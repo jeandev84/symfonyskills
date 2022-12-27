@@ -1,3 +1,8 @@
+### Symfony Cache using Redis Cache 
+
+```
+./config/packages/cache.yaml
+
 framework:
     cache:
         # Unique name of your app: used to compute stable namespaces for cache keys.
@@ -22,3 +27,32 @@ framework:
                 # adapter: cache.adapter.filesystem
                  adapter: cache.adapter.redis
                  provider: '%env(REDIS_URL)%'
+
+============================== DOCKER ==============================
+
+version: '3'
+
+services:
+  database:
+      image: postgres:13-alpine
+      volumes:
+        - ./postgres:/var/lib/postgresql/data
+      restart: always
+      environment:
+        POSTGRES_USER: main
+        POSTGRES_PASSWORD: secret
+        POSTGRES_DB: cache_demo
+      ports: [5432, 54322, 5440]
+
+  redis:
+      image: redis:6.2-alpine
+      ports: [6379]
+
+========================== INSTALL redis extension pecl ======================
+$ sudo apt install php-pear
+$ sudo pecl install redis
+$ docker compose up -d
+$ symfony console cache:pool:delete stocks_cache AMZN
+$ symfony console cache:pool:clear stocks_cache
+
+```

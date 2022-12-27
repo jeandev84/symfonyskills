@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  database:
+      image: postgres:13-alpine
+      volumes:
+        - ./postgres:/var/lib/postgresql/data
+      restart: always
+      environment:
+        POSTGRES_USER: main
+        POSTGRES_PASSWORD: secret
+        POSTGRES_DB: cache_demo
+      ports: [5432, 54322, 5440]
+
+  redis:
+      image: redis:6.2-alpine
+      ports: [6379]

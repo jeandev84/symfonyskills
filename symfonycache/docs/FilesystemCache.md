@@ -1,4 +1,5 @@
-### SYMFONY CACHE
+### Symfony Cache using filesystem cache
+
 
 ```
 // e.g http://localhost:8000/stock/amzn
@@ -71,4 +72,11 @@ Autowirable Types
  $ php bin/console cache:pool:clear app.cache
  $ php bin/console cache:pool:clear cache.app stocks_cache
  
+ // Clearing cache pool: cache.app                                                                                      
+
+ // Clearing cache pool: stocks_cache                                                                                   
+
+                                                                                                                        
+ [OK] Cache was successfully cleared.                                                                                   
+             
 ```
