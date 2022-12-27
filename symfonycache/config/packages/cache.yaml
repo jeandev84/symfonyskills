@@ -15,5 +15,8 @@ framework:
         #app: cache.adapter.apcu
 
         # Namespaced pools use the above "app" backend by default
-        #pools:
+        pools:
             #my.dedicated.cache: null
+            # this mean, I can inject $stocksCache from anywhere and use it (in this case used cache.adapter.filesystem)
+            stocks_cache:
+                adapter: cache.adapter.filesystem
