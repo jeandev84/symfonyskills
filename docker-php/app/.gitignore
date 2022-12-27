@@ -1,0 +1,4 @@
+mysqldata/
+.idea/
+.phpunit.result.cache
+.secret

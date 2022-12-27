@@ -1,0 +1,22 @@
+# https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions
+name: TranslateThis
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+    # - name: Install Composer Dependencies
+    #   working-directory: ./app
+    #   run: composer install --prefer-dist
+    # - name: Run Tests
+    #   working-directory: ./app
+    #   run: composer run-phpunit
+      - run: docker build --target app -t ${{ secrets.DOCKER_USERNAME }}/php-composer:1.2 -f ./php/Dockerfile .
+      - run: docker build -t ${{ secrets.DOCKER_USERNAME }}/nginx-php:1.0 -f ./nginx/Dockerfile .
+      - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - run: docker push ${{ secrets.DOCKER_USERNAME }}/php-composer:1.2
+      - run: docker push ${{ secrets.DOCKER_USERNAME }}/nginx-php:1.0

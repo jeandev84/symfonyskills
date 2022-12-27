@@ -1,0 +1,308 @@
+<?php
+namespace App\Entity;
+
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+
+/**
+ * A Product
+ *
+ * @ORM\Entity
+*/
+// object.getOwner() == user [ if has authenticated User]
+#[
+    ApiResource(
+        collectionOperations: [
+            'get',
+            'post' => [
+                'security' => 'is_granted("ROLE_ADMIN")',
+                'security_message' => 'A Product can only be updated by the owner'
+            ]
+        ],
+        itemOperations: [
+            'get',
+            'put' => ['security' => 'is_granted("ROLE_USER") and object.getOwner() == user']
+        ],
+        attributes: ["pagination_items_per_page" => 5],
+        denormalizationContext: ['groups' => ['product.write']],  # array To object
+        normalizationContext: ['groups' => ['product.read']] # object To array
+    ),
+    ApiFilter(
+        SearchFilter::class,
+        properties: [
+            'name' => SearchFilter::STRATEGY_PARTIAL,
+            'description' => SearchFilter::STRATEGY_PARTIAL,
+            'manufacturer.countryCode' => SearchFilter::STRATEGY_EXACT,
+            'manufacturer.id' => SearchFilter::STRATEGY_EXACT
+        ]
+    ),
+    ApiFilter(
+        OrderFilter::class,
+        properties: [
+            'issueDate' // order desc|asc (in postman you can write params : order[issueDate] | desc
+        ]
+    )
+]
+class Product
+{
+
+    /**
+     * The id of the product
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private ?int $id = null;
+
+
+
+
+    /**
+     * The MPN (manufacturer part number) of the product
+     *
+     * @ORM\Column
+     */
+    #[
+        Assert\NotNull,
+        Groups(['product.read', 'product.write'])
+    ]
+    private ?string $mpn = null;
+
+
+
+
+    /**
+     * The name of product
+     *
+     * @ORM\Column
+    */
+    #[
+        Assert\NotBlank,
+        Groups(['product.read', 'product.write'])
+    ]
+    private string $name = '';
+
+
+
+
+
+    /**
+     * The description of the product
+     *
+     * @ORM\Column(type="text")
+    */
+    #[
+        Assert\NotBlank,
+        Groups(['product.read', 'product.write'])
+    ]
+    private string $description = '';
+
+
+
+
+    /**
+     * The date of issue of the product.
+     *
+     * @ORM\Column(type="datetime")
+    */
+    #[
+        Assert\NotNull,
+        Groups(['product.read', 'product.write'])
+    ]
+    private ?\DateTimeInterface  $issueDate = null;
+
+
+
+
+    /**
+     * The manufacturer
+     *
+     * @ORM\ManyToOne(
+     *     targetEntity="Manufacturer",
+     *     inversedBy="products"
+     * )
+    */
+    #[
+        Assert\NotNull,
+        Groups(['product.read', 'product.write'])
+    ]
+    private ?Manufacturer  $manufacturer = null;
+
+
+
+
+
+    /**
+     * The owner (User)
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+    */
+    #[
+        Groups(['product.read', 'product.write'])
+    ]
+    private User $owner;
+
+
+
+
+
+
+    /**
+     * @return int|null
+    */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+
+
+    /**
+     * @return string|null
+    */
+    public function getMpn(): ?string
+    {
+        return $this->mpn;
+    }
+
+
+
+
+    /**
+     * @param string|null $mpn
+     * @return Product
+    */
+    public function setMpn(?string $mpn): Product
+    {
+        $this->mpn = $mpn;
+
+        return $this;
+    }
+
+
+
+    /**
+     * @return string
+    */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+
+
+
+    /**
+     * @param string $name
+     * @return Product
+    */
+    public function setName(string $name): Product
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+
+
+
+    /**
+     * @return string
+    */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+
+
+    /**
+     * @param string $description
+     * @return Product
+    */
+    public function setDescription(string $description): Product
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+
+
+
+    /**
+     * @return \DateTimeInterface|null
+    */
+    public function getIssueDate(): ?\DateTimeInterface
+    {
+        return $this->issueDate;
+    }
+
+
+
+
+    /**
+     * @param \DateTimeInterface|null $issueDate
+     * @return Product
+    */
+    public function setIssueDate(?\DateTimeInterface $issueDate): Product
+    {
+        $this->issueDate = $issueDate;
+
+        return $this;
+    }
+
+
+
+
+    /**
+     * @return Manufacturer|null
+    */
+    public function getManufacturer(): ?Manufacturer
+    {
+        return $this->manufacturer;
+    }
+
+
+
+
+    /**
+     * @param Manufacturer|null $manufacturer
+     * @return Product
+     */
+    public function setManufacturer(?Manufacturer $manufacturer): Product
+    {
+        $this->manufacturer = $manufacturer;
+
+        return $this;
+    }
+
+
+
+
+    /**
+     * @param User|null $owner
+    */
+    public function setOwner(?User $owner): void
+    {
+        $this->owner = $owner;
+    }
+
+
+
+
+    /**
+     * @return User|null
+    */
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+}
