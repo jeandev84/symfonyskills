@@ -16,4 +16,8 @@ INFO  A new Symfony CLI version is available (5.4.20, currently running 5.4.19).
 
 Opened: http://127.0.0.1:32770
 
+===================================================
+INSTALL TWIG
+composer require symfony/twig-bundle twig/extra-bundle twig/cssinliner-extra
+
 ```
