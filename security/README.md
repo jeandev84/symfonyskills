@@ -458,3 +458,14 @@ Let's make a password reset feature!
 $ symfony console make:migration
 $ bin/console doctrine:migrations:migrate
 ```
+
+
+10. Access Control & Role Based Access Control
+
+- Customize Error Pages
+- https://symfony.com/doc/current/controller/error_pages.html
+
+```
+
+
+```
