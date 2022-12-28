@@ -374,3 +374,21 @@ $ symfony console make:registration-form
 
 $ composer require symfonycasts/verify-email-bundle symfony/mailer
 ```
+
+
+
+7. Stand Home Docker 
+```php 
+AFTER CONFIGURATION DOCKER-COMPOSE.YAML  LUNCH NEXT COMMAND
+============================================================================================
+$ docker compose up -d
+
+$ symfony open:local:webmail
+
+INFO  A new Symfony CLI version is available (5.4.20, currently running 5.4.19).
+
+       If you installed the Symfony CLI via a package manager, updates are going to be automatic.
+       If not, upgrade by downloading the new version at https://github.com/symfony-cli/symfony-cli/releases
+       And replace the current binary (symfony) by the new one.
+
+Opened: http://127.0.0.1:32773

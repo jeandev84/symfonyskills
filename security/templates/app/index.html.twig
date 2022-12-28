@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+     {% for flash_success in app.flashes('success') %}
+          <div class="alert alert-success" role="alert">{{ flash_success }}</div>
+     {% endfor %}
+
      <h1>Welcome, {{ app.user.username }}</h1>
 {% endblock %}
