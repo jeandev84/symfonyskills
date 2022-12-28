@@ -1,6 +1,7 @@
 ### SYMFONY SECURITY
 
 - https://symfony.com/doc/5.4/security.html
+- https://getbootstrap.com/docs/5.0/getting-started/introduction/
 - https://www.toptal.com/developers/gitignore [ Use this link for generate good .gitignore ]
 
 1. Installation dependencies
@@ -181,7 +182,10 @@ when@test:
 $ bin/console make:migration
 $ bin/console doctrine:migrations:migrate
 
-Encode Password via terminal
+========================================================
+ENCODE PASSWORD VIA SYMFONY CONSOLE
+========================================================
+
 $ symfony console security:encode-password
 
 Symfony Password Encoder Utility
