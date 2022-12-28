@@ -466,6 +466,8 @@ $ bin/console doctrine:migrations:migrate
 - https://symfony.com/doc/current/controller/error_pages.html
 
 ```
-
-
+#[Route('ROLE_ADMIN')
+#[Route('ROLE_USER')
 ```
+
+
