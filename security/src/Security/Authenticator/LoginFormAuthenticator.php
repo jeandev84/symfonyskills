@@ -1,9 +1,6 @@
 <?php
+namespace App\Security\Authenticator;
 
-namespace App\Security;
-
-use App\Entity\User;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +17,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
+# https://symfony.com/doc/5.4/security/custom_authenticator.html
 class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
@@ -88,11 +86,14 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-         // Try to redirect the user to their original intended path
-
         // dd("Success FirewallName '{$firewallName}'"); // e.g main
 
-        // For example:
+        // 1. Try to redirect the user to their original intended path
+        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+            return new RedirectResponse($targetPath);
+        }
+
+        // If not, redirect to homepage
         return new RedirectResponse($this->urlGenerator->generate('app_homepage'));
     }
 
