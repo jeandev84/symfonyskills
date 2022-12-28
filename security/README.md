@@ -260,8 +260,117 @@ $ bin/console make:auth
 
 ```
 
-6. Make
+6. Generate a registration form
 ```
+$ composer require form
+$ symfony console validator
+$ symfony console make:registration-form
+
+ Creating a registration form for App\Entity\User
+
+ Do you want to add a @UniqueEntity validation annotation on your User class to make sure duplicate accounts aren't created? (yes/no) [yes]:
+ > 
+
+ Do you want to send an email to verify the user's email address after registration? (yes/no) [yes]:
+ > 
+
+                                                                                                                        
+ [WARNING] We're missing some important components. Don't forget to install these after you're finished.                
+                                                                                                                        
+           composer require symfonycasts/verify-email-bundle symfony/mailer                                             
+                                                                                                                        
+
+ By default, users are required to be authenticated when they click the verification link that is emailed to them.
+ This prevents the user from registering on their laptop, then clicking the link on their phone, without
+ having to log in. To allow multi device email verification, we can embed a user id in the verification link.
+
+ Would you like to include the user id in the verification link to allow anonymous email verification? (yes/no) [no]:
+ > admin@security-demo.com
+
+ What email address will be used to send registration confirmations? (e.g. mailer@your-domain.com):
+ > admin@security-demo.com
+
+ What "name" should be associated with that email address? (e.g. Acme Mail Bot):
+ > Security
+
+ Do you want to automatically authenticate the user after registration? (yes/no) [yes]:
+ > 
+
+ updated: src/Entity/User.php
+ updated: src/Entity/User.php
+ created: src/Security/EmailVerifier.php
+ created: templates/registration/confirmation_email.html.twig
+ created: src/Form/RegistrationFormType.php
+ created: src/Controller/RegistrationController.php
+ created: templates/registration/register.html.twig
+
+           
+  Success! 
+            Creating a registration form for App\Entity\User
+
+ Do you want to add a @UniqueEntity validation annotation on your User class to make sure duplicate accounts aren't created? (yes/no) [yes]:
+ > 
+
+ Do you want to send an email to verify the user's email address after registration? (yes/no) [yes]:
+ > 
+
+                                                                                                                        
+ [WARNING] We're missing some important components. Don't forget to install these after you're finished.                
+                                                                                                                        
+           composer require symfonycasts/verify-email-bundle symfony/mailer                                             
+                                                                                                                        
+
+ By default, users are required to be authenticated when they click the verification link that is emailed to them.
+ This prevents the user from registering on their laptop, then clicking the link on their phone, without
+ having to log in. To allow multi device email verification, we can embed a user id in the verification link.
+
+ Would you like to include the user id in the verification link to allow anonymous email verification? (yes/no) [no]:
+ > 
+
+ What email address will be used to send registration confirmations? (e.g. mailer@your-domain.com):
+ > admin@security-demo.com
+
+ What "name" should be associated with that email address? (e.g. Acme Mail Bot):
+ > Security
+
+ Do you want to automatically authenticate the user after registration? (yes/no) [yes]:
+ > 
+
+ updated: src/Entity/User.php
+ updated: src/Entity/User.php
+ created: src/Security/EmailVerifier.php
+ created: templates/registration/confirmation_email.html.twig
+ created: src/Form/RegistrationFormType.php
+ created: src/Controller/RegistrationController.php
+ created: templates/registration/register.html.twig
+
+           
+  Success! 
+           
+
+ Next:
+ 1) Install some missing packages:
+      composer require symfonycasts/verify-email-bundle symfony/mailer
+ 2) In RegistrationController::verifyUserEmail():
+    * Customize the last redirectToRoute() after a successful email verification.
+    * Make sure you're rendering success flash messages or change the $this->addFlash() line.
+ 3) Review and customize the form, controller, and templates as needed.
+ 4) Run "php bin/console make:migration" to generate a migration for the newly added User::isVerified property.
+
+ Then open your browser, go to "/register" and enjoy your new form!
 
 
+ Next:
+ 1) Install some missing packages:
+      composer require symfonycasts/verify-email-bundle symfony/mailer
+ 2) In RegistrationController::verifyUserEmail():
+    * Customize the last redirectToRoute() after a successful email verification.
+    * Make sure you're rendering success flash messages or change the $this->addFlash() line.
+ 3) Review and customize the form, controller, and templates as needed.
+ 4) Run "php bin/console make:migration" to generate a migration for the newly added User::isVerified property.
+
+ Then open your browser, go to "/register" and enjoy your new form!
+==============================================================================================
+
+$ composer require symfonycasts/verify-email-bundle symfony/mailer
 ```
