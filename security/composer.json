@@ -16,12 +16,13 @@
         "symfony/flex": "^1.17|^2",
         "symfony/form": "5.4.*",
         "symfony/framework-bundle": "5.4.*",
+        "symfony/mailer": "*",
         "symfony/maker-bundle": "^1.48",
         "symfony/runtime": "5.4.*",
         "symfony/security-bundle": "5.4.*",
-        "symfony/mailer": "*",
         "symfony/validator": "5.4.*",
         "symfony/yaml": "5.4.*",
+        "symfonycasts/reset-password-bundle": "*",
         "symfonycasts/verify-email-bundle": "*"
     },
     "config": {
