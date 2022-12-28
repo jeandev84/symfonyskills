@@ -1,0 +1,32 @@
+﻿Real Time                                        Async Message Queue
+                 
+ ========================= ========================= ========================= 
+Click Buy
+
+
+Update Data                                        Create PDF
+   
+
+Return browser to user / client                    Create email and attach PDF
+
+
+                                                      
+                                                    Dispatch Email
+
+
+
+
+===============================================================================
+
+
+
+1. Learn about Messenger and async message queues,
+   transports, and queue workers
+
+
+2. Learn about MongoDB + Symfony 
+
+
+3. Learn about contributing / encourage open-source
+   contribution
+
