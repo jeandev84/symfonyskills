@@ -5,6 +5,7 @@ use App\Entity\Address;
 use App\Entity\Cart;
 use App\Entity\Category;
 use App\Entity\Customer;
+use App\Entity\InterestGroup;
 use App\Entity\Manufacturer;
 use App\Entity\Product;
 use App\Entity\Student;
@@ -141,10 +142,36 @@ class DoctrineRelationsController extends AbstractController
             $this->entityManager->flush();
 
             return new Response(
-               sprintf('Mentor record created with id %d and Cart record created with id %d', $mentor->getId(), $newStudent->getId())
+               sprintf('Mentor record created with id %d and Student record created with id %d', $mentor->getId(), $newStudent->getId())
             );
        }
 
+
+
+
+
+       /**
+        * @Route("/many-to-many")
+        * @return Response
+       */
+       public function manyToMany()
+       {
+             $kungFuGroup = new InterestGroup();
+             $kungFuGroup->setName('NYC Kung Fu group');
+             $this->entityManager->persist($kungFuGroup);
+
+
+             $member = new User();
+             $member->joinInterestGroup($kungFuGroup);
+             $this->entityManager->persist($member);
+
+             $this->entityManager->flush();
+
+             return new Response(
+                sprintf('User %s has joined group %d', $member->getId(), $kungFuGroup->getId())
+             );
+
+       }
 
 
 
