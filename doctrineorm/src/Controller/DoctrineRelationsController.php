@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Entity\Category;
 use App\Entity\Manufacturer;
 use App\Entity\Product;
 use App\Entity\User;
@@ -67,5 +68,78 @@ class DoctrineRelationsController extends AbstractController
 
 
              return new Response(sprintf('Address record created with id %d and User record created with id %d', $address->getId(), $user->getId()));
+       }
+
+
+
+
+
+
+       /**
+        * @Route("/one-to-many-self-joining")
+        * @param EntityManagerInterface $entityManager
+        * @return Response
+       */
+       public function oneToManySelfJoining(EntityManagerInterface $entityManager)
+       {
+
+              // [$parent, $child] = $this->createParentCategoryAndChildWithoutCascade($entityManager);
+
+
+              [$parent, $child] = $this->createParentCategoryAndChildCascade($entityManager);
+
+
+               return new Response(sprintf('Parent Category record created with id %d and child
+               Category record created with id %d', $parent->getId(), $child->getId()));
+       }
+
+
+
+
+
+       /**
+        * In this case Child and Parent will be created one by one
+        *
+        * @param EntityManagerInterface $entityManager
+        * @return array
+       */
+       protected function createParentCategoryAndChildWithoutCascade(EntityManagerInterface $entityManager): array
+       {
+             # $children: @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
+             $parent = new Category('Parent');
+             $entityManager->persist($parent);
+
+             $child = new Category('Child 1');
+             $child->setParent($parent);
+             $entityManager->persist($child);
+
+             $entityManager->flush();
+
+             return [$parent, $child];
+
+       }
+
+
+
+       /**
+        * In this case Child will be automatically persisted because "persistence is cascade"
+        *
+        * @param EntityManagerInterface $entityManager
+        * @return array
+       */
+       protected function createParentCategoryAndChildCascade(EntityManagerInterface $entityManager): array
+       {
+            # $children: @ORM\OneToMany(targetEntity="Category", mappedBy="parent", cascade={"persist"})
+            $parent = new Category('Parent 2');
+
+
+            $child = new Category('Child 2');
+            $child->setParent($parent);
+
+            $entityManager->persist($parent);
+            $entityManager->flush();
+
+            return [$parent, $child];
+
        }
 }
