@@ -48,9 +48,9 @@ class Student
 
 
     /**
-     * @return mixed
+     * @return Student
      */
-    public function getMentor()
+    public function getMentor(): Student
     {
         return $this->mentor;
     }

@@ -158,6 +158,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Etudiant
  *
@@ -202,9 +203,9 @@ class Student
 
 
     /**
-     * @return mixed
+     * @return Student
      */
-    public function getMentor()
+    public function getMentor(): Student
     {
         return $this->mentor;
     }
