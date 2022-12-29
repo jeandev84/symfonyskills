@@ -26,5 +26,13 @@ class Manufacturer
      private $name;
 
 
+
+     /**
+      *  $manufacturer->getProducts();
+      *
+      * This is the inverse side of the manufacturer-product relationship. This key is optional...only declare it if you will use it.
+      *
+      * @ORM\OneToMany(targetEntity="Product", mappedBy="manufacturer")
+     */
      private $products;
 }
