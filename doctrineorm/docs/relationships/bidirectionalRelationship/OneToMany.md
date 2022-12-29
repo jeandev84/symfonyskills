@@ -2,7 +2,7 @@
 
 
 1. Relationship Bidirectional
-```
+```php
 <?php
 namespace App\Entity;
 

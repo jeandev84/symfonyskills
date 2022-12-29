@@ -2,7 +2,9 @@
 namespace App\Controller;
 
 use App\Entity\Address;
+use App\Entity\Cart;
 use App\Entity\Category;
+use App\Entity\Customer;
 use App\Entity\Manufacturer;
 use App\Entity\Product;
 use App\Entity\User;
@@ -14,12 +16,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DoctrineRelationsController extends AbstractController
 {
+
+       public function __construct(private EntityManagerInterface $entityManager)
+       {
+       }
+
+
+
        /**
         * @Route("/one-to-many-bi-directional")
-        * @param EntityManagerInterface $entityManager
         * @return Response
        */
-       public function oneToManyBiDirectional(EntityManagerInterface  $entityManager): Response
+       public function oneToManyBiDirectional(): Response
        {
               /*
               $manufacturer = new Manufacturer();
@@ -30,14 +38,14 @@ class DoctrineRelationsController extends AbstractController
               */
 
               /** @var Manufacturer $manufacturer */
-              $manufacturer = $entityManager->find(Manufacturer::class, 1);
+              $manufacturer = $this->entityManager->find(Manufacturer::class, 1);
               // dd($manufacturer->getProducts()); // Doctrine\ORM\PersistentCollection()
 
 
               $product = new Product();
               $product->setName('Radio knob');
               $product->setManufacturer($manufacturer);
-              $entityManager->persist($product);
+              $this->entityManager->persist($product);
 
               // dd($entityManager->contains($manufacturer), $entityManager->contains($product));
 
@@ -50,21 +58,20 @@ class DoctrineRelationsController extends AbstractController
 
        /**
         * @Route("/many-to-one-uni-directional")
-        * @param EntityManagerInterface $entityManager
         * @return Response
        */
-       public function mayToOneUniDirectional(EntityManagerInterface  $entityManager): Response
+       public function mayToOneUniDirectional(): Response
        {
              $address = new Address();
              $address->setNumber(22);
              $address->setStreet('Acacia Avenue');
-             $entityManager->persist($address);
+             $this->entityManager->persist($address);
 
              $user = new User();
              $user->setAddress($address);
-             $entityManager->persist($user);
+             $this->entityManager->persist($user);
 
-             $entityManager->flush();
+             $this->entityManager->flush();
 
 
              return new Response(sprintf('Address record created with id %d and User record created with id %d', $address->getId(), $user->getId()));
@@ -77,22 +84,53 @@ class DoctrineRelationsController extends AbstractController
 
        /**
         * @Route("/one-to-many-self-joining")
-        * @param EntityManagerInterface $entityManager
         * @return Response
        */
-       public function oneToManySelfJoining(EntityManagerInterface $entityManager)
+       public function oneToManySelfJoining()
        {
 
-              // [$parent, $child] = $this->createParentCategoryAndChildWithoutCascade($entityManager);
+              // [$parent, $child] = $this->createParentCategoryAndChildWithoutCascade($this->entityManager);
 
 
-              [$parent, $child] = $this->createParentCategoryAndChildCascade($entityManager);
+              [$parent, $child] = $this->createParentCategoryAndChildCascade($this->entityManager);
 
 
                return new Response(sprintf('Parent Category record created with id %d and child
                Category record created with id %d', $parent->getId(), $child->getId()));
        }
 
+
+
+
+       /**
+        * @Route("/one-to-one")
+        * @return Response
+       */
+       public function oneToOne()
+       {
+             $custommer = new Customer();
+             $this->entityManager->persist($custommer);
+
+             $cart = new Cart();
+             $cart->setCustomer($custommer);
+             $this->entityManager->persist($cart);
+
+             $this->entityManager->flush();
+
+             return new Response(
+                 sprintf('Customer record created with id %d and Cart record created with id %d', $custommer->getId(), $cart->getId())
+             );
+       }
+
+
+       /**
+        * @Route("/one-to-one-self-joining")
+        * @return void
+       */
+       public function oneToOneSelfJoining()
+       {
+
+       }
 
 
 
@@ -142,4 +180,5 @@ class DoctrineRelationsController extends AbstractController
             return [$parent, $child];
 
        }
+
 }
