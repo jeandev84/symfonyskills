@@ -9,8 +9,8 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Mime\Email;
 
 
-#[AsMessageHandler]
-class PurchaseConfirmationNotificationHandler /* implements MessageHandlerInterface */
+##[AsMessageHandler]
+class PurchaseConfirmationNotificationHandler implements MessageHandlerInterface
 {
      // AsMessageHandler the same thing to implements MessageHandlerinterface
 
