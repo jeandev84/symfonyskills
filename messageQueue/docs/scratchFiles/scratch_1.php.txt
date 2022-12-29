@@ -1,0 +1,5 @@
+<?php
+
+$s = 'O:36:\"Symfony\\Component\\Messenger\\Envelope\":2:{s:44:\"\0Symfony\\Component\\Messenger\\Envelope\0stamps\";a:1:{s:46:\"Symfony\\Component\\Messenger\\Stamp\\BusNameStamp\";a:1:{i:0;O:46:\"Symfony\\Component\\Messenger\\Stamp\\BusNameStamp\":1:{s:55:\"\0Symfony\\Component\\Messenger\\Stamp\\BusNameStamp\0busName\";s:21:\"messenger.bus.default\";}}}s:45:\"\0Symfony\\Component\\Messenger\\Envelope\0message\";
+
+O:44:\"App\\Message\\PurchaseConfirmationNotification\":1:{s:53:\"\0App\\Message\\PurchaseConfirmationNotification\0orderId\";i:1;}}'
