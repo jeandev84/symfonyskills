@@ -27,7 +27,7 @@ class OrderSavedHandler implements MessageHandlerInterface
     {
 
         // Attempt to retrieve an order from MongoDB
-        throw new \RuntimeException('ORDER COULD NOT BE FOUND');
+        // throw new \RuntimeException('ORDER COULD NOT BE FOUND');
 
         // 1. Create a PDF contract note
         $mpdf = new Mpdf();
