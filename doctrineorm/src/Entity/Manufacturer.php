@@ -2,10 +2,13 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 
 /**
+ * Fabricant
+ *
  * @ORM\Entity
  * @ORM\Table(name="manufacturer")
 */
@@ -45,6 +48,8 @@ class Manufacturer
      }
 
 
+
+
      /**
       * @return mixed
      */
@@ -75,6 +80,27 @@ class Manufacturer
         $this->name = $name;
 
         return $this;
+    }
+
+
+
+    /**
+     * @param Product $product
+     * @return void
+    */
+    public function addProduct(Product $product)
+    {
+        $this->products[] = $product;
+    }
+
+
+
+    /**
+     * @return Collection|Product[]
+    */
+    public function getProducts(): Collection
+    {
+        return $this->products;
     }
 
 }

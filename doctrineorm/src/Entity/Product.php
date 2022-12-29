@@ -3,7 +3,10 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
+ * Produit
+ *
  * @ORM\Entity
  * @ORM\Table(name="product")
 */
@@ -97,10 +100,11 @@ class Product
     */
     public function setManufacturer(Manufacturer $manufacturer): Product
     {
+        $manufacturer->addProduct($this);
+
         $this->manufacturer = $manufacturer;
 
         return $this;
     }
-
 
 }
