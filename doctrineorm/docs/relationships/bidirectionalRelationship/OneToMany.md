@@ -1,7 +1,7 @@
-### RelationShip BIDIRECTIONAL OneToMany
+### Relationship Bidirectional (OneToMany)
 
 
-1. RelationShip Bidirectional
+1. Relationship Bidirectional
 ```
 <?php
 namespace App\Entity;
