@@ -7,6 +7,7 @@ use App\Entity\Category;
 use App\Entity\Customer;
 use App\Entity\Manufacturer;
 use App\Entity\Product;
+use App\Entity\Student;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -129,7 +130,19 @@ class DoctrineRelationsController extends AbstractController
        */
        public function oneToOneSelfJoining()
        {
+            # Наставник
+            $mentor = new Student();
+            $this->entityManager->persist($mentor);
 
+            $newStudent = new Student();
+            $newStudent->setMentor($newStudent);
+
+            $this->entityManager->persist($newStudent);
+            $this->entityManager->flush();
+
+            return new Response(
+               sprintf('Mentor record created with id %d and Cart record created with id %d', $mentor->getId(), $newStudent->getId())
+            );
        }
 
 
