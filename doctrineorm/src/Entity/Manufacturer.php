@@ -14,13 +14,12 @@ class Manufacturer
      /**
       * @ORM\Id
       * @ORM\Column(type="integer")
-      * @ORM\GeneratedValue
+      * @ORM\GeneratedValue()
      */
      private $id;
 
 
      /**
-      * @ORM\Id
       * @ORM\Column(type="string")
      */
      private $name;
