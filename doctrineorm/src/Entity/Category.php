@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * Produit
+ * Categorie
  *
  * @ORM\Entity
  * @ORM\Table(name="category")
