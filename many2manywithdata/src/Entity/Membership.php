@@ -31,6 +31,16 @@ class Membership
     private ?User $member;
 
 
+
+    private const MEMBERSHIP_LEVEL_TYPES = ['standard', 'better', 'best'];
+
+
+
+    public function __construct()
+    {
+        $this->createdAt = date_create();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,6 +65,10 @@ class Membership
 
     public function setLevel(string $level): self
     {
+        if (! in_array($level, self::MEMBERSHIP_LEVEL_TYPES)) {
+              throw new \InvalidArgumentException('Level must be one of '. implode(', ', self::MEMBERSHIP_LEVEL_TYPES));
+        }
+
         $this->level = $level;
 
         return $this;
