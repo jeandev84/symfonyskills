@@ -32,6 +32,6 @@ class DigitalBook extends Book
 
     public function write(): string
     {
-        // TODO: Implement write() method.
+        return "{$this->title}, filesize: {$this->fileSize}";
     }
 }
