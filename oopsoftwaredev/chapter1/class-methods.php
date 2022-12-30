@@ -6,6 +6,7 @@ class Product
     public $price = 100; # cens
 
 
+
     /**
      * @param int $divisor
      * @param string $currencySymbol
