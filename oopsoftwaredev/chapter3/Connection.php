@@ -16,7 +16,7 @@ class Connection
      /**
       * @return int
      */
-     public static function getCountOfConnections(): int
+     public static function getCount(): int
      {
           return self::$count;
      }
