@@ -12,14 +12,25 @@ class Playlist
 
      /**
       * @param Song $song
-      * @return $this
+      * @return void
      */
-     public function addSong(Song $song): static
+     public function addSong(Song $song): void
      {
          $this->songs[] = $song;
-
-         return $this;
      }
+
+
+
+
+     /**
+      * @return int
+     */
+     public function getLength(): int
+     {
+          return count($this->songs);
+     }
+
+
 
 
      /**
