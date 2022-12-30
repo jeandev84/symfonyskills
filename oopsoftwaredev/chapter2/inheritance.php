@@ -3,7 +3,7 @@
 require_once 'Book.php';
 
 
-$physicalBook = new Book('A Random Book', 'Jane Doe', 2000, 'physical');
+$physicalBook = new PhysicalBook('A Random Book', 'Jane Doe', 2000, 'physical');
 $digitalBook  = new Book('A Random Book', 'Jane Doe', 2000, 'digital');
 
 

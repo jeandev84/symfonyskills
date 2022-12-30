@@ -68,7 +68,7 @@ class PhysicalBook
 
 
 
-    private function print(): string
+    public function print(): string
     {
          return "{$this->title}, {$this->author}, weight: {$this->weight}";
     }
