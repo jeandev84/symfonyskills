@@ -6,7 +6,7 @@ class BaseClass
 
       protected $protectedProperty = 'Protected properties and methods can only be accessed within the declaring class or from a suclass';
 
-      private $privateProperty = '';
+      private $privateProperty = 'Private properties and methods can only be accessed within the declaring class. They are not visible anywhere else';
 
 
 
@@ -26,4 +26,13 @@ class BaseClass
       {
           return $this->publicProperty;
       }
+
+
+      /**
+       * @return string
+      */
+      public function getPrivateProperty(): string
+      {
+          return $this->privateProperty;
+     }
 }
