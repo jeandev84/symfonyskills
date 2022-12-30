@@ -1,7 +1,7 @@
 <?php
 
-require_once 'Book/PhysicalBook.php';
-require_once 'Book/DigitalBook.php';
+require_once 'Books/PhysicalBook.php';
+require_once 'Books/DigitalBook.php';
 
 $book = new Book('A Random Book', 'Jane Doe', 2000);
 print $book->print() . PHP_EOL;

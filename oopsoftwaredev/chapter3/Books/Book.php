@@ -1,6 +1,6 @@
 <?php
 
-class Book
+abstract class Book
 {
        protected $title;
 
@@ -9,7 +9,7 @@ class Book
       */
       public function __construct(string $title)
       {
-           $this->title    = $title;
+           $this->title = $title;
       }
 
 
