@@ -5,6 +5,7 @@ class Book
        public $title;
        public $author;
        public $price;
+       public $type;
        public $weight;
        public $fileSize;
 
@@ -13,6 +14,7 @@ class Book
         * @param string $title
         * @param string $author
         * @param int $price
+        * @param string $type
         * @param int $weight
         * @param int $fileSize
       */
@@ -20,6 +22,7 @@ class Book
           string $title,
           string $author,
           int $price,
+          string $type,
           int $weight = 0,
           int $fileSize = 0
       )
@@ -27,6 +30,7 @@ class Book
            $this->title    = $title;
            $this->author   = $author;
            $this->price    = $price;
+           $this->type     = $type;
            $this->weight   = $weight;
            $this->fileSize = $fileSize;
       }
@@ -63,6 +67,15 @@ class Book
 
 
       /**
+       * @return string
+      */
+      public function getType(): string
+      {
+          return $this->type;
+      }
+
+
+      /**
        * @return int
       */
       public function getWeight(): int
@@ -78,4 +91,37 @@ class Book
       {
            return $this->fileSize;
        }
+
+
+
+       public function print()
+       {
+            $string = "{$this->title}, {$this->author}, ";
+
+            if ($this->type === 'physical') {
+                $string .= "Weight: {$this->weight}";
+            } elseif ($this->type === 'digital') {
+                $string .= "Filesize: {$this->fileSize}";
+            }
+
+            return $string;
+       }
+
+
+
+
+      public function printBadWay()
+      {
+          // In this case we can create different objects of Books and define own print() method
+
+          $string = "{$this->title}, {$this->author}, ";
+
+          if ($this->type === 'physical') {
+            $string .= "Weight: {$this->weight}";
+          } elseif ($this->type === 'digital') {
+            $string .= "Filesize: {$this->fileSize}";
+          }
+
+          return $string;
+      }
 }
