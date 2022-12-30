@@ -2,8 +2,8 @@
 
 class Song
 {
-    public $name;
-    public $numberOfPlays;
+    private string $name;
+    private int $numberOfPlays;
 
 
     /**
@@ -14,5 +14,22 @@ class Song
     {
          $this->name = $name;
          $this->numberOfPlays = $numberOfPlays;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+
+    /**
+     * @return int
+    */
+    public function getNumberOfPlays(): int
+    {
+        return $this->numberOfPlays;
     }
 }
