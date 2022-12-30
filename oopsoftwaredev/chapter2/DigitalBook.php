@@ -6,7 +6,7 @@ class DigitalBook extends Book
 {
 
 
-    public $fileSize;
+    protected $fileSize;
 
 
     /**

@@ -6,7 +6,7 @@ require_once 'Book.php';
 class PhysicalBook extends Book
 {
 
-    public $weight;
+    protected $weight;
 
 
     /**
