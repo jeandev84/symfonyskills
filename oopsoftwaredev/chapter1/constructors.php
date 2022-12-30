@@ -2,18 +2,13 @@
 
 class Product
 {
-    public $name;
-    public $price;
-
-
     /**
      * @param string $name
      * @param int $price
     */
-    public function __construct(string $name = 'Soap', int $price = 100)
+    public function __construct(public string $name = 'Soap', public int $price = 100)
     {
-         $this->name  = $name;
-         $this->price = $price;
+
     }
 
 
