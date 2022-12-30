@@ -1,11 +1,11 @@
 <?php
+require_once 'Book.php';
 
-class DigitalBook
+
+class DigitalBook extends Book
 {
 
-    public $title;
-    public $author;
-    public $price;
+
     public $fileSize;
 
 
@@ -15,47 +15,10 @@ class DigitalBook
      * @param int $price
      * @param int $fileSize
      */
-    public function __construct(
-        string $title,
-        string $author,
-        int $price,
-        int $fileSize = 0
-    )
+    public function __construct(string $title, string $author, int $price, int $fileSize = 0)
     {
-        $this->title    = $title;
-        $this->author   = $author;
-        $this->price    = $price;
+        parent::__construct($title, $author, $price);
         $this->fileSize = $fileSize;
-    }
-
-
-
-
-    /**
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-
-    /**
-     * @return string
-    */
-    public function getAuthor(): string
-    {
-        return $this->author;
-    }
-
-
-
-    /**
-     * @return int
-     */
-    public function getPrice(): int
-    {
-        return $this->price;
     }
 
 

@@ -1,16 +1,9 @@
 <?php
 
-require_once 'Book.php';
+require_once 'PhysicalBook.php';
+require_once 'DigitalBook.php';
 
 
-$physicalBook = new PhysicalBook('A Random Book', 'Jane Doe', 2000, 'physical');
-$digitalBook  = new Book('A Random Book', 'Jane Doe', 2000, 'digital');
-
-
-/*
-print $physicalBook->getFileSize() . PHP_EOL;
-print $digitalBook->getAuthor() . PHP_EOL;
-*/
+$physicalBook = new PhysicalBook('A Random Book', 'Jane Doe', 2000);
 
 print $physicalBook->print() . PHP_EOL;
-print $digitalBook->print()  . PHP_EOL;
