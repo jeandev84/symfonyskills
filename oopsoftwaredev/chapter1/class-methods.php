@@ -7,12 +7,13 @@ class Product
 
 
     /**
-     * @param $currencySymbol
+     * @param int $divisor
+     * @param string $currencySymbol
      * @return string
     */
-    public function priceAsCurrency($currencySymbol = '$')
+    public function priceAsCurrency($divisor = 1, $currencySymbol = '$')
     {
-        $priceAsCurrency = $this->price / 100;
+        $priceAsCurrency = $this->price / $divisor;
 
         return $currencySymbol . $priceAsCurrency;
     }
@@ -20,7 +21,5 @@ class Product
 
 
 $product = new Product();
-print $product->priceAsCurrency() . PHP_EOL; // Default symbol Dollar
-print $product->priceAsCurrency("£") . PHP_EOL; // Pound symbol
-print $product->priceAsCurrency("$") . PHP_EOL; // Dollar symbol
-print $product->priceAsCurrency("€") . PHP_EOL; // Euro symbol
+print $product->priceAsCurrency(100) . PHP_EOL;
+print $product->priceAsCurrency(currencySymbol: 100) . PHP_EOL; // >=8.0
