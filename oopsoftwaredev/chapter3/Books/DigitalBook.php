@@ -28,4 +28,10 @@ class DigitalBook extends Book
     {
         return $this->fileSize;
     }
+
+
+    public function write(): string
+    {
+        // TODO: Implement write() method.
+    }
 }

@@ -28,4 +28,10 @@ class PhysicalBook extends Book
     {
         return $this->weight;
     }
+
+
+    public function write(): string
+    {
+        // TODO: Implement write() method.
+    }
 }

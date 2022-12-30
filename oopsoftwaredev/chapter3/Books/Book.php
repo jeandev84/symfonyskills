@@ -23,4 +23,9 @@ abstract class Book
            return $this->title;
       }
 
+
+      /**
+       * @return string
+      */
+      abstract public function write(): string;
 }
