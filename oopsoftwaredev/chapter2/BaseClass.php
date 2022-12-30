@@ -13,7 +13,7 @@ class BaseClass
       /**
        * @return string
       */
-      public function getProtectedProperty(): string
+      protected function getProtectedProperty(): string
       {
           return $this->protectedProperty;
       }
@@ -31,8 +31,8 @@ class BaseClass
       /**
        * @return string
       */
-      public function getPrivateProperty(): string
+      private function getPrivateProperty(): string
       {
           return $this->privateProperty;
-     }
+      }
 }

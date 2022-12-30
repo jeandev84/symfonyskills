@@ -4,12 +4,12 @@ class SubClass extends BaseClass
 {
       public function getParentProtectedProperty()
       {
-           return $this->protectedProperty;
+           return $this->getProtectedProperty();
       }
 
 
       public function getParentPrivateProperty()
       {
-           // return $this->privateProperty;
+           return $this->getParentPrivateProperty();
       }
 }
