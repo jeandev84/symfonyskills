@@ -1,7 +1,7 @@
 <?php
 
-require_once 'BaseClass.php';
-require_once 'SubClass.php';
+require_once 'Inheritence/BaseClass.php';
+require_once 'Inheritence/SubClass.php';
 
 
 $baseObject = new BaseClass();

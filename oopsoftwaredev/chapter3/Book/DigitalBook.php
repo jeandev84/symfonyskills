@@ -11,13 +11,11 @@ class DigitalBook extends Book
 
     /**
      * @param string $title
-     * @param string $author
-     * @param int $price
      * @param int $fileSize
      */
-    public function __construct(string $title, string $author, int $price, int $fileSize = 0)
+    public function __construct(string $title, int $fileSize = 0)
     {
-        parent::__construct($title, $author, $price);
+        parent::__construct($title);
         $this->fileSize = $fileSize;
     }
 
@@ -29,12 +27,5 @@ class DigitalBook extends Book
     public function getFileSize(): int
     {
         return $this->fileSize;
-    }
-
-
-
-    public function print(): string
-    {
-        return "{$this->title}, {$this->author}, filesize: {$this->fileSize}";
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Http.php';
+require_once 'StatusCode/Http.php';
 
 /*
 define('CREATED', 201);

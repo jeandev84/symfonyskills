@@ -1,7 +1,7 @@
 <?php
 
-require_once'Playlist.php';
-require_once 'Song.php';
+require_once'Player/Playlist.php';
+require_once 'Player/Song.php';
 
 
 $beatlesSongs = new Playlist();

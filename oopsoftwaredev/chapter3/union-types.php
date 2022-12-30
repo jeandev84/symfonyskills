@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Song.php';
+require_once 'Player/Song.php';
 
 $song = new Song('Yesterday', 100);
 

@@ -1,7 +1,7 @@
 <?php
 
-require_once 'Counter.php';
-require_once 'Connection.php';
+require_once 'Counter/Counter.php';
+require_once 'Database/Connection.php';
 
 /*
 $count accessible only if visibility of $count is public

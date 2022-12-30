@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-require_once 'Song.php';
+require_once 'Player/Song.php';
 
 $song = new Song('Blackbird', 123);
 
