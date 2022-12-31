@@ -9,7 +9,9 @@
 <body>
 <?php
 
-    require 'Filesystem/Reader/FileReader.php';
+use File\CsvFileReader;
+
+require 'Filesystem/Reader/FileReader.php';
     require 'Filesystem/Reader/CsvFileReader.php';
 
     $fileReader    = new FileReader();
