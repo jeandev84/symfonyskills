@@ -31,8 +31,8 @@ class CsvFileReader implements FileReaderInterface
 }
 
 
-/*
+
 $csvReader = new CsvFileReader();
 $items = $csvReader->readFileAsAssociativeArray('inventory.csv');
 print_r($items);
-*/
+
