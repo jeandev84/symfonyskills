@@ -10,7 +10,7 @@
 
 <?php
 
-    require_once 'ShapeCalculator/Cylinder.php';
+    require_once __DIR__.'/Shape/Types/Cylinder.php';
 
     $cylinder = new Cylinder(['radius' => 5, 'height' => 10]);
     $cylinderVolume = $cylinder->volume();

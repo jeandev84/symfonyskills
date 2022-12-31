@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/ThreeDimensionalShape.php';
+require_once __DIR__.'/../ThreeDimensionalShape.php';
 
 
 
