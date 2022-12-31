@@ -8,8 +8,7 @@ class Cylinder extends ThreeDimensionalShape
 
 
     /**
-     * Calculate the volume [V=πr2h]
-     *
+     * Calculate the volume [V = π * r2 * h]
      * @return float
     */
     public function volume(): float
