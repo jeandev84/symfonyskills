@@ -13,9 +13,12 @@ interface SessionInterface
 
     /**
      * @param string $key
+     * @param null $default
      * @return mixed
     */
-    public function get(string $key);
+    public function get(string $key, $default = null);
+
+
 
 
     /**

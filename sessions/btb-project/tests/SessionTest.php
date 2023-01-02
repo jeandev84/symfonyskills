@@ -100,6 +100,30 @@ class SessionTest extends \PHPUnit\Framework\TestCase
 
 
 
+    /** @test */
+    public function can_retrieve_an_item_from_the_session()
+    {
+        // SETUP
+        $session = new App\Session\Session();
+        $session->start();
+        $session->set('auth.id', 678);
+
+        // DO SOMETHING
+        $authId    = $session->get('auth.id');
+        $falseItem = $session->get('false.item');
+        $retrievedDefault = $session->get('false.item', 'retrieved default');
+
+
+        // MAKE ASSERTIONS
+        $this->assertEquals(678, $authId);
+        $this->assertNull($falseItem);
+        $this->assertEquals('retrieved default', $retrievedDefault);
+    }
+
+
+
+
+
     public function assertArrayHasKeys(array $array, array $keys)
     {
         $diff = array_diff($keys, array_keys($array));

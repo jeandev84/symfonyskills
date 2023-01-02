@@ -46,9 +46,13 @@ class Session implements SessionInterface
      /**
       * @inheritDoc
      */
-     public function get(string $key)
+     public function get(string $key, $default = null)
      {
+          if ($this->has($key)) {
+              return $_SESSION[$key];
+          }
 
+          return $default;
      }
 
 
