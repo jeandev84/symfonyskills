@@ -36,10 +36,11 @@ class SessionTest extends \PHPUnit\Framework\TestCase
         // Create a session object
         $session = new \App\Session\Session();
 
-        //DO Something
+        //DO SOMETHING
         $sessionStatus = $session->start();
 
 
+        // MAKE ASSERTIONS
         // Assert session is started
         $this->assertTrue($session->isStarted());
         $this->assertTrue($sessionStatus);

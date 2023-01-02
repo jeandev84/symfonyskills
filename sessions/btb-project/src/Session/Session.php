@@ -13,19 +13,17 @@ class Session
 
 
 
-     public function start()
+     public function start(): bool
      {
          if ($this->isStarted) {
              return true;
          }
 
          if (session_status() === PHP_SESSION_ACTIVE) {
-             $this->isStarted = true;
-             return true;
+             return $this->isStarted = true;
          }
 
          session_start();
-         $this->isStarted = true;
-         return true;
+         return $this->isStarted = true;
      }
 }
