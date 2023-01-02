@@ -124,6 +124,33 @@ class SessionTest extends \PHPUnit\Framework\TestCase
 
 
 
+    /** @test */
+    public function items_can_be_removed_by_key()
+    {
+        // SETUP
+        $session = new App\Session\Session();
+        $session->start();
+        $session->set('auth.id', 678);
+
+
+        // DO SOMETHING
+        $session->remove('auth.id');
+
+
+        // MAKE ASSERTIONS
+        $this->assertNull($session->get('auth.id'));
+    }
+
+
+
+    /** @test */
+    public function the_session_can_be_cleared()
+    {
+
+    }
+
+
+
     public function assertArrayHasKeys(array $array, array $keys)
     {
         $diff = array_diff($keys, array_keys($array));

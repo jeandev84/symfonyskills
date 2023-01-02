@@ -85,6 +85,8 @@ class Session implements SessionInterface
      */
      public function remove(string $key)
      {
-
+          if ($this->has($key)) {
+              unset($_SESSION[$key]);
+          }
      }
 }
