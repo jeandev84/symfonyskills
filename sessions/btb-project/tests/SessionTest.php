@@ -2,6 +2,17 @@
 
 class SessionTest extends \PHPUnit\Framework\TestCase
 {
+
+
+    protected function setUp(): void
+    {
+         if (session_status() === PHP_SESSION_ACTIVE) {
+              session_destroy();
+         }
+    }
+
+
+
     /** @test */
     public function can_check_if_a_session_is_started()
     {
@@ -14,5 +25,23 @@ class SessionTest extends \PHPUnit\Framework\TestCase
 
          // Assert session is not started
          $this->assertFalse($session->isStarted());
+    }
+
+
+
+    /** @test */
+    public function a_session_can_be_started()
+    {
+        // SETUP
+        // Create a session object
+        $session = new \App\Session\Session();
+
+        //DO Something
+        $sessionStatus = $session->start();
+
+
+        // Assert session is started
+        $this->assertTrue($session->isStarted());
+        $this->assertTrue($sessionStatus);
     }
 }
