@@ -146,7 +146,19 @@ class SessionTest extends \PHPUnit\Framework\TestCase
     /** @test */
     public function the_session_can_be_cleared()
     {
+        // SETUP
+        $session = new App\Session\Session();
+        $session->start();
+        $session->set('key1', 'foo');
+        $session->set('key2', 'bar');
 
+
+        // DO SOMETHING
+        $session->clear();
+
+
+        // MAKE ASSERTIONS
+        $this->assertEmpty($_SESSION);
     }
 
 

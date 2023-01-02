@@ -46,7 +46,7 @@ class Session implements SessionInterface
      /**
       * @inheritDoc
      */
-     public function get(string $key, $default = null)
+     public function get(string $key, $default = null): mixed
      {
           if ($this->has($key)) {
               return $_SESSION[$key];
@@ -61,7 +61,7 @@ class Session implements SessionInterface
      /**
       * @inheritDoc
      */
-     public function set(string $key, mixed $value)
+     public function set(string $key, mixed $value): void
      {
            $_SESSION[$key] = $value;
      }
@@ -72,9 +72,9 @@ class Session implements SessionInterface
      /**
       * @inheritDoc
      */
-     public function clear()
+     public function clear(): void
      {
-
+         $_SESSION = [];
      }
 
 
@@ -83,10 +83,21 @@ class Session implements SessionInterface
      /**
       * @inheritDoc
      */
-     public function remove(string $key)
+     public function remove(string $key): void
      {
           if ($this->has($key)) {
               unset($_SESSION[$key]);
           }
+     }
+
+
+
+
+     /**
+      * @inheritDoc
+     */
+     public function all()
+     {
+          return $_SESSION;
      }
 }
