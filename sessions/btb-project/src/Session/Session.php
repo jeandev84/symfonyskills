@@ -1,13 +1,15 @@
 <?php
 namespace App\Session;
 
-class Session
+class Session implements SessionInterface
 {
      private bool $isStarted = false;
 
 
      public function isStarted(): bool
      {
+          $this->isStarted = (session_status() === PHP_SESSION_ACTIVE);
+
           return $this->isStarted;
      }
 
@@ -25,5 +27,60 @@ class Session
 
          session_start();
          return $this->isStarted = true;
+     }
+
+
+
+
+     /**
+      * @inheritDoc
+     */
+     public function has(string $key): bool
+     {
+           return array_key_exists($key, $_SESSION);
+     }
+
+
+
+
+     /**
+      * @inheritDoc
+     */
+     public function get(string $key)
+     {
+
+     }
+
+
+
+
+     /**
+      * @inheritDoc
+     */
+     public function set(string $key, mixed $value)
+     {
+           $_SESSION[$key] = $value;
+     }
+
+
+
+
+     /**
+      * @inheritDoc
+     */
+     public function clear()
+     {
+
+     }
+
+
+
+
+     /**
+      * @inheritDoc
+     */
+     public function remove(string $key)
+     {
+
      }
 }
