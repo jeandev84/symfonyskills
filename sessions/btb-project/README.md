@@ -2,5 +2,5 @@
 
 
 ```php 
-$ vendor/bin/phpunit tests/SessionTest.php
+$ php vendor/bin/phpunit tests/SessionTest.php
 ```
