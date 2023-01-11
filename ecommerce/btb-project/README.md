@@ -7,3 +7,16 @@
 ```php 
 $ php vendor/bin/doctrine orm:schema-tool:create
 ```
+
+2. Console 
+```
+$ php utility/create-user.php @demo123 demo123
+```
+
+
+3. Tests
+```
+$ php vendor/bin/phpunit tests/ProductsTest.php
+```
+
+

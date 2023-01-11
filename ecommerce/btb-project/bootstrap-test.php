@@ -9,18 +9,12 @@ require_once "vendor/autoload.php";
 $isDevMode = true;
 $proxyDir = null;
 $cache = null;
-
 $useSimpleAnnotationReader = false;
 $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src"), $isDevMode, $proxyDir, $cache, $useSimpleAnnotationReader);
 
-
 // database configuration parameters
 $conn = array(
-    'driver'   => 'pdo_mysql',
-    'user'     => 'brown',
-    'password' => 'secret123456',
-    'dbname'   => 'ecommerce_mini_project',
-    'host'     => '127.0.0.1'
+    'url' => 'sqlite:///:memory:',
 );
 
 // obtaining the entity manager
