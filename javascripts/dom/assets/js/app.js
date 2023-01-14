@@ -7,13 +7,20 @@ let score1          = document.getElementById('score--1');
 let diceImage       = document.querySelector('.dice')
 let rollDiceBtn     = document.querySelector('.btn--roll');
 let currentScore1   = document.getElementById('current--0');
-
+let currentScore2   = document.getElementById('current--1');
+let player0         = document.querySelector('.player--0')
+let player1         = document.querySelector('.player--1')
 
 
 /**
  * Initialize the values to zero
 */
+
+let scores         = [0, 0]; // [scorePlayer1, scorePlayer2]
 let current        = 0;
+let activePlayer   = 0;
+
+
 score0.textContent = 0;
 score1.textContent = 0;
 
@@ -47,8 +54,17 @@ rollDiceBtn.addEventListener('click', function () {
 
     if (diceRandomNumber !== 1) {
         current += diceRandomNumber;
-        currentScore1.textContent = current;
+        /* currentScore1.textContent = current; */
+        document.getElementById(`current--${activePlayer}`).textContent = current;
+
+    } else {
+        current = 0;
+        document.getElementById(`current--${activePlayer}`).textContent = current;
+        activePlayer = activePlayer === 0 ? 1 : 0;
+        player0.classList.toggle('player--active'); // add and remove
+        player1.classList.toggle('player--active'); // add and remove
     }
+
 
     // 4. If random is 1 then reset current score to zero and change the active player
 
