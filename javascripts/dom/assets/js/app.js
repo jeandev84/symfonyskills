@@ -440,4 +440,18 @@ eMailText.addEventListener('blur', function () {
  * Events & Event Loop
 */
 
+console.log('Script execution started!')
+
+document.getElementById('btn').addEventListener('click', function () {
+    console.log('Button clicked')
+})
+
+
+document.getElementById('email').onfocus = function () {
+    console.log('Email text-box focused!');
+}
+
+console.log('Script execution finished!')
+
+
 
