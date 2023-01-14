@@ -364,3 +364,9 @@ form.hobbies = hobbies;
  * Log form
 */
 console.log(form)
+
+
+/**
+ * Events and Event handlers
+*/
+

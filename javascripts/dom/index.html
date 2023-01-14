@@ -55,7 +55,13 @@
 
             <div class="form-group mb-3">
                 <label for="firstname">First Name</label>
-                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Your name ..." value="John">
+                <input type="text"
+                       class="form-control"
+                       id="firstname" name="firstname"
+                       placeholder="Your name ..." value="John"
+                       onfocus="this.style.backgroundColor='yellow'"
+                       onblur="this.style.backgroundColor='white'"
+                >
             </div>
 
             <div class="form-group mb-3">
