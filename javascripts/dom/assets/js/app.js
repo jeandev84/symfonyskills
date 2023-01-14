@@ -305,3 +305,10 @@ document.querySelector('.block-to-remove').classList.remove('btn-to-remove');
 
 // ADD STYLE TO HTML ELEMENT
 document.querySelector('.list').classList.add('dynamic')
+
+
+/**
+ * Collecting Form Data using Javascript
+*/
+
+
