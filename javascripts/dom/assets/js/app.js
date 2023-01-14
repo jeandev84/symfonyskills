@@ -394,7 +394,29 @@ formH2.onmouseout = function () {
 
 
 /**
- * Event Handling:addEventLister() method
+ * Event Handling:addEventLister(eventName, callback()) method
+ *
+ * submitButton.addEventListener('click', function () {
+ *       ... do something
+ * });
+*/
+
+/*
+function displayAlert() {
+    alert('You clicked on submit button')
+}
+
+let submitButton = document.getElementById('btn');
+
+submitButton.addEventListener('click', displayAlert);
 */
 
 
+let submitButton = document.getElementById('btn');
+
+submitButton.addEventListener('click', function () {
+    alert('You clicked on submit button');
+})
+
+
+let eMailText = document.getElementById('btn');
