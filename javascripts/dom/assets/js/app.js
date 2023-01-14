@@ -175,28 +175,32 @@ function consoleLog(element, title = 'ELEMENT') {
  * You can access a webpage element only by its ID
  * using getElementById() method
  *
- * getElementById() methods returns null if no webpage element is present with specified ID
+ * 1. Method: getElementById() methods returns null if no webpage element is present with specified ID
+ * 2. If more than one element with the same ID is present in the webpage, then only first will be returned.
  *
  @type {HTMLElement}
 */
+
 let valueOfNullElement = document.getElementById('idOfNullElement');
-consoleLog(valueOfNullElement, 'document.getElementById(idOfNullElement)');
+// consoleLog(valueOfNullElement, 'document.getElementById(idOfNullElement)');
 
 let p = document.getElementById('intro');
-consoleLog(p, 'document.getElementById(IdNameOfElement)');
+// consoleLog(p, 'document.getElementById(IdNameOfElement)');
 
 
 /**
- * querySelector() methods returns null if no webpage,
+ * QuerySelector()
+ *
+ * Method: querySelector() methods returns null if no webpage,
  * element is present with specified ID, class or Tag
  *
  * @type {Element}
 */
 let div = document.querySelector('.list');
-consoleLog(div, 'document.querySelector(.ClassNameOfElement)')
+// consoleLog(div, 'document.querySelector(.ClassNameOfElement)')
 
 let h1 = document.querySelector('#heading');
-consoleLog(h1, 'document.querySelector(#IdNameOfElement)')
+// consoleLog(h1, 'document.querySelector(#IdNameOfElement)')
 
 let img = document.querySelector('img');
-console.log(img, 'document.querySelector(ImageTagName)')
+// console.log(img, 'document.querySelector(ImageTagName)')
