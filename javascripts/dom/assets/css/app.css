@@ -130,7 +130,7 @@ input[type=submit]:hover {
     display: none;
 }
 
-.alert {
+.alert, .prompt {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -155,18 +155,22 @@ input[type=submit]:hover {
     z-index: 5;
 }
 
-.alert > h2, p, button {
+.alert > h2, p, button, .prompt > h2, p, button {
     margin: 10px 0;
 }
 
-.alert > h2 {
+.alert > h2, .prompt > h2 {
     color: #45a049;
 }
 
-#alertOK {
+#alertOK, .modal-btn {
     width: 70px;
     height: 30px;
     float: right;
     border: 0 solid;
     background-color: #45a049;
+}
+
+.modal-btn {
+    margin-left: 3px;
 }
