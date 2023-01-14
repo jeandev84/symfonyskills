@@ -21,7 +21,7 @@
  * Returns true if user clicks on OK button
  * Returns false if user clicks on cancel button
 */
-
+/*
 let confirmationDel = confirm('Do you really want to delete this item ?');
 console.log(confirmationDel);
 
@@ -29,3 +29,4 @@ console.log(confirmationDel);
 if (confirmationDel) {
     // write the logic to delete the item
 }
+*/
