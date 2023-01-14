@@ -108,7 +108,7 @@ input[type=submit]:hover {
     background-color: #eee;
 }
 
-.btn-alert {
+.btn-alert, .btn-prompt {
     background-color: #fff;
 }
 
