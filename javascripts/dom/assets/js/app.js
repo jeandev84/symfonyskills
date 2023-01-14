@@ -381,3 +381,13 @@ lName.onblur  = function () {
     lName.style.backgroundColor = 'white';
 }
 
+
+let formH2 = document.querySelector('#registration');
+
+formH2.onmouseover = function () {
+    formH2.style.color = 'red';
+}
+
+formH2.onmouseout = function () {
+    formH2.style.color = 'black';
+}
