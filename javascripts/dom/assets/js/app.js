@@ -176,6 +176,7 @@ function consoleLog(element, title = 'ELEMENT') {
  * using getElementById() method
  *
  * 1. Method: getElementById() methods returns null if no webpage element is present with specified ID
+ *
  * 2. If more than one element with the same ID is present in the webpage, then only first will be returned.
  *
  @type {HTMLElement}
@@ -191,8 +192,11 @@ let p = document.getElementById('intro');
 /**
  * QuerySelector()
  *
- * Method: querySelector() methods returns null if no webpage,
+ * 1. Method: querySelector() methods returns null if no webpage,
  * element is present with specified ID, class or Tag
+ *
+ * 2. If more than one element with the same ID, class, or tag is present in the webpage,
+ * then only first element will be returned by querySelector()
  *
  * @type {Element}
 */
@@ -204,3 +208,58 @@ let h1 = document.querySelector('#heading');
 
 let img = document.querySelector('img');
 // console.log(img, 'document.querySelector(ImageTagName)')
+
+
+/**
+ * How to read webpage elements data
+ * Read element content
+ *
+ * Property "textContent" is used to read the content of webpage element
+*/
+
+let pContent = p.textContent;
+// console.log(pContent);
+
+
+/**
+ * InnerHTML : returns the HTML content of a webpage element
+*/
+
+let divContent = div.innerHTML;
+// console.log(divContent)
+
+/**
+ * Modifying webpage content
+*/
+// console.log(div.innerHTML);
+
+let dynamicContent = document.getElementById('dynamicContent');
+dynamicContent.textContent = 'This is a dynamically generated paragraph.';
+
+
+div.innerHTML  = `
+<table border="1">
+    <thead>
+       <th>ID</th>
+       <th>Actions</th>
+    </thead>
+    <tbody>
+        <tr>
+           <td>1</td>
+           <td>Accessing DOM element</td>
+        </tr>
+        <tr>
+           <td>2</td>
+           <td>Modifying DOM element</td>
+        </tr>
+        <tr>
+           <td>3</td>
+           <td>Adding DOM element</td>
+        </tr>
+        <tr>
+           <td>4</td>
+           <td>Removing DOM element</td>
+        </tr>
+    </tbody>
+</table>
+`;
