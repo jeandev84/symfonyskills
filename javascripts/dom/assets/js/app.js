@@ -295,7 +295,13 @@ let listDiv = document.querySelector('.list');
  * Removing a class from a webpage element
 */
 
+// REMOVE HTML ELEMENT
 /* console.log(document.querySelector('.block-to-remove').classList); */
+// document.querySelector('.block-to-remove').remove();
 // document.querySelector('.header').classList.remove('header');
-// document.querySelector('.block-to-remove').classList.remove('btn-to-remove');
-document.querySelector('.block-to-remove').remove();
+document.querySelector('.block-to-remove').classList.remove('btn-to-remove');
+
+
+
+// ADD STYLE TO HTML ELEMENT
+document.querySelector('.list').classList.add('dynamic')
