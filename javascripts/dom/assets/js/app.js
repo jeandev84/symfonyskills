@@ -434,3 +434,10 @@ eMailText.addEventListener('blur', function () {
     console.log(this)
     this.style.backgroundColor = 'white';
 })
+
+
+/**
+ * Events & Event Loop
+*/
+
+
