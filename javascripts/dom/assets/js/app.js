@@ -368,5 +368,16 @@ console.log(form)
 
 /**
  * Events and Event handlers
+ * onfocus, onblur, onclick, onsubmit, onmouseover
 */
+
+let lName = document.getElementById('lastname');
+
+lName.onfocus = function () {
+    lName.style.backgroundColor = 'yellow';
+};
+
+lName.onblur  = function () {
+    lName.style.backgroundColor = 'white';
+}
 
