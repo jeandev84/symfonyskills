@@ -50,16 +50,8 @@ let formObj = {
 }
 
 console.log(formObj.send(1))
-*/
 
-
-/**
- * Accessing and Manipulating DOM elements
- * You can access a webpage element only by its ID
- * using getElementById() method
-*/
-
-/*
+========================================================
 let p = document.getElementById('intro');
 console.log(p)
 
@@ -97,18 +89,77 @@ console.log('GET ELEMENT BY QUERY SELECTOR')
 console.log('===============================================')
 let div = document.querySelector('.list');
 console.log(div)
+
+
+let $ = {
+  jsQuery: function() {
+     return document.querySelector()
+  }
+};
+let jsQuery = {
+    selectById: function (id) {
+         return document.getElementById(id);
+    },
+    selectQuery: function (anchor) {
+         return document.querySelector(anchor);
+    }
+}
+
+
+let htmlElement = {
+
+}
+
+let formObj = {
+
+}
+
+
+let $ = {
+    elementName: "",
+    elementObj: {},
+    log: function(element) {
+      return console.log(element)
+    },
+    jsQuery: function(elementName) {
+        this.elementName = elementName;
+        // return document.querySelector()
+    },
+    form: function (formObj) {
+        // return formObj;
+    }
+};
+
+$.jsQuery();
+
+=========================================================
+
+let $ = {
+  jsQuery: function (selectorName) {
+     return jsQuery(selectorName);
+  }
+}
+
+let jsQuery = {
+   selectorName: "",
+
+}
 */
 
 
+/**
+ * Useful functions
+*/
+
 function printHeader(title) {
-    console.log('START LOG ['+ title +']')
+    console.log('starting ['+ title +']')
     console.log('===============================================')
 }
 
 
 function printFooter() {
-    console.log('END LOG')
     console.log('===============================================')
+    console.log('end log')
     console.log('\n')
 }
 
@@ -120,14 +171,32 @@ function consoleLog(element, title = 'ELEMENT') {
 
 
 /**
- * HtmlElement
+ * Accessing and Manipulating DOM elements
+ * You can access a webpage element only by its ID
+ * using getElementById() method
  *
- * @type {HTMLElement}
+ * getElementById() methods returns null if no webpage element is present with specified ID
+ *
+ @type {HTMLElement}
 */
-
+let valueOfNullElement = document.getElementById('idOfNullElement');
+consoleLog(valueOfNullElement, 'document.getElementById(idOfNullElement)');
 
 let p = document.getElementById('intro');
-consoleLog(p, 'GET ELEMENT BY ID');
+consoleLog(p, 'document.getElementById(IdNameOfElement)');
 
+
+/**
+ * querySelector() methods returns null if no webpage,
+ * element is present with specified ID, class or Tag
+ *
+ * @type {Element}
+*/
 let div = document.querySelector('.list');
-consoleLog(div, 'GET ELEMENT BY QUERY SELECTOR')
+consoleLog(div, 'document.querySelector(.ClassNameOfElement)')
+
+let h1 = document.querySelector('#heading');
+consoleLog(h1, 'document.querySelector(#IdNameOfElement)')
+
+let img = document.querySelector('img');
+console.log(img, 'document.querySelector(ImageTagName)')
