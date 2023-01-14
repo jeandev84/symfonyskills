@@ -30,3 +30,30 @@ if (confirmationDel) {
     // write the logic to delete the item
 }
 */
+
+
+/**
+ * Custom Alert modal window
+*/
+
+
+let alertBtn       = document.getElementById('btn-alert');
+let alertElement   = document.querySelector('.alert');
+let overlayElement = document.querySelector('.overlay');
+let alertOk        = document.getElementById('alertOK');
+
+
+function showAlert() {
+    alertElement.classList.remove('hidden');
+    overlayElement.classList.remove('hidden');
+}
+
+function hideAlert() {
+    alertElement.classList.add('hidden');
+    overlayElement.classList.add('hidden');
+}
+
+alertBtn.addEventListener('click', showAlert);
+
+
+alertOk.addEventListener('click', hideAlert);
