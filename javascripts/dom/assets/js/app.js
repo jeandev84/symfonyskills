@@ -263,3 +263,15 @@ div.innerHTML  = `
     </tbody>
 </table>
 `;
+
+
+
+/**
+ * Changing attribute and style of webpage element
+ * How to change the attribute value of a webpage element
+*/
+
+let image = document.querySelector('img');
+// console.log(image.src);
+image.src = '/assets/images/forest.jpeg';
+
