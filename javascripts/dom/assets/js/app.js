@@ -34,7 +34,7 @@ rollDiceBtn.addEventListener('click', function () {
 
     // 2. Display the dice image with the random number
     diceImage.classList.remove('hidden');
-
+    diceImage.src = `/assets/images/dices/dice-${diceRandomNumber}.png`;
 
 
     // 3. If the random number is not 1 then add it to active player current score
