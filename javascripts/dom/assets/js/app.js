@@ -114,10 +114,13 @@ holdBtn.addEventListener('click', function () {
 
         // finish the game
         document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+        document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
         document.getElementById(`name--${activePlayer}`).textContent = 'Winner!';
 
         // hide dice image
         diceImage.classList.add('hidden');
+        rollDiceBtn.classList.add('hidden');
+        holdBtn.classList.add('hidden');
 
     } else {
         switchPlayer();
