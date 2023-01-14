@@ -273,14 +273,29 @@ div.innerHTML  = `
  * Image object [attributes: src, height, width ...]
 */
 
-let image = document.querySelector('img'); // console.log(image.src);
-image.src    = '/assets/images/forest.jpeg';
-// image.height = '200';
-// image.width  = '500';
+let image = document.querySelector('img');
+// console.log(image.src);
+image.src    = '/assets/images/forest.jpeg'; // <img src="/assets/images/forest.jpeg">
+// image.height = '200'; <img height="200">
+// image.width  = '500'; <img width="500">
 
 
 /**
  * Add styles dynamically to webpage element
 */
 let heading = document.getElementById('heading');
-heading.style.color = 'red';
+heading.style.color = 'red'; style="color:red"
+
+let listDiv = document.querySelector('.list');
+// listDiv.style.backgroundColor = 'yellow'; // <div class="list" style="background: #fff0">
+
+
+/**
+ * Adding and removing class from a webpage element
+ * Removing a class from a webpage element
+*/
+
+/* console.log(document.querySelector('.block-to-remove').classList); */
+// document.querySelector('.header').classList.remove('header');
+// document.querySelector('.block-to-remove').classList.remove('btn-to-remove');
+document.querySelector('.block-to-remove').remove();

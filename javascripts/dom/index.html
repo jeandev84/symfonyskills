@@ -4,52 +4,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>DOM [Document Object Model] : Manipulation</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="/assets/css/app.css">
+    <link href="/assets/css/bootstrap/5.0.2/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/app.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="container mt-5">
-
-    <div class="container-header" id="head">
+    <div class="block-to-remove" style="border: 2px solid olivedrab; text-align: center;">
+        <p>!!! THIS INFORMATION MUST BE TO REMOVE</p>
+        <button class="btn btn-primary btn-to-remove">Click me!</button>
+    </div>
+    <div class="header" id="head">
        <h1>DOM and DOM Manipulation</h1>
         <p class="info">
             The HTML DOM is a standard for how to (access, change, add, or delete) HTML Elements
         </p>
     </div>
 
-    <div class="container-body">
-        <div class="app-content">
-            <!-- Image element -->
-            <img src="/assets/images/notebook.jpg" height="170" width="400" alt="photo">
+    <div class="content">
+        <!-- Image element -->
+        <img src="/assets/images/notebook.jpg" height="170" width="400" alt="photo">
 
-            <!-- Heading element -->
-            <h1 id="heading">Javascript</h1>
+        <!-- Heading element -->
+        <h1 id="heading">Javascript</h1>
 
-            <!-- A paragraph element with id = intro -->
-            <p id="intro">
-               In this section, you will about DOM Manipulation using javascript language
-            </p>
+        <!-- A paragraph element with id = intro -->
+        <p id="intro">
+            In this section, you will about DOM Manipulation using javascript language
+        </p>
 
-            <!-- A paragraph element with id = dynamic content -->
-            <p id="dynamicContent"></p>
+        <!-- A paragraph element with id = dynamic content -->
+        <p id="dynamicContent"></p>
 
-            <div class="list">
-                <h2>Selection topics</h2>
-                <ul>
-                    <li>Accessing DOM Element</li>
-                    <li>Modifying DOM Element</li>
-                    <li>Adding DOM Element</li>
-                    <li>Removing existing DOM Element</li>
-                </ul>
-            </div>
+        <div class="list">
+            <h2>Selection topics</h2>
+            <ul>
+                <li>Accessing DOM Element</li>
+                <li>Modifying DOM Element</li>
+                <li>Adding DOM Element</li>
+                <li>Removing existing DOM Element</li>
+            </ul>
         </div>
+    </div>
+
+    <div class="form">
+
     </div>
 
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="/assets/js/bootstrap/5.0.2/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/app.js"></script>
 </body>
 </html>
