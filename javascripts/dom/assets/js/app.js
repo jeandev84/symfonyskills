@@ -14,6 +14,9 @@ let diceImage       = document.querySelector('.dice')
 let player0         = document.querySelector('.player--0')
 let player1         = document.querySelector('.player--1')
 
+let name1           = document.getElementById('name--0');
+let name2           = document.getElementById('name--1');
+
 
 let rollDiceBtn     = document.querySelector('.btn--roll');
 let holdBtn         = document.querySelector('.btn--hold')
@@ -141,6 +144,9 @@ newGameBtn.addEventListener('click', function () {
 
     currentScore1.textContent = 0;
     currentScore2.textContent = 0;
+
+    name1.textContent = "Player 1";
+    name2.textContent = "Player 2";
 
     player0.classList.remove('player--winner');
     player1.classList.remove('player--winner');
