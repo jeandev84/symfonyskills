@@ -112,9 +112,12 @@ holdBtn.addEventListener('click', function () {
     // 2. check if the player already reached maximum score
     if (scores[activePlayer] >= 20) {
 
-        // finish game
+        // finish the game
         document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
         document.getElementById(`name--${activePlayer}`).textContent = 'Winner!';
+
+        // hide dice image
+        diceImage.classList.add('hidden');
 
     } else {
         switchPlayer();
