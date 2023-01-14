@@ -1,0 +1,7 @@
+#form form > div {
+    margin-top: 10px;
+}
+
+.submit-button button {
+    display: block!important;
+}
