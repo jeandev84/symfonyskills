@@ -311,4 +311,56 @@ document.querySelector('.list').classList.add('dynamic')
  * Collecting Form Data using Javascript
 */
 
+let form = {
+    firstname: document.getElementById('firstname').value,
+    lastname: document.getElementById('lastname').value,
+    email: document.getElementById('email').value,
+    country: document.querySelector('#country').value,
+    gender: document.querySelector('input[name="gender"]:checked').value,
+    hobbies: [{}]
+}
 
+/*
+let attrNameFirstname = document.getElementById('firstname').name;
+let dataNames = document.getElementById('firstname').dataset;
+let dataInputField = document.getElementById('firstname').dataset.inputField;
+*/
+
+/**
+ * How to collect data from text
+*/
+let firstname = document.getElementById('firstname').value;
+let lastname  = document.getElementById('lastname').value;
+let email     = document.getElementById('email').value;
+
+
+/**
+ * Getting selected value from a dropdown list
+*/
+let country   = document.querySelector('#country').value;
+
+
+/**
+ * Getting value of checked radio button
+*/
+let gender = document.querySelector('input[name="gender"]:checked').value;
+
+
+/**
+ * Selecting all checked checkbox
+*/
+let hobbies    = [];
+let checkboxes = document.getElementsByName('hobbies[]');
+
+for (let i = 0; i < checkboxes.length; i++) {
+    if (checkboxes[i].checked) {
+        hobbies.push(checkboxes[i].value)
+    }
+}
+
+form.hobbies = hobbies;
+
+/**
+ * Log form
+*/
+console.log(form)
