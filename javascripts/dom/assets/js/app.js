@@ -114,6 +114,7 @@ holdBtn.addEventListener('click', function () {
 
         // finish game
         document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+        document.getElementById(`name--${activePlayer}`).textContent = 'Winner!';
 
     } else {
         switchPlayer();
