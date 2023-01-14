@@ -17,7 +17,7 @@ let player1         = document.querySelector('.player--1')
 
 let rollDiceBtn     = document.querySelector('.btn--roll');
 let holdBtn         = document.querySelector('.btn--hold')
-
+let newGameBtn      = document.querySelector('.btn--new');
 
 
 /**
@@ -128,5 +128,32 @@ holdBtn.addEventListener('click', function () {
 });
 
 
+/**
+ * Implement functionality for new game button
+ * Start the new game
+*/
+
+newGameBtn.addEventListener('click', function () {
+
+    // Reset values
+    score0.textContent = 0;
+    score1.textContent = 0;
+
+    currentScore1.textContent = 0;
+    currentScore2.textContent = 0;
+
+    player0.classList.remove('player--winner');
+    player1.classList.remove('player--winner');
+
+    player0.classList.add('player--active');
+    player1.classList.remove('player--active');
+
+    rollDiceBtn.classList.remove('hidden');
+    holdBtn.classList.remove('hidden');
+
+    scores         = [0, 0]; // [scorePlayer1, scorePlayer2]
+    current        = 0;
+    activePlayer   = 0;
+});
 
 
