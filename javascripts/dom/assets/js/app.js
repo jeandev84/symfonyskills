@@ -419,4 +419,15 @@ submitButton.addEventListener('click', function () {
 })
 
 
-let eMailText = document.getElementById('btn');
+let eMailText = document.getElementById('email');
+
+eMailText.addEventListener('focus', function () {
+    eMailText.style.backgroundColor = 'yellow';
+})
+
+eMailText.addEventListener('blur', function () {
+    // document.getElementById('email').style.backgroundColor = 'white';
+    // here this = document.getElementById('email');
+    console.log(this)
+    this.style.backgroundColor = 'white';
+})
