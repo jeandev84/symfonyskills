@@ -172,5 +172,10 @@ input[type=submit]:hover {
 }
 
 .modal-btn {
-    margin-left: 3px;
+    width: 70px;
+    height: 30px;
+    float: right;
+    border: 0 solid;
+    background-color: #45a049;
+    margin-left: 5px;
 }
