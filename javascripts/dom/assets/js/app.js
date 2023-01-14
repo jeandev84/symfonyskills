@@ -232,7 +232,7 @@ let divContent = div.innerHTML;
  * Modifying webpage content
 */
 // console.log(div.innerHTML);
-
+/*
 let dynamicContent = document.getElementById('dynamicContent');
 dynamicContent.textContent = 'This is a dynamically generated paragraph.';
 
@@ -263,15 +263,24 @@ div.innerHTML  = `
     </tbody>
 </table>
 `;
-
+*/
 
 
 /**
  * Changing attribute and style of webpage element
  * How to change the attribute value of a webpage element
+ *
+ * Image object [attributes: src, height, width ...]
 */
 
-let image = document.querySelector('img');
-// console.log(image.src);
-image.src = '/assets/images/forest.jpeg';
+let image = document.querySelector('img'); // console.log(image.src);
+image.src    = '/assets/images/forest.jpeg';
+// image.height = '200';
+// image.width  = '500';
 
+
+/**
+ * Add styles dynamically to webpage element
+*/
+let heading = document.getElementById('heading');
+heading.style.color = 'red';
