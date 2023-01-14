@@ -27,29 +27,75 @@ let newGameBtn      = document.querySelector('.btn--new');
  * Initialize the values to zero
 */
 
-let scores         = [0, 0]; // [scorePlayer1, scorePlayer2]
-let current        = 0;
-let activePlayer   = 0;
-
-
-/*
-score0.textContent = `${0}`;
-score1.textContent = `${0}`;
-*/
-
-score0.textContent = 0;
-score1.textContent = 0;
+let scores;
+let current;
+let activePlayer;
 
 
 /**
- * Hide dice
+ * Initialize Game
 */
-diceImage.classList.add('hidden');
+function initGame() {
+
+    // Reset values
+
+    /*
+    score0.textContent = `${0}`;
+    score1.textContent = `${0}`;
+    score0.textContent = 0;
+    score1.textContent = 0;
+    */
+
+    /**
+     * Initialize current score
+     *
+     * @type {number}
+    */
+    score0.textContent = 0;
+    score1.textContent = 0;
+
+    currentScore1.textContent = 0;
+    currentScore2.textContent = 0;
+
+    name1.textContent = "Player 1";
+    name2.textContent = "Player 2";
+
+
+    /**
+     * Activation current player
+    */
+    player0.classList.remove('player--winner');
+    player1.classList.remove('player--winner');
+
+    player0.classList.add('player--active');
+    player1.classList.remove('player--active');
+
+
+    /**
+     * Hide buttons
+    */
+    rollDiceBtn.classList.remove('hidden');
+    holdBtn.classList.remove('hidden');
 
 
 
-// scores[activePlayer]
+    /**
+     * Hide dice
+    */
+    diceImage.classList.add('hidden');
 
+    scores         = [0, 0]; // [scorePlayer1, scorePlayer2]
+    current        = 0;
+    activePlayer   = 0;
+
+}
+
+
+// Call Init Game
+initGame();
+
+
+// SwitchPlayer
 let switchPlayer = function () {
     current = 0;
     document.getElementById(`current--${activePlayer}`).textContent = current;
@@ -136,30 +182,6 @@ holdBtn.addEventListener('click', function () {
  * Start the new game
 */
 
-newGameBtn.addEventListener('click', function () {
-
-    // Reset values
-    score0.textContent = 0;
-    score1.textContent = 0;
-
-    currentScore1.textContent = 0;
-    currentScore2.textContent = 0;
-
-    name1.textContent = "Player 1";
-    name2.textContent = "Player 2";
-
-    player0.classList.remove('player--winner');
-    player1.classList.remove('player--winner');
-
-    player0.classList.add('player--active');
-    player1.classList.remove('player--active');
-
-    rollDiceBtn.classList.remove('hidden');
-    holdBtn.classList.remove('hidden');
-
-    scores         = [0, 0]; // [scorePlayer1, scorePlayer2]
-    current        = 0;
-    activePlayer   = 0;
-});
+newGameBtn.addEventListener('click', initGame);
 
 
