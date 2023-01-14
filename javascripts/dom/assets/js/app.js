@@ -2,14 +2,22 @@
  * Get access to webpage elements
 */
 
+let currentScore1   = document.getElementById('current--0');
+let currentScore2   = document.getElementById('current--1');
+
+
 let score0          = document.getElementById('score--0');
 let score1          = document.getElementById('score--1');
 let diceImage       = document.querySelector('.dice')
-let rollDiceBtn     = document.querySelector('.btn--roll');
-let currentScore1   = document.getElementById('current--0');
-let currentScore2   = document.getElementById('current--1');
+
+
 let player0         = document.querySelector('.player--0')
 let player1         = document.querySelector('.player--1')
+
+
+let rollDiceBtn     = document.querySelector('.btn--roll');
+let holdBtn         = document.querySelector('.btn--hold')
+
 
 
 /**
@@ -21,6 +29,11 @@ let current        = 0;
 let activePlayer   = 0;
 
 
+/*
+score0.textContent = `${0}`;
+score1.textContent = `${0}`;
+*/
+
 score0.textContent = 0;
 score1.textContent = 0;
 
@@ -30,6 +43,17 @@ score1.textContent = 0;
 */
 diceImage.classList.add('hidden');
 
+
+
+// scores[activePlayer]
+
+let switchPlayer = function () {
+    current = 0;
+    document.getElementById(`current--${activePlayer}`).textContent = current;
+    activePlayer = activePlayer === 0 ? 1 : 0;
+    player0.classList.toggle('player--active'); // add and remove
+    player1.classList.toggle('player--active'); // add and remove
+}
 
 
 /**
@@ -58,16 +82,42 @@ rollDiceBtn.addEventListener('click', function () {
         document.getElementById(`current--${activePlayer}`).textContent = current;
 
     } else {
+        /*
         current = 0;
         document.getElementById(`current--${activePlayer}`).textContent = current;
         activePlayer = activePlayer === 0 ? 1 : 0;
         player0.classList.toggle('player--active'); // add and remove
         player1.classList.toggle('player--active'); // add and remove
+        */
+        switchPlayer();
     }
 
 
     // 4. If random is 1 then reset current score to zero and change the active player
 
+});
+
+
+/**
+ * Implement hold button functionality
+*/
+holdBtn.addEventListener('click', function () {
+
+    // 1. add current score to global score
+    // scores[activePlayer] = scores[activePlayer] + current;
+    scores[activePlayer] +=  current;
+    document.getElementById(`score--${activePlayer}`).textContent = `${scores[activePlayer]}`;
+
+
+    // 2. check if the player already reached maximum score
+    if (scores[activePlayer] >= 20) {
+
+        // finish game
+        document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+
+    } else {
+        switchPlayer();
+    }
 });
 
 
