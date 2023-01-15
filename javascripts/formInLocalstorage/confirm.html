@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Confirm</title>
+</head>
+<body>
+
+<main>
+  <h1>Let's check data is correct</h1>
+  <div id="data"></div>
+    <div>
+        <button id="btn">Confirm</button>
+    </div>
+</main>
+
+
+<script>
+
+    const json = localStorage.getItem('form');
+    // console.log(JSON.parse(json));
+
+    // const obj = JSON.parse(json);
+    //
+    // for (let key in obj) {
+    //     console.log(key, obj[key])
+    // }
+
+    const obj  = JSON.parse(json)
+
+    for (let key in obj) {
+        const markup = `
+          <div>
+            <span>${key}: ${obj[key]}</span>
+          </div>
+        `;
+
+        document.getElementById('data').innerHTML += markup;
+    }
+</script>
+</body>
+</html>
