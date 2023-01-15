@@ -175,3 +175,12 @@ contentDiv.insertBefore(divElement, listDivClass);
 
 
 
+/**
+ * Adding element dynamically on click to webpage
+*/
+
+let studentElement = document.createElement('div');
+studentElement.classList.add('student-list');
+
+
+
