@@ -179,6 +179,8 @@ contentDiv.insertBefore(divElement, listDivClass);
  * Adding element dynamically on click to webpage
 */
 
+const imgSrc = '/assets/images/students/avatar/';
+
 // 1. Create a div and add it to webpage
 let studentDivElement = document.createElement('div');
 studentDivElement.classList.add('student-list');
@@ -255,11 +257,12 @@ function displayStudentDetails() {
     // console.log(form)
     // <img src="/assets/images/students/avatar/${gender}_avatar.png" width="70" alt="Student Image">
 
-    let source = gender === 'male' ? '/assets/images/students/avatar/male_avatar.png' : '/assets/images/students/avatar/female_avatar.png';
+    /* let source = gender === 'male' ? '/assets/images/students/avatar/male_avatar.png' : '/assets/images/students/avatar/female_avatar.png'; */
+    let source = gender === 'male' ? 'male_avatar.png' : 'female_avatar.png';
 
     let studentCardHTML = `
             <div class="card">
-               <img src="${source}" width="70" height="70" alt="Student Image">
+               <img src="/assets/images/students/avatar/${source}" width="70" height="70" alt="Student Image">
                <div class="student-details">
                    <div class="std-name">${firstname} ${lastname}</div>
                    <div class="std-email"><i>${email}</i></div>
@@ -272,7 +275,20 @@ function displayStudentDetails() {
     `;
 
     studentDivElement.insertAdjacentHTML('beforeend', studentCardHTML);
+
+
+    // Removing object
+    let removeCardBtn = document.querySelector('.remove-card');
+
+    // console.log(removeCardBtn);
+    removeCardBtn.addEventListener('click', function () {
+        console.log(this);
+    });
 }
+
+
+
+
 
 
 

@@ -414,10 +414,11 @@ submitButton.addEventListener('click', displayAlert);
 
 let submitButton = document.getElementById('btn');
 
+/*
 submitButton.addEventListener('click', function () {
     alert('You clicked on submit button');
 })
-
+*/
 
 let eMailText = document.getElementById('email');
 
