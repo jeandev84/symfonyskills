@@ -179,8 +179,101 @@ contentDiv.insertBefore(divElement, listDivClass);
  * Adding element dynamically on click to webpage
 */
 
-let studentElement = document.createElement('div');
-studentElement.classList.add('student-list');
+// 1. Create a div and add it to webpage
+let studentDivElement = document.createElement('div');
+studentDivElement.classList.add('student-list');
+
+let contentParentDiv = document.querySelector('.content');
+contentParentDiv.appendChild(studentDivElement);
+
+
+// 2. Add event listener on submit button
+let submitBtn = document.getElementById('btn');
+submitBtn.addEventListener('click', displayStudentDetails)
+
+
+// 3. Create displayStudentDetails function
+function displayStudentDetails() {
+
+    /**
+     * Collecting Form Data using Javascript
+    */
+    // let form = {
+    //     firstname: document.getElementById('firstname').value,
+    //     lastname: document.getElementById('lastname').value,
+    //     email: document.getElementById('email').value,
+    //     country: document.querySelector('#country').value,
+    //     gender: document.querySelector('input[name="gender"]:checked').value,
+    //     hobbies: [{}]
+    // }
+
+    /*
+    let attrNameFirstname = document.getElementById('firstname').name;
+    let dataNames = document.getElementById('firstname').dataset;
+    let dataInputField = document.getElementById('firstname').dataset.inputField;
+    */
+
+    /**
+     * How to collect data from text
+    */
+    let firstname = document.getElementById('firstname').value;
+    let lastname  = document.getElementById('lastname').value;
+    let email     = document.getElementById('email').value;
+
+
+    /**
+     * Getting selected value from a dropdown list
+    */
+    let country   = document.querySelector('#country').value;
+
+
+    /**
+     * Getting value of checked radio button
+     */
+    let gender = document.querySelector('input[name="gender"]:checked').value;
+
+
+    // /**
+    //  * Selecting all checked checkbox
+    // */
+    // let hobbies    = [];
+    //
+    // let checkboxes = document.getElementsByName('hobbies[]');
+    //
+    // for (let i = 0; i < checkboxes.length; i++) {
+    //     if (checkboxes[i].checked) {
+    //         hobbies.push(checkboxes[i].value)
+    //     }
+    // }
+
+
+    // form.hobbies = hobbies;
+
+    /**
+     * Log form
+    */
+    // console.log(form)
+    // <img src="/assets/images/students/avatar/${gender}_avatar.png" width="70" alt="Student Image">
+
+    let source = gender === 'male' ? '/assets/images/students/avatar/male_avatar.png' : '/assets/images/students/avatar/female_avatar.png';
+
+    let studentCardHTML = `
+            <div class="card">
+               <img src="${source}" width="70" height="70" alt="Student Image">
+               <div class="student-details">
+                   <div class="std-name">${firstname} ${lastname}</div>
+                   <div class="std-email"><i>${email}</i></div>
+                   <div class="std-country">${country}</div>
+               </div>
+               <div class="div-remove-card">
+                   <button class="remove-card">X</button>
+               </div>
+            </div>
+    `;
+
+    studentDivElement.insertAdjacentHTML('beforeend', studentCardHTML);
+}
+
 
 
 
