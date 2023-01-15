@@ -287,11 +287,14 @@ function displayStudentDetails() {
     removeCardBtn.addEventListener('click', function () {
 
         // console.log(this);
-        let studentCardElementHTMLToRemove = this.parentNode.parentNode;
-
         // console.log(this.parentNode.parentNode);
 
-        studentDivElement.removeChild(studentCardElementHTMLToRemove);
+        let confirmStudentToDelete = confirm('Do you really want to delete this student ?');
+
+        if (confirmStudentToDelete) {
+            let studentCardElementHTMLToRemove = this.parentNode.parentNode;
+            studentDivElement.removeChild(studentCardElementHTMLToRemove);
+        }
     });
 
     i++;
