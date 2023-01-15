@@ -142,7 +142,7 @@ the new features in the latest release of ES2021.
 </p>`;
 
 // divElement.innerHTML = pElementText; Ecrase les elements precedents
-divElement.insertAdjacentHTML('afterend', pElement);
+divElement.insertAdjacentHTML('beforeend', pElement);
 
 /*
 divElement.insertAdjacentHTML('beforebegin', pElement);
