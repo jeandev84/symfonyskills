@@ -119,15 +119,36 @@ promptCancel.addEventListener('click', hidePrompt);
 
 // 1. Create a DIV element
 let divElement = document.createElement('div');
+divElement.classList.add('import-update');
+divElement.style.marginTop = "30px";
+
 
 
 // 2. Create a text content
-let textNode = document.createTextNode('This is a dynamically generated text content');
-divElement.appendChild(textNode);
+// let textNode = document.createTextNode('This is a dynamically generated text content');
+// divElement.appendChild(textNode);
+
+
+// Create H2 element
+let h2Element = document.createElement('h2');
+h2Element.textContent = "Important Update";
+divElement.appendChild(h2Element);
+
+let pElement = `
+<p>
+Here we have an important update for all our student.
+We are going to have a live free class on Thuresday July 2022, 2021 to discuss about
+the new features in the latest release of ES2021.
+</p>`;
+
+// divElement.innerHTML = pElementText;
+divElement.insertAdjacentHTML('beforeend', pElement);
 
 
 // 3. Add the created DIV to the webpage
 let contentDiv = document.querySelector('.content');
+
+
 
 /*
 containerDiv.appendChild(divElement);
@@ -140,6 +161,7 @@ containerDiv.appendChild(divElement);
  </div>
 */
 
+// listDivClass is a child of <div class="content"></div>
 let listDivClass = document.querySelector('.list');
 contentDiv.insertBefore(divElement, listDivClass);
 
