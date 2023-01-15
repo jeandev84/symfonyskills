@@ -16,33 +16,18 @@
 
 <script>
 
-    function getParameter(parameterName) {
-        let parameters   =  new URLSearchParams(window.location.search);
-        return parameters.get(parameterName);
-    }
-
-    const params = new URLSearchParams({
+   const params = new URLSearchParams({
       query: 'dinner',
       language: 'en'
-    });
+   });
 
-   /*
    const url = `search.php?${params.toString()}`;
    console.log(url);
+
 
    fetch(url)
    .then(response => response.text())
    .then(console.log)
-   */
-
-   fetch('search.php', {
-       method: 'post',
-       body: params
-   })
-   .then(response => response.text())
-   .then(console.log)
-
-
 </script>
 </body>
 </html>
