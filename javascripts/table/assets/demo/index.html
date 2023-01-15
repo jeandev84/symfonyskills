@@ -12,7 +12,7 @@
 
 <div class="container mt-5">
    <div class="row">
-       <div class="col-md-7 tab" id="tab-1">
+       <div class="col-md-7">
            <table class="table table-striped table-hover" id="table">
                <thead>
                <tr>
@@ -22,25 +22,36 @@
                </tr>
                </thead>
                <tbody>
+               <!--
                <tr>
-                   <th scope="row">A1</th>
-                   <td>B1</td>
-                   <td>10</td>
+                   <th scope="row">1</th>
+                   <td>Mark</td>
+                   <td>Otto</td>
+                   <td>@mdo</td>
                </tr>
                <tr>
-                   <th scope="row">A2</th>
-                   <td>B2</td>
-                   <td>20</td>
+                   <th scope="row">2</th>
+                   <td>Jacob</td>
+                   <td>Thornton</td>
+                   <td>@jth</td>
                </tr>
                <tr>
-                   <th scope="row">A3</th>
-                   <td>B3</td>
-                   <td>30</td>
+                   <th scope="row">3</th>
+                   <td>Anne</td>
+                   <td>Claire</td>
+                   <td>@acl</td>
                </tr>
+               <tr>
+                   <th scope="row">4</th>
+                   <td>Audrey</td>
+                   <td>Marie</td>
+                   <td>@amar</td>
+               </tr>
+               -->
                </tbody>
            </table>
        </div>
-       <div class="col-md-5 tab" id="tab-2">
+       <div class="col-md-5">
            <h1>Append data</h1>
            <div class="form-group">
                <label for="firstname">
@@ -60,9 +71,9 @@
                </label>
            </div>
 
-           <button class="btn btn-success" onclick="addHTMLTableRow();">Add</button>
-           <button class="btn btn-primary" onclick="editHtmlTableSelectedRow();">Edit</button>
-           <button class="btn btn-danger"  onclick="removeSelectedRow();">Remove</button>
+           <button class="btn btn-success" id="add" onclick="addHTMLTableRow()">Add</button>
+           <button class="btn btn-primary" id="edit">Edit</button>
+           <button class="btn btn-danger" id="remove">Remove</button>
        </div>
    </div>
 </div>
