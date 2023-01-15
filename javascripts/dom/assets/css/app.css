@@ -179,3 +179,8 @@ input[type=submit]:hover {
     background-color: #45a049;
     margin-left: 5px;
 }
+
+.import-update {
+    padding: 10px;
+    background-color: #eee;
+}

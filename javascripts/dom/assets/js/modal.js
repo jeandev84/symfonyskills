@@ -101,3 +101,48 @@ function hidePrompt(event) {
 promptBtn.addEventListener('click', showPrompt)
 promptOK.addEventListener('click', hidePrompt);
 promptCancel.addEventListener('click', hidePrompt);
+
+
+/**
+ * Adding Elements Dynamically to Webpage
+*/
+
+/*
+ appendChild()
+ <div>
+   <p>Paragraph 1</p>
+   <p>Paragraph 2</p>
+   <p>Paragraph 3</p>
+   <text>Text Node appended after last child of div element created!</text>
+ </div>
+*/
+
+// 1. Create a DIV element
+let divElement = document.createElement('div');
+
+
+// 2. Create a text content
+let textNode = document.createTextNode('This is a dynamically generated text content');
+divElement.appendChild(textNode);
+
+
+// 3. Add the created DIV to the webpage
+let contentDiv = document.querySelector('.content');
+
+/*
+containerDiv.appendChild(divElement);
+ appendChild()
+ <div>
+   <p>Paragraph 1</p>
+   <p>Paragraph 2</p>
+   <p>Paragraph 3</p>
+   <text>Text Node appended after last child of div element created!</text>
+ </div>
+*/
+
+let listDivClass = document.querySelector('.list');
+contentDiv.insertBefore(divElement, listDivClass);
+
+
+
+
