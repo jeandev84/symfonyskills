@@ -194,6 +194,9 @@ let submitBtn = document.getElementById('btn');
 submitBtn.addEventListener('click', displayStudentDetails)
 
 
+let i = 0;
+
+
 // 3. Create displayStudentDetails function
 function displayStudentDetails() {
 
@@ -260,7 +263,7 @@ function displayStudentDetails() {
     /* let source = gender === 'male' ? '/assets/images/students/avatar/male_avatar.png' : '/assets/images/students/avatar/female_avatar.png'; */
     let source = gender === 'male' ? 'male_avatar.png' : 'female_avatar.png';
 
-    let studentCardHTML = `
+    let studentCardHTMLToAdd = `
             <div class="card">
                <img src="/assets/images/students/avatar/${source}" width="70" height="70" alt="Student Image">
                <div class="student-details">
@@ -269,21 +272,29 @@ function displayStudentDetails() {
                    <div class="std-country">${country}</div>
                </div>
                <div class="div-remove-card">
-                   <button class="remove-card">X</button>
+                   <button class="remove-card" id="remove-card-${i}">X</button>
                </div>
             </div>
     `;
 
-    studentDivElement.insertAdjacentHTML('beforeend', studentCardHTML);
+    studentDivElement.insertAdjacentHTML('beforeend', studentCardHTMLToAdd);
 
 
     // Removing object
-    let removeCardBtn = document.querySelector('.remove-card');
+    let removeCardBtn = document.querySelector('#remove-card-' + i);
 
     // console.log(removeCardBtn);
     removeCardBtn.addEventListener('click', function () {
-        console.log(this);
+
+        // console.log(this);
+        let studentCardElementHTMLToRemove = this.parentNode.parentNode;
+
+        // console.log(this.parentNode.parentNode);
+
+        studentDivElement.removeChild(studentCardElementHTMLToRemove);
     });
+
+    i++;
 }
 
 
