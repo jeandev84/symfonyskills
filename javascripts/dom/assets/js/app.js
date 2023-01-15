@@ -297,9 +297,9 @@ let listDiv = document.querySelector('.list');
 
 // REMOVE HTML ELEMENT
 /* console.log(document.querySelector('.block-to-remove').classList); */
-// document.querySelector('.block-to-remove').remove();
-// document.querySelector('.header').classList.remove('header');
-document.querySelector('.block-to-remove').classList.remove('btn-to-remove');
+/* document.querySelector('.block-to-remove').remove(); */
+/* document.querySelector('.header').classList.remove('header'); */
+/* document.querySelector('.block-to-remove').classList.remove('btn-to-remove'); */
 
 
 

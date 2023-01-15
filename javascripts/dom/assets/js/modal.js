@@ -57,3 +57,47 @@ alertBtn.addEventListener('click', showAlert);
 
 
 alertOk.addEventListener('click', hideAlert);
+
+
+/**
+ * Custom prompt modal window
+*/
+
+let promptBtn     = document.getElementById('btn-prompt');
+let promptElement = document.querySelector('.prompt');
+let promptOK      = document.getElementById('promptOK');
+let promptCancel  = document.getElementById('promptCancel');
+let inputAge      = document.getElementById('inputAge');
+
+function showPrompt() {
+    promptElement.classList.remove('hidden');
+    overlayElement.classList.remove('hidden');
+}
+
+function hidePrompt(event) {
+
+    // console.log(event);
+    // console.log(event.target);
+    // console.log(event.target.textContent);
+
+    let age
+
+    console.log(event.target.textContent);
+
+    if (event.target.textContent === 'OK') {
+        age = inputAge.value;
+    } else {
+        age = null;
+    }
+
+    console.log(age);
+
+    promptElement.classList.add('hidden');
+    overlayElement.classList.add('hidden');
+}
+
+
+// Prompts events
+promptBtn.addEventListener('click', showPrompt)
+promptOK.addEventListener('click', hidePrompt);
+promptCancel.addEventListener('click', hidePrompt);
