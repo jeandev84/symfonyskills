@@ -141,8 +141,15 @@ We are going to have a live free class on Thuresday July 2022, 2021 to discuss a
 the new features in the latest release of ES2021.
 </p>`;
 
-// divElement.innerHTML = pElementText;
+// divElement.innerHTML = pElementText; Ecrase les elements precedents
+divElement.insertAdjacentHTML('afterend', pElement);
+
+/*
+divElement.insertAdjacentHTML('beforebegin', pElement);
+divElement.insertAdjacentHTML('afterbegin', pElement);
 divElement.insertAdjacentHTML('beforeend', pElement);
+divElement.insertAdjacentHTML('afterend', pElement);
+*/
 
 
 // 3. Add the created DIV to the webpage
