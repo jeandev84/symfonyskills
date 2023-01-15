@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/bootstrap-5.0.2/css/bootstrap.min.css">
+    <title>URLSearchParams with Fetch - Javascript</title>
+</head>
+<body>
+
+<div class="container mt-5">
+     <h1>URLSearchParams with Fetch - Javascript</h1>
+</div>
+
+<script>
+   const params = new URLSearchParams({
+      query: 'dinner',
+      language: 'en'
+   });
+
+   const url = `search.php?${params.toString()}`;
+
+   fetch(url)
+   .then(response => response.text())
+   .then(console.log)
+</script>
+</body>
+</html>
