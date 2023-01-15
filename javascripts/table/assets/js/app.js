@@ -82,9 +82,11 @@ function editHtmlTableSelectedRow() {
     let lastname  = document.getElementById('lastname').value;
     let age       = document.getElementById('age').value;
 
-    table.rows[rowIndexed].cells[0].innerHTML = firstname;
-    table.rows[rowIndexed].cells[1].innerHTML = lastname;
-    table.rows[rowIndexed].cells[2].innerHTML = age;
+    if (! checkEmptyInput()) {
+        table.rows[rowIndexed].cells[0].innerHTML = firstname;
+        table.rows[rowIndexed].cells[1].innerHTML = lastname;
+        table.rows[rowIndexed].cells[2].innerHTML = age;
+    }
 }
 
 
