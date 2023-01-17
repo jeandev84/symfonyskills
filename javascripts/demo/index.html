@@ -2,47 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/bootstrap-5.0.2/css/bootstrap.min.css">
-    <title>URLSearchParams with Fetch - Javascript</title>
+    <title>FormValidator</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/app.js" type="module"></script>
 </head>
 <body>
 
-<div class="container mt-5">
-     <h1>URLSearchParams with Fetch - Javascript</h1>
+<div class="container">
+    <form action="./" id="signup">
+        <div class="input">
+            <label for="username" class="input__label">Username</label>
+            <input type="text" id="username" class="input__input">
+            <div class="input__error"></div>
+        </div>
+        <div class="input">
+            <label for="password" class="input__label">Password</label>
+            <input type="password" id="password" class="input__input">
+            <div class="input__error"></div>
+        </div>
+        <div class="input">
+            <label for="preferredLanguage" class="input__label">Preferred Language</label>
+            <select class="input__input" id="preferredLanguage">
+                <option value="javascript">JavaScript</option>
+                <option value="typescript">TypeScript</option>
+                <option value="go">Go</option>
+                <option value="kotlin">Kotlin</option>
+            </select>
+            <div class="input__error"></div>
+        </div>
+        <button type="submit">Sign Up</button>
+    </form>
 </div>
 
-<script>
 
-    function getParameter(parameterName) {
-        let parameters   =  new URLSearchParams(window.location.search);
-        return parameters.get(parameterName);
-    }
-
-    const params = new URLSearchParams({
-      query: 'dinner',
-      language: 'en'
-    });
-
-   /*
-   const url = `search.php?${params.toString()}`;
-   console.log(url);
-
-   fetch(url)
-   .then(response => response.text())
-   .then(console.log)
-   */
-
-   fetch('search.php', {
-       method: 'post',
-       body: params
-   })
-   .then(response => response.text())
-   .then(console.log)
-
-
-</script>
 </body>
 </html>
