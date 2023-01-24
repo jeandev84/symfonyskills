@@ -46,7 +46,6 @@ export default class FormValidator {
                 // console.log(this.inputsWithErrors);
 
             } else {
-                console.log('delete')
                 this.inputsWithErrors.delete(inputField);
             }
         };
