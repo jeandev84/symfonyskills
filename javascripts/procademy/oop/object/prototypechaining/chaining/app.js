@@ -16,19 +16,19 @@ Person.prototype.city = 'London';
 
 
 let john = new Person('John', 'Male', 1990);
-// john.calculateAge();
+john.calculateAge();
 console.log(john);
-// console.log(john.hasOwnProperty('city'));
+console.log(john.hasOwnProperty('city'));
 // console.log(john.Prototype === Person.prototype);
 
 
 let merry = new Person('Merry', 'Female', 1995);
-// merry.calculateAge();
+merry.calculateAge();
 console.log(merry);
 
 
 let steve = new Person('Steve', 'Male', 1989);
-// steve.calculateAge();
+steve.calculateAge();
 console.log(steve);
 
 
@@ -49,18 +49,10 @@ let mark = {
     gender: 'Male'
 };
 
-// console.log(mark);
-// console.log(mark instanceof Object);
-// console.log(mark.hasOwnProperty('name'));
-// console.log(mark.hasOwnProperty('foo'));
-// console.log(Person instanceof Object);
+console.log(mark);
+console.log(mark instanceof Object);
+console.log(mark.hasOwnProperty('name'));
+console.log(mark.hasOwnProperty('foo'));
+console.log(Person instanceof Object);
 
-
-let arr = [10, 20, 30];
-console.log(arr);
-console.log(arr instanceof Array);
-// new Array();
-// arr.push();
-// arr.unshift();
-// arr.pop();
 

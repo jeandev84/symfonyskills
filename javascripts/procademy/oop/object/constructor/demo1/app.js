@@ -1,4 +1,4 @@
-// Constructor
+// Constructor function
 // let now  = new Date();
 // let str  = new String();
 

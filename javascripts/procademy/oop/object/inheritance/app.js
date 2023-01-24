@@ -1,4 +1,4 @@
-// Constructor
+// Constructor function
 let Person = function (name, gender, birthYear) {
      this.name      = name;
      this.gender    = gender;
