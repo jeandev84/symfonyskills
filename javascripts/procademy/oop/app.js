@@ -22,6 +22,15 @@ class Employee extends Person {
         this.employeeId = employeeId;
         this.salary     = salary;
     }
+
+    calculateSalary() {
+        return this.salary * 12;
+    }
+
+    employeeDetails() {
+        console.log(this.name);
+        console.log(this.employeeId);
+    }
 }
 
 
