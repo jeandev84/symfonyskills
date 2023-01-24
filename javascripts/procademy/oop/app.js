@@ -12,17 +12,20 @@ Person.prototype.calculateAge = function () {
     console.log(age);
 };
 
+Person.prototype.city = 'London';
+
 
 let john = new Person('John', 'Male', 1990);
-john.calculateAge();
+// john.calculateAge();
 console.log(john);
+// console.log(john.Prototype === Person.prototype);
 
 
 let merry = new Person('Merry', 'Female', 1995);
-merry.calculateAge();
+//merry.calculateAge();
 console.log(merry);
 
 
 let steve = new Person('Steve', 'Male', 1989);
-steve.calculateAge();
+// steve.calculateAge();
 console.log(steve);
