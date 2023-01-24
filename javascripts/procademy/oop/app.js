@@ -1,38 +1,47 @@
-// Inheritance between classes
-class Person {
+// Implementing inheritance using Object.create()
+let person = {
 
-    constructor(name, birthYear, gender) {
+    calculateAge() {
+       return new Date().getFullYear() - this.birthYear;
+    },
+
+    personInit(name, birthYear, gender) {
         this.name = name;
         this.birthYear = birthYear;
         this.gender = gender;
     }
-
-    calculateAge() {
-        let age = new Date().getFullYear() - this.birthYear;
-        console.log(age)
-    }
 }
 
 
+let employee = Object.create(person);
 
-class Employee extends Person {
+// console.log(employee);
 
-    constructor(name, gender, birthYear, employeeId, salary) {
-        super(name, gender, birthYear);
-        this.employeeId = employeeId;
-        this.salary     = salary;
-    }
+/*
+DRY
+employee.employeeInit = function (name, birthYear, gender, employeeId) {
+    this.name = name;
+    this.birthYear = birthYear;
+    this.gender = gender;
+    this.employeeId = employeeId;
+}
+*/
 
-    calculateSalary() {
-        return this.salary * 12;
-    }
-
-    employeeDetails() {
-        console.log(this.name);
-        console.log(this.employeeId);
-    }
+employee.employeeInit = function (name, birthYear, gender, employeeId, salary) {
+    employee.personInit.call(this, name, birthYear, gender);
+    this.employeeId = employeeId;
+    this.salary = salary;
 }
 
+console.log(employee);
 
-let mark = new Employee('Mark', 'Male', 1995, 201, 18000);
+
+let mark = Object.create(employee);
+mark.employeeInit('Mark', 1990, 'Male', 201, 24000);
 console.log(mark);
+
+
+/*
+let form = new FormData();
+console.log(form);
+*/
