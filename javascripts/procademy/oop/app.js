@@ -41,10 +41,12 @@ let Employee = function (name, gender, birthYear, employeeId, salary) {
 }
 
 
-// Inheritance all methods of Parent class
+// Inheritance all methods of Parent class (Assign prototype Child and Parent before running child prototype)
 Employee.prototype = Person.prototype;
 
 
+
+// And then
 Employee.prototype.calculateSalary = function () {
     return this.salary * 12;
 }
