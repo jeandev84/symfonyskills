@@ -1,66 +1,45 @@
-// Constructor function
-let Person = function (name, gender, birthYear) {
-     this.name      = name;
-     this.gender    = gender;
-     this.birthYear = birthYear;
+// Javascript classes
+// There are two ways to create a class
+// 1. Using class declaration
+
+class Person {
+
+    constructor(name, birthYear, gender) {
+         this.name      = name;
+         this.birthYear = birthYear;
+         this.gender    = gender;
+
+         /*
+         this.calculateAge = function () {
+             console.log(new Date().getFullYear() - this.birthYear);
+         }
+         */
+     }
+
+     calculateAge() {
+         console.log(new Date().getFullYear() - this.birthYear);
+     }
 }
 
 
-// inheritance
-Person.prototype.calculateAge = function () {
-    let age = new Date().getFullYear() - this.birthYear;
-    console.log(age);
-};
-
-Person.prototype.city = 'London';
+Person.prototype.greet = function () {
+   console.log('Good morning ' + this.name + '!')
+}
 
 
-let john = new Person('John', 'Male', 1990);
-// john.calculateAge();
+let john = new Person('John', 1990, 'Male');
 console.log(john);
-// console.log(john.hasOwnProperty('city'));
-// console.log(john.Prototype === Person.prototype);
+john.calculateAge();
+john.greet();
 
 
-let merry = new Person('Merry', 'Female', 1995);
-// merry.calculateAge();
+let merry = new Person('Merry', 1995, 'Female');
 console.log(merry);
 
-
-let steve = new Person('Steve', 'Male', 1989);
-// steve.calculateAge();
-console.log(steve);
+/* Enter this in console tools dev: >> john.__proto__ === Person.prototype ( true )*/
 
 
-
-// Prototype Chaining
-
-// Every object we create in Javascript is directly or indirectly an instance of object constructor
-
-// let mark = new Object(); - empty object
-// mark.name = 'Mark';
-// mark.birthYear = 1992;
-// mark.gender = 'Male';
-
-
-let mark = {
-    name: 'Mark',
-    birthYear: 1992,
-    gender: 'Male'
-};
-
-// console.log(mark);
-// console.log(mark instanceof Object);
-// console.log(mark.hasOwnProperty('name'));
-// console.log(mark.hasOwnProperty('foo'));
-// console.log(Person instanceof Object);
-
-
-let arr = [10, 20, 30];
-console.log(arr);
-console.log(arr instanceof Array);
-// new Array();
-// arr.push();
-// arr.unshift();
-// arr.pop();
+// 1. classes cannot be hoisted ( Declare class and do new instance of class)
+// 2. classes are first class citizen
+// 3. classes are executed in strict mode
 
