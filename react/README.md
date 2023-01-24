@@ -12,5 +12,12 @@ Ok to proceed? (y) y
 2. Start rendering project in dev server
 ```
 >> npm start
+
+http://localhost:3000
 ```
 
+
+3. JXML convertor to HTML code 
+```
+https://babeljs.io/repl
+```
