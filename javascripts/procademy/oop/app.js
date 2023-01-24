@@ -1,45 +1,41 @@
-// Javascript classes
-// There are two ways to create a class
-// 1. Using class declaration
+// [ Getters and Setters ]
+// Accessor properties are methods that gets or sets the value of an objects property
 
-class Person {
+// 1. getter properties   - read objects property value   - use "get" keywords
+// 2. setter properties   - set an objects property value - use "set" keywords
 
-    constructor(name, birthYear, gender) {
-         this.name      = name;
-         this.birthYear = birthYear;
-         this.gender    = gender;
+// Encapsulation - Hide data from outside world
+//
+let john = {
+    name: 'John',
+    birthYear: 1990,
+    AnnualSalary: 12000,
 
-         /*
-         this.calculateAge = function () {
-             console.log(new Date().getFullYear() - this.birthYear);
-         }
-         */
-     }
+    get getName() {
+        return this.name;
+    },
 
-     calculateAge() {
-         console.log(new Date().getFullYear() - this.birthYear);
-     }
+    get getPrefixedName() {
+       return 'Mr. ' + this.name;
+    },
+
+    set setName(name) {
+        if (name.length < 4) {
+            alert('Name should be of at lest 4 characters.')
+        } else {
+            this.name = name;
+        }
+    }
 }
 
 
-Person.prototype.greet = function () {
-   console.log('Good morning ' + this.name + '!')
-}
+console.log(john.getName);
+john.setName = 'John Smith';
+// john.setName = 'Joh';
+console.log(john.getName);
+console.log(john.getPrefixedName);
 
 
-let john = new Person('John', 1990, 'Male');
-console.log(john);
-john.calculateAge();
-john.greet();
-
-
-let merry = new Person('Merry', 1995, 'Female');
-console.log(merry);
-
-/* Enter this in console tools dev: >> john.__proto__ === Person.prototype ( true )*/
-
-
-// 1. classes cannot be hoisted ( Declare class and do new instance of class)
-// 2. classes are first class citizen
-// 3. classes are executed in strict mode
-
+console.log(john.name);
+john.name = 'John Doe';
+console.log(john.name);
