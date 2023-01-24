@@ -1,63 +1,46 @@
-// Static methods
-/*
-class Person {
+// Object.create()
 
-    constructor(name, birthYear, gender) {
-        this.name = name;
-        this.birthYear = birthYear;
-        this.gender = gender;
-    }
+let person = {
 
     calculateAge() {
-        console.log(new Date().getFullYear() - this.birthYear);
-    }
+        return new Date().getFullYear() - this.birthYear;
+    },
 
-    static greet() {
-        console.log('Hey there! How are you?');
+    greet() {
+        return 'Have a nice day!';
+    },
+
+    init(name, birthYear, gender) {
+         this.name = name;
+         this.birthYear = birthYear;
+         this.gender  = gender;
     }
 }
 
 
-let john = new Person('John', 1990, 'Male');
+// john inherit of person object
+let john = Object.create(person);
+
+john.name = 'John';
+john.birthYear = 1990;
+john.gender = 'Male';
+
 console.log(john);
-
-// john.calculateAge();
-
-// use class static method
-Person.greet();
-*/
+console.log(john.calculateAge());
 
 
+// merry inherit of person object
+let merry = Object.create(person, {
+    name: {value: 'Merry'},
+    birthYear: {value: 1995},
+    gender: {value: 'Female'}
+});
 
-let Person = function (name, gender, birthYear) {
-    this.name = name;
-    this.gender = gender;
-    this.birthYear = birthYear;
-}
-
-
-// Attach method inheritance to prototype
-Person.prototype.calculateAge = function () {
-    let age = new Date().getFullYear() - this.birthYear;
-    console.log(age)
-}
+console.log(merry);
 
 
-// Add a static method simply
-Person.greet = function () {
-    console.log('Have a nice day!');
-}
-
-
-let mark = new Person('Mark', 'Male', 1995);
+// mark inherit of person object
+let mark = Object.create(person);
+mark.init('Mark', 2002, 'Male');
 console.log(mark);
-mark.calculateAge();
-Person.greet();
 
-
-// Examples static methods of object (Number)
-Number.parseInt('203');
-Number.isNaN('someNumber');
-
-// Arrays
-Array.from([100, 300, 205]);
