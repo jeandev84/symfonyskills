@@ -1,3 +1,10 @@
+/**
+* OOP Concept
+* - Inheritance
+* - Encapsulation
+* - Abstraction
+* - Polymorphism
+*/
 
 let users = {
     name: 'John',
@@ -10,6 +17,18 @@ let users = {
 
     removeUser() {
        // Logic to remove user
+    }
+}
+
+
+// Inheritance
+
+let person = {
+    name: '',
+    birthYear: '',
+    gender: '',
+    calculateAge() {
+
     }
 }
 
@@ -44,5 +63,51 @@ let steve = {
 
     calculateAge(currentData = 2023) {
         return currentData - this.birthYear;
+    }
+}
+
+
+// Abstraction
+
+let Employee = {
+    employeeId: 0,
+    salary: 0,
+    company: '',
+    calculateSalary() {
+
+    }
+}
+
+
+let PermanentEmployee = {
+    monthlySalary: 0,
+    getSalary() {
+        return 12 * this.monthlySalary;
+    }
+}
+
+
+let PartTimeEmployee = {
+     hourlySalary: 0,
+     getSalary() {
+         return 12 * this.hourlySalary;
+     }
+}
+
+
+// Polymorphism
+
+let Calculator = {
+
+    addNumbers(x, y) {
+        return x + y;
+    }
+}
+
+
+let CalculatorAdvanced = {
+
+    addNumbers(x, y, z) {
+        return x + y + z;
     }
 }
