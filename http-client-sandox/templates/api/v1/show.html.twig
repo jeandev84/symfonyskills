@@ -11,6 +11,6 @@
 <div class="example-wrapper">
     <h1>Github Repository ✅</h1>
     <h3>Name: {{ repository.name }}</h3>
-    <p>Description: {{ repository.description ?  'No description for this one !' }}</p>
+    <p>Description: {{ repository.description ??  'No description for this one !' }}</p>
 </div>
 {% endblock %}

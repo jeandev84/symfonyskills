@@ -3,6 +3,7 @@ namespace App\Controller\v1;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
@@ -59,6 +60,10 @@ class ApiController extends AbstractController
     public function show($id, HttpClientInterface $client): Response
     {
         $response = $client->request('GET', "https://api.github.com/repositories/{$id}");
+
+        if ($response->getStatusCode() === Response::HTTP_NOT_FOUND) {
+             throw new NotFoundHttpException(sprintf('No repository with id %s', $id));
+        }
 
         return $this->render('api/v1/show.html.twig', [
             'repository' => $response->toArray()
