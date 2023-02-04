@@ -80,8 +80,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
            // Find user has id: githubId
           return $this->createQueryBuilder('u')
                         ->where('u.githubId = :githubId')
+                        ->orWhere('u.email = :email')
                         ->setParameters([
-                            'githubId' => $githubResourceOwner->getId()
+                            'githubId' => $githubResourceOwner->getId(),
+                            'email'    => $githubResourceOwner->getEmail()
                         ])
                         ->getQuery()
                         ->getOneOrNullResult();

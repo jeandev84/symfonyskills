@@ -68,23 +68,28 @@ class UserManager
 
 
      /**
-      * @param GithubResourceOwner $githubResourceOwner
+      * @param GithubResourceOwner $owner
       * @return User
      */
-     public function findOrCreateUserFromGithubAuth(GithubResourceOwner $githubResourceOwner): User
+     public function findOrCreateUserFromGithubAuth(GithubResourceOwner $owner): User
      {
            $repository = $this->entityManager->getRepository(User::class);
 
-           $user = $repository->findUserFromOAuthGithubOauth($githubResourceOwner);
+           /** @var User $user */
+           $user = $repository->findUserFromOAuthGithubOauth($owner);
 
            if ($user) {
+               if ($user->getGithubId() === null) {
+                   $user->setGithubId($owner->getId());
+                   $this->saveUser($user);
+               }
                return $user;
            }
 
            $user = (new User())
                    ->setRoles(['ROLE_USER'])
-                   ->setGithubId($githubResourceOwner->getId())
-                   ->setEmail($githubResourceOwner->getEmail());
+                   ->setGithubId($owner->getId())
+                   ->setEmail($owner->getEmail());
 
 
            return $this->saveUser($user);

@@ -3,7 +3,15 @@
 {% block title %}Welcome Page{% endblock %}
 
 {% block body %}
-     <div class="container">
-         <h1>Welcome to Home Page</h1>
-     </div>
+    <nav>
+        {% if app.user %}
+            <li>Hi, {{ app.user.username }}</li>
+            <li><a href="{{ path('app_logout') }}">logout</a></li>
+        {% else %}
+            <li><a href="{{ path('app_login') }}">login</a></li>
+        {% endif %}
+    </nav>
+    <div class="container">
+        <h1>Welcome to Home Page</h1>
+    </div>
 {% endblock %}
