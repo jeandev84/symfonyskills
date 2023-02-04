@@ -3,7 +3,7 @@
 ## Documentation
 - https://symfony.com/doc/current/messenger.html
 - https://symfony.com/doc/current/messenger.html#middleware
-
+- RabbitMQ php-amqp (Advanced Message Queuing Protocol)
 
 
 
@@ -77,4 +77,16 @@ Please review, edit and commit them: these files are yours.
 ```
 
 
-2. 
+2. Create project with Docker 
+```
+$ docker compose up -d
+$ docker compose exec php composer create-project symfony/skeleton:"6.1.*" messenger-rabbitmq
+$ sudo chown -R yao project-catalog/
+$ docker compose exec php composer require symfony/messenger
+```
+
+
+3. Start JOBS and Workers
+```
+$ docker compose exec php php bin/console messenger:consume async
+```
