@@ -10,6 +10,11 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class GithubAuthenticator extends AbstractGuardAuthenticator
 {
@@ -41,11 +46,20 @@ class GithubAuthenticator extends AbstractGuardAuthenticator
          ];
     }
 
+
+
+
+    /**
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws ClientExceptionInterface
+    */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
          // LOGIC => GET USER FROM GITHUB
-         $this->provider->loadUserFromGithub($credentials['code']);
-         return new User();
+         return $this->provider->loadUserFromGithub($credentials['code']);
     }
 
     public function checkCredentials($credentials, UserInterface $user): bool

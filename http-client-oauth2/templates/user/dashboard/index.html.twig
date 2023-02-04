@@ -9,6 +9,7 @@
     </style>
 
     <div class="example-wrapper">
-        <h3>Hi, User!</h3>
+        <h3>Welcome, {{ app.user.username }}</h3>
+        <img src="{{ app.user.avatar }}" alt="{{ app.user.username }}">
     </div>
 {% endblock %}
