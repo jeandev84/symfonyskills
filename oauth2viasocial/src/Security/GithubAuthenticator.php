@@ -2,21 +2,29 @@
 namespace App\Security;
 
 use App\Manager\UserManager;
+use App\Security\Exception\NotVerifiedEmailException;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Client\Provider\GithubClient;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
 use League\OAuth2\Client\Provider\GithubResourceOwner;
 use League\OAuth2\Client\Token\AccessToken;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 
 class GithubAuthenticator extends SocialAuthenticator
@@ -77,21 +85,49 @@ class GithubAuthenticator extends SocialAuthenticator
     public function getCredentials(Request $request)
     {
          // On Recupere le token pour le client github
-         return $this->fetchAccessToken($this->getGithubClient());
+         return $this->fetchAccessToken($this->githubClient());
     }
-
-
 
 
     /**
      * @param AccessToken $credentials
      * @param UserProviderInterface $userProvider
      * @return UserInterface
-     */
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+    */
     public function getUser($credentials, UserProviderInterface $userProvider): UserInterface
     {
          /** @var GithubResourceOwner $githubUser */
-         $githubUser = $this->getGithubClient()->fetchUserFromToken($credentials);
+         $githubUser = $this->githubClient()->fetchUserFromToken($credentials);
+
+
+         // On recupere l' email de l' utilisateur
+         $response = HttpClient::create()->request('GET', 'https://api.github.com/user/emails', [
+             'headers' => [
+                 'authorization' => "token {$credentials->getToken()}"
+             ]
+         ]);
+
+
+         $emails = $response->toArray();
+
+         foreach ($emails as $email) {
+             if ($email['primary'] === true && $email['verified'] === true) {
+                  $data = $githubUser->toArray();
+                  $data['email'] = $email['email'];
+                  $githubUser = new GithubResourceOwner($data);
+             }
+         }
+
+
+         if ($githubUser->getEmail() === null) {
+               throw new NotVerifiedEmailException();
+         }
+
 
          return $this->userManager->findOrCreateUserFromGithubAuth($githubUser);
     }
@@ -104,7 +140,11 @@ class GithubAuthenticator extends SocialAuthenticator
     */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
+          if ($request->hasSession()) {
+              $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
+          }
 
+          return new RedirectResponse($this->router->generate('app_login'));
     }
 
 
@@ -129,7 +169,7 @@ class GithubAuthenticator extends SocialAuthenticator
     /**
      * @return GithubClient
     */
-    private function getGithubClient(): GithubClient
+    private function githubClient(): GithubClient
     {
          return $this->clientRegistry->getClient('github');
     }
