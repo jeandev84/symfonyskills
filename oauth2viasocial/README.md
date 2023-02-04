@@ -159,12 +159,18 @@ yao@pc-gaming:~/Desktop/webprojects/symfonyskills/oauth2social$ bin/console make
 5. Make Migratiion 
 ```
 $ bin/console make:migration 
+   
 
- Success! 
+ Are you sure you wish to continue? (yes/no) [yes]:
+ > yes
+
+
            
-Next: Review the new migration "migrations/Version20230204114410.php"
-Then: Run the migration with php bin/console doctrine:migrations:migrate
-See https://symfony.com/doc/current/bundles/DoctrineMigrationsBundle/index.html
+  Success! 
+           
+
+ Next: Review the new migration "migrations/Version20230204145752.php"
+ Then: Run the migration with php bin/console doctrine:migrations:migrate
 ```
 
 

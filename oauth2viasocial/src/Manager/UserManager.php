@@ -3,6 +3,7 @@ namespace App\Manager;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use League\OAuth2\Client\Provider\GithubResourceOwner;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserManager
@@ -63,5 +64,29 @@ class UserManager
                'password' => '1234',
                'roles'   => ['ROLE_USER']
            ]);
+     }
+
+
+     /**
+      * @param GithubResourceOwner $githubResourceOwner
+      * @return User
+     */
+     public function findOrCreateUserFromGithubAuth(GithubResourceOwner $githubResourceOwner): User
+     {
+           $repository = $this->entityManager->getRepository(User::class);
+
+           $user = $repository->findUserFromOAuthGithubOauth($githubResourceOwner);
+
+           if ($user) {
+               return $user;
+           }
+
+           $user = (new User())
+                   ->setRoles(['ROLE_USER'])
+                   ->setGithubId($githubResourceOwner->getId())
+                   ->setEmail($githubResourceOwner->getEmail());
+
+
+           return $this->saveUser($user);
      }
 }
