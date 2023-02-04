@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Manager\UserManager;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
+use KnpU\OAuth2ClientBundle\Client\Provider\GithubClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -42,11 +44,17 @@ class SecurityController extends AbstractController
     /**
      * @Route("/connect/github", name="github_connect")
      * @param ClientRegistry $clientRegistry
-     * @return void
+     * @return RedirectResponse
     */
-    public function connectViaSocialNetwork(ClientRegistry $clientRegistry)
+    public function connectViaSocialNetwork(ClientRegistry $clientRegistry): RedirectResponse
     {
-          dd($clientRegistry->getClient('github'));
+          /* dd($clientRegistry->getClient('github')); */
+
+          /** @var GithubClient $client */
+          $client = $clientRegistry->getClient('github');
+
+          # // ... redirect(scopes)
+          return $client->redirect(['read:user', 'user:email']);
     }
 
 
