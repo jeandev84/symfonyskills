@@ -32,13 +32,15 @@ class GithubUserProvider
 
 
     /**
-     * @throws TransportExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws DecodingExceptionInterface
+     * @param string $code
+     * @return User|null
      * @throws ClientExceptionInterface
-     */
-    public function loadUserFromGithub(string $code)
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
+    */
+    public function loadUserFromGithub(string $code): ?User
     {
           $url = sprintf("https://github.com/login/oauth/access_token?client_id=%s&client_secret=%s&code=%s",
                  $this->githubClient,

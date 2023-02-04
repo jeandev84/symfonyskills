@@ -63,5 +63,5 @@ bin/console make:user
 
 4. Make Auth
 ```
-
+$ bin/console make:auth
 ```
