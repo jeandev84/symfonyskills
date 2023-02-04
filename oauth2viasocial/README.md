@@ -1,8 +1,18 @@
 ### OAuth2 
 
+- https://github.com/knpuniversity/oauth2-client-bundle
+- https://github.com/thephpleague/oauth2-github (from "https://github.com/knpuniversity/oauth2-client-bundle")
 - https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps
 - https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-the-authenticated-user
 - https://github.com/settings (Configure application name)
+
+
+0. Install Oauth Bundle
+```
+$ composer require knpuniversity/oauth2-client-bundle
+$ composer require league/oauth2-github
+```
+
 
 1. Configure .env
 ```
@@ -175,4 +185,3 @@ $ bin/console doctrine:migrations:migrate
 ```
 http://localhost:8000/login
 ```
-

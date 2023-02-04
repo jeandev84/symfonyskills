@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Manager\UserManager;
+use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,7 +29,6 @@ class SecurityController extends AbstractController
         //     return $this->redirectToRoute('target_path');
         // }
 
-        $this->userManager->createFakeUserJohnDoe();
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -38,9 +38,22 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
+
+    /**
+     * @Route("/connect/github", name="github_connect")
+     * @param ClientRegistry $clientRegistry
+     * @return void
+    */
+    public function connectViaSocialNetwork(ClientRegistry $clientRegistry)
+    {
+          dd($clientRegistry->getClient('github'));
+    }
+
+
+
     /**
      * @Route("/logout", name="app_logout")
-     */
+    */
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
