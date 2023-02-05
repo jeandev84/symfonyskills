@@ -61,6 +61,22 @@ class ContactManager
      }
 
 
+
+
+     public function deleteContactsByIds(array $contactIds): bool
+     {
+           // BAD WAY !!!
+           // todo DELETE FROM contact WHERE ids IN (:contactIds)
+           foreach ($contactIds as $contactId) {
+                if ($contact = $this->findContactById($contactId)) {
+                     $this->deleteContact($contact);
+                }
+           }
+
+           return true;
+     }
+
+
      /**
       * @return Contact[]
      */
@@ -69,6 +85,22 @@ class ContactManager
            $repository = $this->entityManager->getRepository(Contact::class);
 
            return $repository->findAll();
+     }
+
+
+     /**
+      * @param int $id
+      * @return Contact|null
+     */
+     public function findContactById(int $id): ?Contact
+     {
+         $repository = $this->entityManager->getRepository(Contact::class);
+
+         if (! $contact = $repository->find($id)) {
+               return null;
+         }
+
+         return $contact;
      }
 
 

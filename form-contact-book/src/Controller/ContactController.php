@@ -104,4 +104,19 @@ class ContactController extends AbstractController
 
           return $this->redirectToRoute('contacts.list');
       }
+
+
+
+
+      #[Route(path: '/contacts/rows/delete', name: 'contacts.rows.delete', methods: ['POST'])]
+      public function deleteContactCollections(Request $request): RedirectResponse
+      {
+          $contactIds = $request->get('contactIds');
+
+          $this->contactManager->deleteContactsByIds($contactIds);
+
+          $this->addFlash('success', "Users was successfully deleted!");
+
+          return $this->redirectToRoute('contacts.list');
+      }
 }
