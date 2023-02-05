@@ -40,6 +40,7 @@ class Contact
     #[Assert\Email(
         message: "The email '{{ value }}' is not a valid email"
     )]
+    // #[NewAssert\ForbiddenDomainZone()]
     private ?string $email = null;
 
     #[ORM\Column(length: 255, nullable: true)]
