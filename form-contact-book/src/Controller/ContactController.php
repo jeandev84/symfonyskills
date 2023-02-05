@@ -13,10 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactController extends AbstractController
 {
 
-      /**
-       * @var ContactManager
-      */
-      protected $contactManager;
+      protected ContactManager $contactManager;
 
 
       /**
@@ -25,6 +22,16 @@ class ContactController extends AbstractController
       public function __construct(ContactManager $contactManager)
       {
            $this->contactManager = $contactManager;
+      }
+
+
+
+      #[Route(path: '/contacts', name: 'contacts.list')]
+      public function listContacts(): Response
+      {
+           return $this->render("contact/list.html.twig", [
+              'contacts' => $this->contactManager->findAllContacts()
+           ]);
       }
 
 
@@ -43,6 +50,8 @@ class ContactController extends AbstractController
                $this->contactManager->saveContactFromForm($form);
 
                $this->addFlash('success', "User was successfully created!");
+
+               return $this->redirectToRoute("contacts.list");
           }
 
           return $this->renderForm('contact/form.html.twig', compact('form'));

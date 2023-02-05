@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact Book - all contacts{% endblock %}
+
+{% block body %}
+   <div id="create-contact">
+       <a href="{{ path('contacts.create') }}" class="btn btn-primary">New</a>
+   </div>
+   <table class="table table-success table-hover">
+       <thead>
+          <tr>
+              <th scope="col">
+                  <input type="checkbox" id="mainCheckbox">
+              </th>
+              <th scope="col">ID</th>
+              <th scope="col">Last name</th>
+              <th scope="col">First name</th>
+              <th scope="col">Phone number</th>
+              <th scope="col">Email</th>
+              <th scope="col">Notes</th>
+              <th scope="col">Actions</th>
+          </tr>
+       </thead>
+       <tbody>
+       {% if contacts %}
+           {% for contact in  contacts %}
+               <tr>
+                   <td>
+                       <input type="checkbox" name="">
+                   </td>
+                   <td>{{ contact.id }}</td>
+                   <td>{{ contact.lastName }}</td>
+                   <td>{{ contact.firstName }}</td>
+                   <td>{{ contact.phoneNumber }}</td>
+                   <td>{{ contact.email }}</td>
+                   <td>{{ contact.notes }}</td>
+                   <td>
+                       <div><a href="#">Update contact</a></div>
+                       <div><a href="#">Delete contact</a></div>
+                   </td>
+               </tr>
+           {% endfor %}
+       {% endif %}
+       </tbody>
+   </table>
+{% endblock %}

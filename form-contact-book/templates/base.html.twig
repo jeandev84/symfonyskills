@@ -17,6 +17,14 @@
     </head>
     <body>
         <div class="container">
+            <div class="d-flex justify-content-center" style="margin-top: 10px;">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
             {% block body %}{% endblock %}
         </div>
     </body>

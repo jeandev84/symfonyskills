@@ -45,4 +45,15 @@ class ContactManager
      {
           return $this->saveContact(ContactFactory::createFromForm($form));
      }
+
+
+     /**
+      * @return Contact[]
+     */
+     public function findAllContacts(): array
+     {
+           $repository = $this->entityManager->getRepository(Contact::class);
+
+           return $repository->findAll();
+     }
 }
