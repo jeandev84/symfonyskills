@@ -1,4 +1,4 @@
-### API Symfony 5
+### API Symfony 5 (Example project : https://www.manning.com/)
 
 
 1. Packages (For Skeleton project)
