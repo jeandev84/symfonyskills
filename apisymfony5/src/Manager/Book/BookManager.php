@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Manager;
+namespace App\Manager\Book;
 
-use App\Entity\Book;
+use App\Entity\Book\Book;
 use Doctrine\ORM\EntityManagerInterface;
 
 class BookManager

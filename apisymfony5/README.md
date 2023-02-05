@@ -102,3 +102,67 @@ You can pass a higher rule level through the --level option
 (the default and current level is 0) to analyse code more thoroughly.
 
 ```
+
+
+8. Make Fixtures
+```
+$ composer require orm-fixtures --dev
+$ bin/console make:fixtures
+$ bin/console doctrine:fixtures:load --help
+
+Description:
+  Load data fixtures to your database
+
+Usage:
+  doctrine:fixtures:load [options]
+
+Options:
+      --append                             Append the data fixtures instead of deleting all data from the database first.
+      --group=GROUP                        Only load fixtures that belong to this group (multiple values allowed)
+      --em=EM                              The entity manager to use for this command.
+      --purger=PURGER                      The purger to use for this command [default: "default"]
+      --purge-exclusions=PURGE-EXCLUSIONS  List of database tables to ignore while purging (multiple values allowed)
+      --shard=SHARD                        The shard connection to use for this command.
+      --purge-with-truncate                Purge data by using a database-level TRUNCATE statement
+  -h, --help                               Display help for the given command. When no command is given display help for the list command
+  -q, --quiet                              Do not output any message
+  -V, --version                            Display this application version
+      --ansi|--no-ansi                     Force (or disable --no-ansi) ANSI output
+  -n, --no-interaction                     Do not ask any interactive question
+  -e, --env=ENV                            The Environment name. [default: "dev"]
+      --no-debug                           Switch off debug mode.
+  -v|vv|vvv, --verbose                     Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Help:
+  The doctrine:fixtures:load command loads data fixtures from your application:
+
+    php bin/console doctrine:fixtures:load
+
+  Fixtures are services that are tagged with doctrine.fixture.orm.
+
+  If you want to append the fixtures instead of flushing the database first you can use the --append option:
+
+    php bin/console doctrine:fixtures:load --append
+
+  By default Doctrine Data Fixtures uses DELETE statements to drop the existing rows from the database.
+  If you want to use a TRUNCATE statement instead you can use the --purge-with-truncate flag:
+
+    php bin/console doctrine:fixtures:load --purge-with-truncate
+
+  To execute only fixtures that live in a certain group, use:
+
+    php bin/console doctrine:fixtures:load --group=group1
+
+=========================================================================
+Load Fixtures
+
+$ bin/console doctrine:fixtures:load --purge-with-truncate
+
+Careful, database "postgres" will be purged. Do you want to continue? (yes/no) [no]:
+> yes
+
+> purging database
+> loading App\DataFixtures\BookCategoryFixtures
+
+
+```
