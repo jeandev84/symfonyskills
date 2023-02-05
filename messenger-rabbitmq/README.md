@@ -89,4 +89,10 @@ $ docker compose exec php composer require symfony/messenger
 3. Start JOBS and Workers
 ```
 $ docker compose exec php php bin/console messenger:consume async
+$ docker compose exec php php bin/console app:send-notification
+$ docker compose exec php php bin/console app:send-notification --via=sms
+$ docker compose exec php php bin/console app:send-notification --via=whatsapp
+$ docker compose exec php php bin/console app:send-notification --via=telegram
+$ docker compose exec php php bin/console app:send-notification --via=push-sms
+$ docker compose exec php php bin/console app:send-notification --via=
 ```
