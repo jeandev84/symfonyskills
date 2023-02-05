@@ -72,4 +72,36 @@ class ContactController extends AbstractController
 
           return $this->renderForm('contact/form.html.twig', compact('form'));
       }
+
+
+
+
+      #[Route(path: '/contacts/update/{id}', name: "contacts.update")]
+      public function updateContact(Request $request, Contact $contact): RedirectResponse|Response
+      {
+            $form = $this->createForm(ContactFormType::class, $contact);
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+               $this->contactManager->saveContactFromForm($form);
+
+               $this->addFlash('success', "User {$contact->getLastName()} was successfully updated!");
+
+               return $this->redirectToRoute("contacts.list");
+           }
+
+           return $this->renderForm('contact/form.html.twig', compact('form'));
+      }
+
+
+
+      #[Route(path: '/contacts/delete/{id}', name: 'contacts.delete')]
+      public function deleteContact(Contact $contact): Response
+      {
+          $this->contactManager->deleteContact($contact);
+
+          return $this->redirectToRoute('contacts.list');
+      }
 }

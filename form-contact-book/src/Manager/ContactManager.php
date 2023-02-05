@@ -47,6 +47,20 @@ class ContactManager
      }
 
 
+
+     /**
+      * @param Contact $contact
+      * @return Contact
+     */
+     public function deleteContact(Contact $contact): Contact
+     {
+          $this->entityManager->remove($contact);
+          $this->entityManager->flush();
+
+          return $contact;
+     }
+
+
      /**
       * @return Contact[]
      */
@@ -58,7 +72,7 @@ class ContactManager
      }
 
 
-     public function contactToArray(Contact $contact)
+     public function contactToArray(Contact $contact): array
      {
           // This is a bad way
           return [

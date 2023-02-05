@@ -41,12 +41,22 @@
                    <td>{{ contact.notes }}</td>
                    <td>
                        <div><a href="{{ path('contacts.show', {'id': contact.id}) }}">View contact</a></div>
-                       <div><a href="#">Update contact</a></div>
-                       <div><a href="#">Delete contact</a></div>
+                       <div><a href="{{ path('contacts.update', {'id': contact.id}) }}">Update contact</a></div>
+                       <div><a href="{{ path('contacts.delete', {'id': contact.id}) }}">Delete contact</a></div>
                    </td>
                </tr>
            {% endfor %}
        {% endif %}
        </tbody>
    </table>
+   <script>
+        function toggle(source) {
+            let checkboxes = document.querySelector('input[type="checkbox"]');
+            for (let i=0; i < checkboxes.length; i++) {
+                if (checkboxes[i] !== source) {
+                    checkboxes[i].checked = source.checked;
+                }
+            }
+        }
+   </script>
 {% endblock %}
