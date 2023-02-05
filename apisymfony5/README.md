@@ -164,5 +164,16 @@ Careful, database "postgres" will be purged. Do you want to continue? (yes/no) [
 > purging database
 > loading App\DataFixtures\BookCategoryFixtures
 
+```
 
+### DDD (Domain Driven Development)
+```
+src/
+ - BookDomain
+    - Controller/BookController
+    - Entity/Book
+
+- UserDomain
+   - Controller/UserController
+   - Entity/User
 ```

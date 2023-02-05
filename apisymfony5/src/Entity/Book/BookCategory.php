@@ -19,6 +19,22 @@ class BookCategory
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
+
+    /**
+     * Just for tests application will be used setId()
+     *
+     * @param int|null $id
+     * @return $this
+    */
+    public function setId(?int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+
+
     public function getId(): ?int
     {
         return $this->id;
