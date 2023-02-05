@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact Book - Card{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-6">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Column Name</th>
+                    <th scope="col">Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                  {% if contact is defined %}
+                    <tr>
+                        <td>ID</td>
+                        <td>{{ contact.id }}</td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td>{{ contact.lastName }}</td>
+                    </tr>
+                    <tr>
+                        <td>First Name</td>
+                        <td>{{ contact.firstName }}</td>
+                    </tr>
+                    <tr>
+                        <td>Phone Number</td>
+                        <td>{{ contact.phoneNumber }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ contact.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Notes</td>
+                        <td>{{ contact.notes }}</td>
+                    </tr>
+                 {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -25,6 +25,13 @@
                     </div>
                 {% endfor %}
             </div>
+            {% block navigation %}
+                <div class="row">
+                    <div class="col d-flex justify-content-end" style="margin: 30px 0;">
+                        <a href="{{ path('contacts.list') }}">Back to the main page</a>
+                    </div>
+                </div>
+            {% endblock %}
             {% block body %}{% endblock %}
         </div>
     </body>

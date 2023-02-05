@@ -5,6 +5,7 @@ use App\Entity\Contact;
 use App\Form\Type\ContactFormType;
 use App\Manager\ContactManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,6 +27,13 @@ class ContactController extends AbstractController
 
 
 
+      #[Route(path: '/', name: 'home')]
+      public function mainPage(): RedirectResponse
+      {
+          return $this->redirectToRoute('contacts.list');
+      }
+
+
       #[Route(path: '/contacts', name: 'contacts.list')]
       public function listContacts(): Response
       {
@@ -33,6 +41,14 @@ class ContactController extends AbstractController
               'contacts' => $this->contactManager->findAllContacts()
            ]);
       }
+
+
+
+      #[Route(path: '/contacts/{id}', name: 'contacts.show')]
+      public function showContact(Contact $contact): Response
+      {
+         return $this->render("contact/show.html.twig", compact('contact'));
+     }
 
 
 

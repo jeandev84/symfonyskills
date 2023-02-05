@@ -2,10 +2,15 @@
 
 {% block title %}Contact Book - all contacts{% endblock %}
 
+ {% block navigation %}
+     <div class="row">
+         <div class="col d-flex justify-content-end" style="margin: 30px 0;">
+             <a href="{{ path('contacts.create') }}">Add New Contact</a>
+         </div>
+     </div>
+ {% endblock %}
+
 {% block body %}
-   <div id="create-contact">
-       <a href="{{ path('contacts.create') }}" class="btn btn-primary">New</a>
-   </div>
    <table class="table table-success table-hover">
        <thead>
           <tr>
@@ -35,6 +40,7 @@
                    <td>{{ contact.email }}</td>
                    <td>{{ contact.notes }}</td>
                    <td>
+                       <div><a href="{{ path('contacts.show', {'id': contact.id}) }}">View contact</a></div>
                        <div><a href="#">Update contact</a></div>
                        <div><a href="#">Delete contact</a></div>
                    </td>

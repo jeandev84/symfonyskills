@@ -56,4 +56,18 @@ class ContactManager
 
            return $repository->findAll();
      }
+
+
+     public function contactToArray(Contact $contact)
+     {
+          // This is a bad way
+          return [
+              'id'          => $contact->getId(),
+              'lastName'    => $contact->getLastName(),
+              'firstName'   => $contact->getFirstName(),
+              'phoneNumber' => $contact->getPhoneNumber(),
+              'email'       => $contact->getEmail(),
+              'notes'       => $contact->getNotes()
+          ];
+     }
 }
