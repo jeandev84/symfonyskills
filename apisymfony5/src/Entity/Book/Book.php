@@ -31,16 +31,14 @@ class Book
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $publicationDate = null;
 
-
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private ?bool $meap = null;
 
     /**
      * @var Collection<BookCategory>
-    */
+     */
     #[ORM\ManyToMany(targetEntity: BookCategory::class, inversedBy: 'books')]
     private Collection $categories;
-
 
     public function __construct()
     {
@@ -51,20 +49,6 @@ class Book
     {
         return $this->id;
     }
-
-
-    /**
-     * @param int|null $id
-     * @return $this
-    */
-    public function setId(?int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-
 
     public function getTitle(): ?string
     {
@@ -126,7 +110,6 @@ class Book
         return $this;
     }
 
-
     public function isMeap(): ?bool
     {
         return $this->meap;
@@ -139,8 +122,6 @@ class Book
         return $this;
     }
 
-
-
     /**
      * @return Collection<BookCategory>
      */
@@ -149,11 +130,11 @@ class Book
         return $this->categories;
     }
 
-
     /**
      * @param Collection<BookCategory>$categories
+     *
      * @return $this
-    */
+     */
     public function setCategories(Collection $categories): self
     {
         $this->categories = $categories;
@@ -176,5 +157,4 @@ class Book
 
         return $this;
     }
-
 }

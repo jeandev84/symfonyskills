@@ -10,10 +10,12 @@ use App\Exception\Book\BookCategoryNotFoundException;
 use App\Repository\Book\BookCategoryRepository;
 use App\Repository\Book\BookRepository;
 use App\Service\Book\BookService;
+use App\Tests\AbstractTestCase;
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPUnit\Framework\TestCase;
 
-class BookServiceTest extends TestCase
+
+
+class BookServiceTest extends AbstractTestCase
 {
 
     public function testGetBooksByCategoryNotFound(): void
@@ -63,15 +65,19 @@ class BookServiceTest extends TestCase
 
     private function createBookEntity(): Book
     {
-        return (new Book())
-            ->setId(123)
-            ->setTitle('Test Book')
-            ->setSlug('test-book')
-            ->setMeap(false)
-            ->setAuthors(['Tester'])
-            ->setImage('http://localhost/test.png')
-            ->setCategories(new ArrayCollection())
-            ->setPublicationDate(new \DateTime('2020-10-10'));
+        $book = (new Book())
+                ->setTitle('Test Book')
+                ->setSlug('test-book')
+                ->setMeap(false)
+                ->setAuthors(['Tester'])
+                ->setImage('http://localhost/test.png')
+                ->setCategories(new ArrayCollection())
+                ->setPublicationDate(new \DateTime('2020-10-10'));
+
+
+        $this->setEntityId($book, 123);
+
+        return $book;
     }
 
 
