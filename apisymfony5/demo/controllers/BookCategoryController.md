@@ -4,13 +4,7 @@
 <?php
 namespace App\Controller\Api\v1;
 
-use App\Service\Book\BookCategoryService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
-use App\DTO\Model\Book\Category\BookCategoryListResponse;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use OpenApi\Annotations as OA;
+use App\Service\Book\Category\BookCategoryService;use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;use Symfony\Component\HttpFoundation\JsonResponse;use Symfony\Component\Routing\Annotation\Route;
 
 
 class BookCategoryController extends AbstractController

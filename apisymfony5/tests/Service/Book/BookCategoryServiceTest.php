@@ -5,7 +5,7 @@ use App\DTO\Model\Book\Category\BookCategoryListItem;
 use App\DTO\Model\Book\Category\BookCategoryListResponse;
 use App\Entity\Book\BookCategory;
 use App\Repository\Book\BookCategoryRepository;
-use App\Service\Book\BookCategoryService;
+use App\Service\Book\Category\BookCategoryService;
 use Doctrine\Common\Collections\Criteria;
 use PHPUnit\Framework\TestCase;
 

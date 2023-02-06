@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller\Api\v1;
 
-use App\Service\Book\BookCategoryService;
+use App\Service\Book\Category\BookCategoryService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;

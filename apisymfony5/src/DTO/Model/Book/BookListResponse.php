@@ -1,7 +1,7 @@
 <?php
 namespace App\DTO\Model\Book;
 
-class BooListResponse
+class BookListResponse
 {
 
     /**

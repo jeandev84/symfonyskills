@@ -1,5 +1,5 @@
 <?php
-namespace App\Service\Book;
+namespace App\Service\Book\Category;
 
 use App\DTO\Model\Book\Category\BookCategoryListItem;
 use App\DTO\Model\Book\Category\BookCategoryListResponse;
