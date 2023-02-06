@@ -22,7 +22,7 @@ class BookController extends AbstractController
        /**
         * @OA\Response(
         *     response=200,
-        *     description="Returns books",
+        *     description="Returns books inside a category",
         *     @Model(type=BookListResponse::class)
         * )
         * @param int $id
