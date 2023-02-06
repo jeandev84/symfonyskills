@@ -1,18 +1,19 @@
 <?php
-namespace App\DTO\Model;
+namespace App\DTO\Model\Book;
 
-class BookCategoryListResponse
+class BooListResponse
 {
+
     /**
-     * @var BookCategoryListItem[]
-    */
+     * @var BookListItem[]
+     */
     private array $items;
 
 
 
     /**
-     * @param BookCategoryListItem[] $items
-    */
+     * @param BookListItem[] $items
+     */
     public function __construct(array $items)
     {
         $this->items = $items;
@@ -20,7 +21,7 @@ class BookCategoryListResponse
 
 
     /**
-     * @return BookCategoryListItem[]
+     * @return BookListItem[]
     */
     public function getItems(): array
     {

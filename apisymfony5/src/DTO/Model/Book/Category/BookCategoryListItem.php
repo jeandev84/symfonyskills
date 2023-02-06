@@ -1,5 +1,5 @@
 <?php
-namespace App\DTO\Model;
+namespace App\DTO\Model\Book\Category;
 
 class BookCategoryListItem
 {

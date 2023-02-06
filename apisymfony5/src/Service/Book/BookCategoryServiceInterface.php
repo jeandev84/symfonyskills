@@ -1,7 +1,7 @@
 <?php
 namespace App\Service\Book;
 
-use App\DTO\Model\BookCategoryListResponse;
+use App\DTO\Model\Book\Category\BookCategoryListResponse;
 
 interface BookCategoryServiceInterface
 {

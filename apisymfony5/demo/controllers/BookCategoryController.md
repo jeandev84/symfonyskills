@@ -1,3 +1,6 @@
+### BookCategoryController
+
+```php
 <?php
 namespace App\Controller\Api\v1;
 
@@ -31,3 +34,4 @@ class BookCategoryController extends AbstractController
            return $this->json($this->bookCategoryService->getCategories());
        }
 }
+```

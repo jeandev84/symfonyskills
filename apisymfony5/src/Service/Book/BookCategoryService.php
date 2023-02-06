@@ -1,8 +1,8 @@
 <?php
 namespace App\Service\Book;
 
-use App\DTO\Model\BookCategoryListItem;
-use App\DTO\Model\BookCategoryListResponse;
+use App\DTO\Model\Book\Category\BookCategoryListItem;
+use App\DTO\Model\Book\Category\BookCategoryListResponse;
 use App\Entity\Book\BookCategory;
 use App\Repository\Book\BookCategoryRepository;
 use Doctrine\Common\Collections\Criteria;
