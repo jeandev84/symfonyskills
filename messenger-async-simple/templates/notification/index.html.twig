@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Bienvenue! {% endblock %}
+
+{% block body %}
+  <div class="row">
+      <div class="col-md-4">
+          {% for message in app.flashes('success') %}
+              <div class="alert alert-success" role="alert">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      </div>
+  </div>
+   <div class="row">
+       <div class="col-md-4">
+           <div class="card">
+               <div class="card-head text-center mt-3">Notification [User]</div>
+               <div class="card-body">
+                   {{ form_start(form) }}
+                   {{ form_reset(form) }}
+                   <div class="form-group mt-3">
+                      <button type="submit" class="btn btn-primary">Notifier</button>
+                   </div>
+                   {{ form_end(form) }}
+               </div>
+           </div>
+       </div>
+   </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h1>Taches echouees</h1>
+            <ul>
+                {% for job in  jobs %}
+                   {# <li>{{ dump(job) }}</li> #}
+                   <li>
+                       <h2>{{ job.title }}</h2>
+                       <pre>{{ job.trace }}</pre>
+                       <form action="{{ path('delete.failed.messages', {'id': job.id}) }}" method="POST">
+                           <input type="hidden" name="_method" value="DELETE">
+                           <button class="btn btn-danger">Supprimer</button>
+                       </form>
+                       <form action="{{ path('delete.failed.messages', {'id': job.id}) }}" method="POST">
+                           <input type="hidden" name="_method" value="DELETE">
+                           <button class="btn btn-secondary">Relancher</button>
+                       </form>
+                   </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
