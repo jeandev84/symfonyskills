@@ -15,23 +15,24 @@ class FailedJobRepository
 
 
     /**
-     * @param ListableReceiverInterface $listableReceiver
+     * @param ListableReceiverInterface $receiver
     */
-    public function __construct(ListableReceiverInterface $listableReceiver)
+    public function __construct(ListableReceiverInterface $receiver)
     {
-         $this->receiver = $listableReceiver;
+         $this->receiver = $receiver;
+
+         /* iterable|Envelope[]{ dd($receiver->all()); */
     }
 
 
-
-//    /**
-//     * @return iterable|Envelope[]
-//     */
-//    public function findEnvelops()
-//    {
-//        return $this->receiver->all();
-//    }
-//
+    /**
+     * @param string $id
+     * @return FailedJob
+    */
+    public function find(string $id): FailedJob
+    {
+         return new FailedJob($this->receiver->find($id));
+    }
 
 
 

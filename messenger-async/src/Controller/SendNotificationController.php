@@ -23,7 +23,8 @@ class SendNotificationController extends AbstractController
 
 
       /**
-       * @Route("/send-message", name="send.message")
+       * @Route("/send", name="send.message")
+       *
        * @param Request $request
        * @param MessageBusInterface $messageBus
        * @param FailedJobRepository $failedJobRepository
@@ -53,10 +54,38 @@ class SendNotificationController extends AbstractController
       }
 
 
-      protected function deserializedMessage()
+
+
+
+      /**
+       * @Route("/delete/{id}", name="delete.failed.messages", methods={"DELETE"})
+       *
+       * @param int $id
+       * @param FailedJobRepository $failedJobRepository
+       * @return RedirectResponse
+      */
+      public function delete(int $id, FailedJobRepository $failedJobRepository): RedirectResponse
       {
-          //  dd($this->deserializedMessage());
-          // from table "messenger_messages
-          return unserialize("O:36:\"Symfony\\Component\\Messenger\\Envelope\":2:{s:44:\"\0Symfony\\Component\\Messenger\\Envelope\0stamps\";a:1:{s:46:\"Symfony\\Component\\Messenger\\Stamp\\BusNameStamp\";a:1:{i:0;O:46:\"Symfony\\Component\\Messenger\\Stamp\\BusNameStamp\":1:{s:55:\"\0Symfony\\Component\\Messenger\\Stamp\\BusNameStamp\0busName\";s:21:\"messenger.bus.default\";}}}s:45:\"\0Symfony\\Component\\Messenger\\Envelope\0message\";O:35:\"App\\Message\\UserNotificationMessage\":1:{s:9:\"\0*\0userId\";i:1;}} ");
+           $failedJobRepository->reject($id);
+           $this->addFlash('success', 'La tache a bien ete supprimee');
+           return $this->redirectToRoute('home');
       }
+
+
+    /**
+     * @Route("/retry/{id}", name="retry.failed.messages", methods={"POST"})
+     *
+     * @param int $id
+     * @param FailedJobRepository $failedJobRepository
+     * @param MessageBusInterface $messageBus
+     * @return RedirectResponse
+    */
+    public function retry(int $id, FailedJobRepository $failedJobRepository, MessageBusInterface $messageBus): RedirectResponse
+    {
+        $message = $failedJobRepository->find($id)->getMessage();
+        $messageBus->dispatch($message);
+        $failedJobRepository->reject($id);
+        $this->addFlash('success', 'La tache a bien ete ressayer');
+        return $this->redirectToRoute('home');
+    }
 }

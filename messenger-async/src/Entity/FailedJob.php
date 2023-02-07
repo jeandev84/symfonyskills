@@ -3,6 +3,8 @@ namespace App\Entity;
 
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Stamp\RedeliveryStamp;
+use Symfony\Component\Messenger\Stamp\TransportMessageIdStamp;
+use Symfony\Component\Mime\Message;
 
 class FailedJob
 {
@@ -16,6 +18,32 @@ class FailedJob
      }
 
 
+
+
+     /**
+      * @return object
+     */
+     public function getMessage(): object
+     {
+         return $this->envelope->getMessage();
+     }
+
+
+     /**
+      * @return string
+     */
+     public function getId(): string
+     {
+         /** @var TransportMessageIdStamp[] $stamps */
+         $stamps =  $this->envelope->all(TransportMessageIdStamp::class);
+
+         return end($stamps)->getId();
+     }
+
+
+     /**
+      * @return string
+     */
      public function getTitle(): string
      {
           return get_class($this->envelope->getMessage());
