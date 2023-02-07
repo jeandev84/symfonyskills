@@ -40,7 +40,7 @@
                            <input type="hidden" name="_method" value="DELETE">
                            <button class="btn btn-danger">Supprimer</button>
                        </form>
-                       <form action="{{ path('delete.failed.messages', {'id': job.id}) }}" method="POST">
+                       <form action="{{ path('retry.failed.messages', {'id': job.id}) }}" method="POST">
                            <input type="hidden" name="_method" value="DELETE">
                            <button class="btn btn-secondary">Relancher</button>
                        </form>

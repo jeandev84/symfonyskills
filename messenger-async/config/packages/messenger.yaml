@@ -20,4 +20,5 @@ framework:
             # Route your messages to the transports
             # On envoie notre message en utilisant le transport appele "async"
             App\Message\UserNotificationMessage: async
+            App\Message\ServiceMethodCallMessage: async
             # 'App\Message\YourMessage': async
