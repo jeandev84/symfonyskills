@@ -5,7 +5,6 @@ use App\Entity\User;
 use App\Form\NotifyUserFormType;
 use App\Message\UserNotificationMessage;
 use App\Repository\FailedJobRepository;
-use App\Service\AsyncMethodService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,17 +22,17 @@ class SendSimpleNotificationController extends AbstractController
 {
 
 
-    /**
-     * @Route("/notification/send", name="send.message")
-     *
-     * @param Request $request
-     * @param AsyncMethodService $asyncMethodService
-     * @param FailedJobRepository $failedJobRepository
-     * @return RedirectResponse|Response
-     */
+      /**
+       * @Route("/notification/send", name="send.message")
+       *
+       * @param Request $request
+       * @param MessageBusInterface $messageBus
+       * @param FailedJobRepository $failedJobRepository
+       * @return RedirectResponse|Response
+      */
       public function index(
           Request $request,
-          AsyncMethodService $asyncMethodService,
+          MessageBusInterface $messageBus,
           FailedJobRepository $failedJobRepository
       )
       {
@@ -42,7 +41,7 @@ class SendSimpleNotificationController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $user = $form->getData();
-                $asyncMethodService->async(UserNotifierService::class, 'notify', [$user->getId()]);
+                $messageBus->dispatch(new UserNotificationMessage($user->getId()));
                 $this->addFlash('success', 'La notification a bien ete envoyer');
                 return $this->redirectToRoute('home');
             }
