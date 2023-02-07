@@ -31,12 +31,12 @@ class PageController extends AbstractController
      public function index(Request $request, UserNotifierService $notifierService)
      {
             /* $form = $this->createForm(NotifyUserFormType::class, []); */
-            $form = $this->createForm(NotifyUserFormType::class, new User());
+            $form = $this->createForm(NotifyUserFormType::class, new User(1));
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $data = $form->getData();
-                $notifierService->notify($data['user']);
+                $user = $form->getData();
+                $notifierService->notify($user);
                 $this->addFlash('success', 'La notification a bien ete envoyer');
                 return $this->redirectToRoute('home');
             }

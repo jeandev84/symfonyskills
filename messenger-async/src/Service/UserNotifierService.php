@@ -50,10 +50,28 @@ class UserNotifierService
            $email = (new Email())
                     ->from('noreplay@site.fr')
                     ->to($user->getEmail())
-                    ->html($this->twig->render('email/notification', compact('user')));
+                    ->html($this->twig->render('emails/notification.html.twig', compact('user')));
 
            sleep(2);
 
+           throw new \Exception('Pas Possible');
+
            $this->mailer->send($email);
+      }
+
+
+      /**
+       * @param array $payload
+       * @return void
+       * @throws TransportExceptionInterface
+      */
+      public function notifyAdmin(array $payload)
+      {
+          $email = (new Email())
+                   ->from('noreplay@site.fr')
+                   ->to('administrator@server.fr')
+                   ->text($payload['message']);
+
+          $this->mailer->send($email);
       }
 }

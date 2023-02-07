@@ -18,13 +18,14 @@ class NotifyUserFormType extends AbstractType
                 'attr' => [
                     'class' => 'form-control'
                 ]
-            ])
+            ]);
+            /*
             ->add('Notifier', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-3'
                 ]
-            ])
-        ;
+            ]);
+            */
     }
 
 

@@ -42,17 +42,17 @@ class UserNotificationHandler implements MessageHandlerInterface
      /**
       * @param UserNotificationMessage $message
       * @return void
+      * @throws LoaderError
+      * @throws RuntimeError
+      * @throws SyntaxError
+      * @throws TransportExceptionInterface
      */
      public function __invoke(UserNotificationMessage $message)
      {
-          /*
-          $user = $this->entityManager->find(User::class, $message->getUserId());
+           $user = $this->entityManager->find(User::class, $message->getUserId());
 
-          if ($user !== null) {
+            if ($user !== null) {
               $this->notifierService->notify($user);
-          }
-
-          dump($message);
-          */
+            }
      }
 }
