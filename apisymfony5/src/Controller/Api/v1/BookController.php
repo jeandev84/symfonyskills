@@ -30,8 +30,8 @@ class BookController extends AbstractController
      * )
      */
     #[Route(path: '/api/v1/category/{id}/books', name: 'api.v1.category.books', methods: ['GET'])]
-       public function getBooksByCategory(int $id): JsonResponse
-       {
-           return $this->json($this->bookService->getBooksByCategory($id));
-       }
+    public function getBooksByCategory(int $id): JsonResponse
+    {
+        return $this->json($this->bookService->getBooksByCategory($id));
+    }
 }
