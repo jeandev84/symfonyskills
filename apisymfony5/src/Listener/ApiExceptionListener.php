@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Listener;
 
 use App\DTO\Model\Exception\Response\ErrorResponse;
