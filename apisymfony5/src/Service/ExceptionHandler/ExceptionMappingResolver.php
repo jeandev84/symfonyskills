@@ -22,12 +22,10 @@ class ExceptionMappingResolver
             $this->addMapping(
                 $class,
                 $mapping['code'],
-                $mapping['hidden'] ?? false,
+                $mapping['hidden'] ?? true,
                 $mapping['loggable'] ?? false
             );
         }
-
-        $this->mappings = $mappings;
     }
 
     public function resolve(string $throwableClass): ?ExceptionMapping
