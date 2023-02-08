@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Exception\Book;
 
 use RuntimeException;
