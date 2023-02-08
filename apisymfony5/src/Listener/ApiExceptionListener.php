@@ -24,7 +24,7 @@ class ApiExceptionListener
     public function __invoke(ExceptionEvent $event)
     {
         $throwable = $event->getThrowable();
-        $mapping = $this->resolver->resolve($throwable);
+        $mapping = $this->resolver->resolve(get_class($throwable));
 
         if (null === $mapping) {
             $mapping = ExceptionMapping::fromCode(Response::HTTP_INTERNAL_SERVER_ERROR);
