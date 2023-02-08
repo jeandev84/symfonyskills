@@ -1,7 +1,17 @@
 version: '3.9'
 
 services:
-   database:
+  database-test:
+    container_name: postgres-test
+    image: postgres:13.3-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "54323:5432"
+
+  database:
      container_name: postgres
      image: postgres:13.3-alpine
      environment:
