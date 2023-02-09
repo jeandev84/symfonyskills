@@ -4,7 +4,9 @@ namespace App\DTO\Model\Exception\Response;
 
 class ErrorResponse
 {
-    public function __construct(protected string $message, private mixed $details = null)
+
+
+    public function __construct(protected string $message, private readonly mixed $details = null)
     {
     }
 

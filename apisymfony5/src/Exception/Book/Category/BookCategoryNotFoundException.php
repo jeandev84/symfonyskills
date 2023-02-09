@@ -1,5 +1,5 @@
 <?php
-namespace App\Exception\Book;
+namespace App\Exception\Book\Category;
 
 use RuntimeException;
 

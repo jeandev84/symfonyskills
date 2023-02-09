@@ -21,46 +21,13 @@ class SubscriberRepository extends ServiceEntityRepository
         parent::__construct($registry, Subscriber::class);
     }
 
-    public function save(Subscriber $entity, bool $flush = false): void
+
+    /**
+     * @param string $email
+     * @return bool
+    */
+    public function existsByEmail(string $email): bool
     {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        return null !== $this->findOneBy(compact('email'));
     }
-
-    public function remove(Subscriber $entity, bool $flush = false): void
-    {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
-    }
-
-//    /**
-//     * @return Subscriber[] Returns an array of Subscriber objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Subscriber
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

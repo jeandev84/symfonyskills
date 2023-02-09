@@ -24,10 +24,10 @@ class BookCategoryController extends AbstractController
      * )
      */
     #[Route(path: '/api/v1/book/categories', name: 'api.v1.book.categories', methods: ['GET'])]
-       public function listBookCategories(): JsonResponse
-       {
-           /* throw new \RuntimeException('testing'); */
+    public function listBookCategories(): JsonResponse
+    {
+        /* throw new \RuntimeException('testing'); */
 
-           return $this->json($this->bookCategoryService->getCategories());
-       }
+        return $this->json($this->bookCategoryService->getCategories());
+    }
 }

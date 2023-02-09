@@ -5,7 +5,7 @@ namespace App\Service\Book;
 use App\DTO\Model\Book\BookListItem;
 use App\DTO\Model\Book\BookListResponse;
 use App\Entity\Book\Book;
-use App\Exception\Book\BookCategoryNotFoundException;
+use App\Exception\Book\Category\BookCategoryNotFoundException;
 use App\Repository\Book\BookCategoryRepository;
 use App\Repository\Book\BookRepository;
 
