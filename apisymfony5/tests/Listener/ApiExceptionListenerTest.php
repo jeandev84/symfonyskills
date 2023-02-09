@@ -64,7 +64,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
     {
         $mapping = new ExceptionMapping(Response::HTTP_NOT_FOUND, false, false);
 
-        $responseMessage = 'test exception';
+        $responseMessage = 'test';
 
         $responseBody = json_encode(['error' => $responseMessage]);
 
@@ -85,6 +85,42 @@ class ApiExceptionListenerTest extends AbstractTestCase
         $this->assertResponse(Response::HTTP_NOT_FOUND, $responseBody, $event->getResponse());
     }
 
+
+
+
+    public function testNon500LoggableMappingTriggersLogger(): void
+    {
+        $mapping = new ExceptionMapping(Response::HTTP_NOT_FOUND, false, true);
+
+        $responseMessage = 'test';
+
+        $responseBody = json_encode(['error' => $responseMessage]);
+
+        $this->resolver->expects($this->once())
+            ->method('resolve')
+            ->with(InvalidArgumentException::class)
+            ->willReturn($mapping);
+
+        $this->serializer->expects($this->once())
+            ->method('serialize')
+            ->with(new ErrorResponse($responseMessage), JsonEncoder::FORMAT)
+            ->willReturn($responseBody);
+
+
+        $this->logger->expects($this->once())
+                     ->method('error');
+
+
+        $event = $this->createEvent(new InvalidArgumentException('test'));
+
+        $this->runListener($event);
+
+        $this->assertResponse(Response::HTTP_NOT_FOUND, $responseBody, $event->getResponse());
+    }
+
+
+
+
     private function assertResponse(int $expectedStatusCode, string $expectedBody, Response $actualResponse): void
     {
         $this->assertEquals($expectedStatusCode, $actualResponse->getStatusCode());
@@ -97,7 +133,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
         (new ApiExceptionListener($this->resolver, $this->logger, $this->serializer, $isDebug))($event);
     }
 
-    public function createEvent(InvalidArgumentException $e): ExceptionEvent
+    private function createEvent(InvalidArgumentException $e): ExceptionEvent
     {
         return new ExceptionEvent(
             $this->createTestKernel(),
@@ -107,7 +143,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
         );
     }
 
-    public function createTestKernel(): HttpKernelInterface
+    private function createTestKernel(): HttpKernelInterface
     {
         return new class() implements HttpKernelInterface {
             public function handle(Request $request, int $type = self::MAIN_REQUEST, bool $catch = true): Response
