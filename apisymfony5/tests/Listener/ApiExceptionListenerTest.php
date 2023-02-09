@@ -59,7 +59,6 @@ class ApiExceptionListenerTest extends AbstractTestCase
         $this->assertResponse(Response::HTTP_NOT_FOUND, $responseBody, $event->getResponse());
     }
 
-
     public function testNon500MappingWithPublicMessage(): void
     {
         $mapping = new ExceptionMapping(Response::HTTP_NOT_FOUND, false, false);
@@ -85,9 +84,6 @@ class ApiExceptionListenerTest extends AbstractTestCase
         $this->assertResponse(Response::HTTP_NOT_FOUND, $responseBody, $event->getResponse());
     }
 
-
-
-
     public function testNon500LoggableMappingTriggersLogger(): void
     {
         $mapping = new ExceptionMapping(Response::HTTP_NOT_FOUND, false, true);
@@ -106,10 +102,8 @@ class ApiExceptionListenerTest extends AbstractTestCase
             ->with(new ErrorResponse($responseMessage), JsonEncoder::FORMAT)
             ->willReturn($responseBody);
 
-
         $this->logger->expects($this->once())
                      ->method('error');
-
 
         $event = $this->createEvent(new InvalidArgumentException('test'));
 
@@ -118,8 +112,88 @@ class ApiExceptionListenerTest extends AbstractTestCase
         $this->assertResponse(Response::HTTP_NOT_FOUND, $responseBody, $event->getResponse());
     }
 
+    public function test500IsLoggable(): void
+    {
+        $mapping = ExceptionMapping::fromCode(Response::HTTP_GATEWAY_TIMEOUT);
 
+        $responseMessage = Response::$statusTexts[$mapping->getCode()];
 
+        $responseBody = json_encode(['error' => $responseMessage]);
+
+        $this->resolver->expects($this->once())
+            ->method('resolve')
+            ->with(InvalidArgumentException::class)
+            ->willReturn($mapping);
+
+        $this->serializer->expects($this->once())
+            ->method('serialize')
+            ->with(new ErrorResponse($responseMessage), JsonEncoder::FORMAT)
+            ->willReturn($responseBody);
+
+        $this->logger->expects($this->once())
+             ->method('error')
+             ->with('error message', $this->anything());
+
+        $event = $this->createEvent(new InvalidArgumentException('error message'));
+
+        $this->runListener($event);
+
+        $this->assertResponse(Response::HTTP_GATEWAY_TIMEOUT, $responseBody, $event->getResponse());
+    }
+
+    public function test500IsDefaultWhenMappingNotFound(): void
+    {
+        $responseMessage = Response::$statusTexts[Response::HTTP_INTERNAL_SERVER_ERROR];
+
+        $responseBody = json_encode(['error' => $responseMessage]);
+
+        $this->resolver->expects($this->once())
+            ->method('resolve')
+            ->with(InvalidArgumentException::class)
+            ->willReturn(null);
+
+        $this->serializer->expects($this->once())
+            ->method('serialize')
+            ->with(new ErrorResponse($responseMessage), JsonEncoder::FORMAT)
+            ->willReturn($responseBody);
+
+        $this->logger->expects($this->once())
+            ->method('error')
+            ->with('error message', $this->anything());
+
+        $event = $this->createEvent(new InvalidArgumentException('error message'));
+
+        $this->runListener($event);
+
+        $this->assertResponse(Response::HTTP_INTERNAL_SERVER_ERROR, $responseBody, $event->getResponse());
+    }
+
+    public function testShowTraceWhenDebug(): void
+    {
+        $mapping = ExceptionMapping::fromCode(Response::HTTP_NOT_FOUND);
+
+        $responseMessage = Response::$statusTexts[$mapping->getCode()];
+
+        $responseBody = json_encode(['error' => $responseMessage, 'trace' => 'something']);
+
+        $this->resolver->expects($this->once())
+            ->method('resolve')
+            ->with(InvalidArgumentException::class)
+            ->willReturn($mapping);
+
+        $this->serializer->expects($this->once())
+            ->method('serialize')
+            ->with($this->callback(function (ErrorResponse $response) use ($responseMessage) {
+                return $response->getMessage() === $responseMessage && !empty($response->getDetails()['trace']);
+            }), JsonEncoder::FORMAT)
+            ->willReturn($responseBody);
+
+        $event = $this->createEvent(new InvalidArgumentException('error message'));
+
+        $this->runListener($event, true);
+
+        $this->assertResponse(Response::HTTP_NOT_FOUND, $responseBody, $event->getResponse());
+    }
 
     private function assertResponse(int $expectedStatusCode, string $expectedBody, Response $actualResponse): void
     {
