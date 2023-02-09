@@ -40,11 +40,15 @@ class TableHtmlBuilder
         return $this;
     }
 
+
+    /**
+     * @return string
+    */
     public function createHtml(): string
     {
         $html[] = '<table>';
-        $html[] = $this->header->render();
-        $html[] = $this->body->render();
+        $html[] = $this->header->createHtmlRowsHeader();
+        $html[] = $this->body->createHtmlRowsBody();
         $html[] = '</table>';
 
         return join(PHP_EOL, array_filter($html));

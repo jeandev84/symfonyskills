@@ -20,7 +20,7 @@ class TableBodyBuilder
     /**
      * @return string
     */
-    public function render(): string
+    public function createHtmlRowsBody(): string
     {
         if (empty($this->rows)) {
             return '';
@@ -29,7 +29,7 @@ class TableBodyBuilder
         $html[] = '<tbody>';
         foreach ($this->rows as $body) {
             $html[] = '<tr>';
-            $html[] = $body->render();
+            $html[] = $body->renderHtml();
             $html[] = '</tr>';
         }
         $html[] = '</tbody>';

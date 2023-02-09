@@ -3,17 +3,34 @@ namespace App\Service\Builder\Table\Body;
 
 class TableBodyRow
 {
-    protected $label;
 
-    protected $options = [];
+    /**
+     * @var string
+    */
+    protected string $label;
 
+
+    /**
+     * @var array
+    */
+    protected array $options = [];
+
+
+    /**
+     * @param string $label
+     * @param array $options
+    */
     public function __construct(string $label, array $options = [])
     {
         $this->label = $label;
         $this->options = $options;
     }
 
-    public function render()
+
+    /**
+     * @return string
+    */
+    public function renderHtml(): string
     {
         return "<td>$this->label</td>";
     }

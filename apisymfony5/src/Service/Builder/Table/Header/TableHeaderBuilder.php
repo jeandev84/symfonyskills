@@ -4,26 +4,22 @@ namespace App\Service\Builder\Table\Header;
 
 class TableHeaderBuilder
 {
-
     /**
      * @var TableHeaderRow[]
-    */
-    protected $rows = [];
+     */
+    protected array $rows = [];
 
-
-
-    public function addRow(TableHeaderRow $row)
+    /**
+     * @return $this
+     */
+    public function addRow(TableHeaderRow $row): static
     {
         $this->rows[] = $row;
 
         return $this;
     }
 
-
-    /**
-     * @return string
-    */
-    public function render(): string
+    public function createHtmlRowsHeader(): string
     {
         if (empty($this->rows)) {
             return '';
@@ -31,7 +27,7 @@ class TableHeaderBuilder
 
         $html[] = '<thead>';
         foreach ($this->rows as $header) {
-            $html[] = $header->render();
+            $html[] = $header->renderHtml();
         }
         $html[] = '</thead>';
 
