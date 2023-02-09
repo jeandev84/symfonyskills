@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230208092941 extends AbstractMigration
+final class Version20230209180215 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -22,12 +22,15 @@ final class Version20230208092941 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SEQUENCE book_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE book_category_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('CREATE SEQUENCE subscriber_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE book (id INT NOT NULL, title VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, image VARCHAR(255) NOT NULL, authors TEXT NOT NULL, publication_date DATE NOT NULL, meap BOOLEAN DEFAULT false NOT NULL, PRIMARY KEY(id))');
         $this->addSql('COMMENT ON COLUMN book.authors IS \'(DC2Type:simple_array)\'');
         $this->addSql('CREATE TABLE book_book_category (book_id INT NOT NULL, book_category_id INT NOT NULL, PRIMARY KEY(book_id, book_category_id))');
         $this->addSql('CREATE INDEX IDX_7A5A379416A2B381 ON book_book_category (book_id)');
         $this->addSql('CREATE INDEX IDX_7A5A379440B1D29E ON book_book_category (book_category_id)');
         $this->addSql('CREATE TABLE book_category (id INT NOT NULL, title VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE subscriber (id INT NOT NULL, email VARCHAR(255) NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('COMMENT ON COLUMN subscriber.created_at IS \'(DC2Type:datetime_immutable)\'');
         $this->addSql('CREATE TABLE messenger_messages (id BIGSERIAL NOT NULL, body TEXT NOT NULL, headers TEXT NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, available_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, delivered_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_75EA56E0FB7336F0 ON messenger_messages (queue_name)');
         $this->addSql('CREATE INDEX IDX_75EA56E0E3BD61CE ON messenger_messages (available_at)');
@@ -50,11 +53,13 @@ final class Version20230208092941 extends AbstractMigration
         $this->addSql('CREATE SCHEMA public');
         $this->addSql('DROP SEQUENCE book_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE book_category_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE subscriber_id_seq CASCADE');
         $this->addSql('ALTER TABLE book_book_category DROP CONSTRAINT FK_7A5A379416A2B381');
         $this->addSql('ALTER TABLE book_book_category DROP CONSTRAINT FK_7A5A379440B1D29E');
         $this->addSql('DROP TABLE book');
         $this->addSql('DROP TABLE book_book_category');
         $this->addSql('DROP TABLE book_category');
+        $this->addSql('DROP TABLE subscriber');
         $this->addSql('DROP TABLE messenger_messages');
     }
 }
