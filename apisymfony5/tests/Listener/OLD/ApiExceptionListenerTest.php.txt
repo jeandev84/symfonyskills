@@ -2,7 +2,6 @@
 
 namespace App\Tests\Listener;
 
-use App\DTO\Model\Exception\Response\ErrorDebugDetails;
 use App\DTO\Model\Exception\Response\ErrorResponse;
 use App\Listener\ApiExceptionListener;
 use App\Service\ExceptionHandler\ExceptionMapping;
@@ -185,12 +184,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
         $this->serializer->expects($this->once())
             ->method('serialize')
             ->with($this->callback(function (ErrorResponse $response) use ($responseMessage) {
-
-                /** @var ErrorDebugDetails|object $details */
-                $details = $response->getDetails();
-
-                return ($response->getMessage() === $responseMessage) && $details instanceof ErrorDebugDetails && !empty($details->getTrace());
-
+                return $response->getMessage() === $responseMessage && !empty($response->getDetails()['trace']);
             }), JsonEncoder::FORMAT)
             ->willReturn($responseBody);
 
