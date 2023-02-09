@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Service\ExceptionHandler;
 
 class ExceptionMappingResolver
@@ -7,11 +6,9 @@ class ExceptionMappingResolver
     /**
      * @var ExceptionMapping[]
      */
-    protected array $mappings;
+    protected array $mappings = [];
 
-    /**
-     * @param ExceptionMapping[] $mappings
-     */
+
     public function __construct(array $mappings)
     {
         foreach ($mappings as $class => $mapping) {
