@@ -21,8 +21,7 @@ class SubscribeController extends AbstractController
     /**
      * @OA\Response(
      *     response=200,
-     *     description="Subscribe email to newsletter mailing list",
-     *     @Model(type=BookListResponse::class)
+     *     description="Subscribe email to newsletter mailing list"
      * )
      */
     #[Route(path: '/api/v1/subscribe', name: 'api.v1.subscribe', methods: ['POST'])]
