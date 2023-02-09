@@ -3,10 +3,6 @@
 namespace App\DTO\Model\Exception\Response;
 
 use OpenApi\Annotations as OA;
-use Nelmio\ApiDocBundle\Annotation\Model;
-use App\DTO\Model\Exception\Response\ErrorDebugDetails;
-use App\DTO\Model\Exception\Response\ErrorValidationDetails;
-
 
 class ErrorResponse
 {
@@ -20,10 +16,7 @@ class ErrorResponse
     }
 
     /**
-     * @OA\Property(type="object", oneOf={
-     *     @OA\Schema(ref=@Model(type=ErrorDebugDetails::class)),
-     *     @OA\Schema(ref=@Model(type=ErrorValidationDetails::class))
-     * })
+     * @OA\Property(type="object")
      */
     public function getDetails(): mixed
     {
