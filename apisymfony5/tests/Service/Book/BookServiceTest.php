@@ -10,6 +10,7 @@ use App\Repository\Book\BookCategoryRepository;
 use App\Repository\Book\BookRepository;
 use App\Service\Book\BookService;
 use App\Tests\AbstractTestCase;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class BookServiceTest extends AbstractTestCase
@@ -59,7 +60,7 @@ class BookServiceTest extends AbstractTestCase
                 ->setAuthors(['Tester'])
                 ->setImage('http://localhost/test.png')
                 ->setCategories(new ArrayCollection())
-                ->setPublicationDate(new \DateTime('2020-10-10'));
+                ->setPublicationDate(new DateTimeImmutable('2020-10-10'));
 
         $this->setEntityId($book, 123);
 
