@@ -2,6 +2,7 @@
 
 namespace App\Entity\Book;
 
+use App\Entity\Reviews\Review;
 use App\Repository\Book\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -28,6 +29,12 @@ class Book
     #[ORM\Column(type: Types::SIMPLE_ARRAY)]
     private array $authors = [];
 
+    #[ORM\Column(length: 13)]
+    private ?string $isbn = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $description = null;
+
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeInterface $publicationDate = null;
 
@@ -38,21 +45,26 @@ class Book
      * @var Collection<BookCategory>
      */
     #[ORM\ManyToMany(targetEntity: BookCategory::class, inversedBy: 'books')]
+    #[ORM\JoinTable(name: 'book_to_book_category')]
     private Collection $categories;
 
-    #[ORM\Column(length: 13)]
-    private ?string $isbn = null;
-
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $description = null;
-
+    /**
+     * @var Collection<BookToBookFormat>
+     */
     #[ORM\OneToMany(mappedBy: 'book', targetEntity: BookToBookFormat::class)]
     private Collection $formats;
+
+    /**
+     * @var Collection<Review>
+     */
+    #[ORM\OneToMany(mappedBy: 'book', targetEntity: Review::class)]
+    private Collection $reviews;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->formats = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -200,6 +212,11 @@ class Book
         return $this->formats;
     }
 
+    public function setFormats(Collection $formats): void
+    {
+        $this->formats = $formats;
+    }
+
     public function addFormat(BookToBookFormat $format): self
     {
         if (!$this->formats->contains($format)) {
@@ -216,6 +233,36 @@ class Book
             // set the owning side to null (unless already changed)
             if ($format->getBook() === $this) {
                 $format->setBook(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getBook() === $this) {
+                $review->setBook(null);
             }
         }
 
