@@ -69,7 +69,7 @@ class ValidationExceptionListenerTest extends AbstractTestCase
 
                              return 'name' === $violations[0]->getField() && 'error' === $violations[0]->getMessage();
                          }),
-                         JsonEncoder::FORMAT
+                             JsonEncoder::FORMAT
                          )
                          ->willReturn($serialized);
 
