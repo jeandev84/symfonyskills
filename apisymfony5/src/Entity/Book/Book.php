@@ -40,9 +40,19 @@ class Book
     #[ORM\ManyToMany(targetEntity: BookCategory::class, inversedBy: 'books')]
     private Collection $categories;
 
+    #[ORM\Column(length: 13)]
+    private ?string $isbn = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $description = null;
+
+    #[ORM\OneToMany(mappedBy: 'book', targetEntity: BookToBookFormat::class)]
+    private Collection $formats;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->formats = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -154,6 +164,60 @@ class Book
     public function removeCategory(BookCategory $category): self
     {
         $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    public function getIsbn(): ?string
+    {
+        return $this->isbn;
+    }
+
+    public function setIsbn(string $isbn): self
+    {
+        $this->isbn = $isbn;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BookToBookFormat>
+     */
+    public function getFormats(): Collection
+    {
+        return $this->formats;
+    }
+
+    public function addFormat(BookToBookFormat $format): self
+    {
+        if (!$this->formats->contains($format)) {
+            $this->formats->add($format);
+            $format->setBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFormat(BookToBookFormat $format): self
+    {
+        if ($this->formats->removeElement($format)) {
+            // set the owning side to null (unless already changed)
+            if ($format->getBook() === $this) {
+                $format->setBook(null);
+            }
+        }
 
         return $this;
     }
