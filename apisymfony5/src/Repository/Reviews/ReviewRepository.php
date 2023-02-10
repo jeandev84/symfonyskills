@@ -35,13 +35,11 @@ class ReviewRepository extends ServiceEntityRepository
      */
     public function getBookTotalRatingSum(int $id): int
     {
-        return $this->_em->createQuery(
-            'SELECT SUM(r.rating) FORM APP\Entity\Reviews\Review r WHERE r.book = :id'
+        return (int) $this->_em->createQuery(
+            'SELECT SUM(r.rating) FORM App\Entity\Reviews\Review r WHERE r.book = :id'
         )->setParameter('id', $id)
          ->getSingleScalarResult();
     }
-
-
 
     public function getPageByBookId(int $id, int $offset, int $limit): Paginator
     {
@@ -50,8 +48,6 @@ class ReviewRepository extends ServiceEntityRepository
                      ->setParameter('id', $id)
                      ->setFirstResult($offset)
                      ->setMaxResults($limit);
-
-
 
         return new Paginator($query, false);
     }

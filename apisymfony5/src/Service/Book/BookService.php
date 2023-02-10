@@ -34,8 +34,7 @@ class BookService
         }
 
         return new BookListResponse(
-            array_map([$this, 'map'],
-                $this->bookRepository->findBooksByCategoryId($categoryId))
+            array_map([$this, 'map'], $this->bookRepository->findBooksByCategoryId($categoryId))
         );
     }
 
@@ -47,11 +46,17 @@ class BookService
     {
         $book = $this->bookRepository->getById($id);
         $reviews = $this->reviewRepository->countByBookId($id);
-        $ratingSum = $this->reviewRepository->getBookTotalRatingSum($id);
+
+        $rating = 0;
+        if ($reviews > 0) {
+            $rating = $this->reviewRepository->getBookTotalRatingSum($id) / $reviews;
+        }
 
         $categories = $book->getCategories()->map(fn (BookCategory $bookCategory) => new BookCategoryModel(
             $bookCategory->getId(), $bookCategory->getTitle(), $bookCategory->getSlug()
         ));
+
+        /* dd($this->mapFormats($book->getFormats())->toArray()); */
 
         return (new BookDetails())
                ->setId($book->getId())
@@ -61,16 +66,19 @@ class BookService
                ->setAuthors($book->getAuthors())
                ->setMeap($book->isMeap())
                ->setPublicationDate($book->getPublicationDate()->getTimestamp())
-               ->setRating($ratingSum / $reviews)
+               /* ->setRating($reviews > 0 ? $ratingSum / $reviews : 0) */
+               ->setRating($rating)
                ->setReviews($reviews)
-               ->setFormats($this->mapFormats($book->getFormats()))
+               ->setFormats($this->mapFormats($book->getFormats())->toArray())
               ->setCategories($categories->toArray());
     }
 
     /**
      * @param Collection<BookToBookFormat> $formats
+     *
+     * @return array|\Doctrine\Common\Collections\ReadableCollection
      */
-    private function mapFormats(Collection $formats): array
+    private function mapFormats(Collection $formats)
     {
         return $formats->map(fn (BookToBookFormat $formatJoin) => (new BookFormat())
                        ->setId($formatJoin->getFormat()->getId())
@@ -78,8 +86,8 @@ class BookService
                        ->setDescription($formatJoin->getFormat()->getDescription())
                        ->setComment($formatJoin->getFormat()->getComment())
                        ->setPrice($formatJoin->getPrice())
-                       ->setDiscountPercent($formatJoin->getDiscountPercent())
-                  );
+                       ->setDiscountPercent($formatJoin->getDiscountPercent()
+                       ));
     }
 
     private function map(Book $book): BookListItem
