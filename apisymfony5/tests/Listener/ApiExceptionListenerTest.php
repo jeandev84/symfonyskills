@@ -53,7 +53,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
                    ->with(new ErrorResponse($responseMessage), JsonEncoder::FORMAT)
                    ->willReturn($responseBody);
 
-        $event = $this->createEvent(new InvalidArgumentException('test'));
+        $event = $this->createExceptionEvent(new InvalidArgumentException('test'));
 
         $this->runListener($event);
 
@@ -78,7 +78,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
             ->with(new ErrorResponse($responseMessage), JsonEncoder::FORMAT)
             ->willReturn($responseBody);
 
-        $event = $this->createEvent(new InvalidArgumentException('test'));
+        $event = $this->createExceptionEvent(new InvalidArgumentException('test'));
 
         $this->runListener($event);
 
@@ -106,7 +106,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
         $this->logger->expects($this->once())
                      ->method('error');
 
-        $event = $this->createEvent(new InvalidArgumentException('test'));
+        $event = $this->createExceptionEvent(new InvalidArgumentException('test'));
 
         $this->runListener($event);
 
@@ -135,7 +135,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
              ->method('error')
              ->with('error message', $this->anything());
 
-        $event = $this->createEvent(new InvalidArgumentException('error message'));
+        $event = $this->createExceptionEvent(new InvalidArgumentException('error message'));
 
         $this->runListener($event);
 
@@ -162,7 +162,7 @@ class ApiExceptionListenerTest extends AbstractTestCase
             ->method('error')
             ->with('error message', $this->anything());
 
-        $event = $this->createEvent(new InvalidArgumentException('error message'));
+        $event = $this->createExceptionEvent(new InvalidArgumentException('error message'));
 
         $this->runListener($event);
 
@@ -194,42 +194,15 @@ class ApiExceptionListenerTest extends AbstractTestCase
             }), JsonEncoder::FORMAT)
             ->willReturn($responseBody);
 
-        $event = $this->createEvent(new InvalidArgumentException('error message'));
+        $event = $this->createExceptionEvent(new InvalidArgumentException('error message'));
 
         $this->runListener($event, true);
 
         $this->assertResponse(Response::HTTP_NOT_FOUND, $responseBody, $event->getResponse());
     }
 
-    private function assertResponse(int $expectedStatusCode, string $expectedBody, Response $actualResponse): void
-    {
-        $this->assertEquals($expectedStatusCode, $actualResponse->getStatusCode());
-        $this->assertInstanceOf(JsonResponse::class, $actualResponse);
-        $this->assertJsonStringEqualsJsonFile($expectedBody, $actualResponse->getContent());
-    }
-
     private function runListener(ExceptionEvent $event, bool $isDebug = false): void
     {
         (new ApiExceptionListener($this->resolver, $this->logger, $this->serializer, $isDebug))($event);
-    }
-
-    private function createEvent(InvalidArgumentException $e): ExceptionEvent
-    {
-        return new ExceptionEvent(
-            $this->createTestKernel(),
-            new Request(),
-            HttpKernelInterface::MAIN_REQUEST,
-            $e
-        );
-    }
-
-    private function createTestKernel(): HttpKernelInterface
-    {
-        return new class() implements HttpKernelInterface {
-            public function handle(Request $request, int $type = self::MAIN_REQUEST, bool $catch = true): Response
-            {
-                return new Response('test');
-            }
-        };
     }
 }
