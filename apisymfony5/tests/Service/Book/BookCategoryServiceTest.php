@@ -2,7 +2,7 @@
 
 namespace App\Tests\Service\Book;
 
-use App\DTO\Model\Book\Category\BookCategoryListItem;
+use App\DTO\Model\Book\Category\BookCategory as BookCategoryModel;
 use App\DTO\Model\Book\Category\BookCategoryListResponse;
 use App\Entity\Book\BookCategory;
 use App\Repository\Book\BookCategoryRepository;
@@ -26,7 +26,7 @@ class BookCategoryServiceTest extends AbstractTestCase
 
         // Call services
         $service = new BookCategoryService($repository);
-        $expected = new BookCategoryListResponse([new BookCategoryListItem(7, 'Test', 'test')]);
+        $expected = new BookCategoryListResponse([new BookCategoryModel(7, 'Test', 'test')]);
 
         $this->assertEquals($expected, $service->getCategories());
     }

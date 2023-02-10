@@ -56,6 +56,8 @@ class BookControllerTest extends AbstractControllerTest
                            ->setTitle('Test book')
                            ->setImage('http://localhost/demo.png')
                            ->setMeap(true)
+                           ->setIsbn('123321')
+                           ->setDescription('test')
                            ->setSlug('test-book')
                            ->setPublicationDate(new DateTimeImmutable())
                            ->setAuthors(['Tester'])

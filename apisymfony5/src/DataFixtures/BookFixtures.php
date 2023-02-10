@@ -1,4 +1,5 @@
 <?php
+
 namespace App\DataFixtures;
 
 use App\Entity\Book\Book;
@@ -7,19 +8,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-
 class BookFixtures extends Fixture implements DependentFixtureInterface
 {
-
     public function load(ObjectManager $manager)
     {
         $androidCategory = $this->getReference(BookCategoryFixtures::ANDROID_CATEGORY);
         $devicesCategory = $this->getReference(BookCategoryFixtures::DEVICES_CATEGORY);
 
         $book = (new Book())
-                ->setTitle("RxJava for Android Developers")
-                ->setPublicationDate(new \DateTime('2019-04-01'))
+                ->setTitle('RxJava for Android Developers')
+                ->setPublicationDate(new \DateTimeImmutable('2019-04-01'))
                 ->setMeap(false)
+                ->setIsbn('123321')
+                ->setDescription('test description')
                 ->setAuthors(['Timo Tuominen'])
                 ->setSlug('rxjava-for-android-developers')
                 ->setCategories(new ArrayCollection([$androidCategory, $devicesCategory]))
@@ -32,8 +33,8 @@ class BookFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies(): array
     {
-         return [
-             BookCategoryFixtures::class
+        return [
+             BookCategoryFixtures::class,
          ];
     }
 }

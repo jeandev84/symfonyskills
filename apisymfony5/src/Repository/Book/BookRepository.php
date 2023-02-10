@@ -3,6 +3,7 @@
 namespace App\Repository\Book;
 
 use App\Entity\Book\Book;
+use App\Exception\Book\BookNotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -31,5 +32,16 @@ class BookRepository extends ServiceEntityRepository
         $query->setParameter('categoryId', $categoryId);
 
         return $query->getResult();
+    }
+
+    public function getById(int $id): Book
+    {
+        $book = $this->find($id);
+
+        if (null === $book) {
+            throw new BookNotFoundException();
+        }
+
+        return $book;
     }
 }

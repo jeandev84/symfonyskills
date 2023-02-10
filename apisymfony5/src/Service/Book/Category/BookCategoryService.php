@@ -2,7 +2,7 @@
 
 namespace App\Service\Book\Category;
 
-use App\DTO\Model\Book\Category\BookCategoryListItem;
+use App\DTO\Model\Book\Category\BookCategory as BookCategoryModel;
 use App\DTO\Model\Book\Category\BookCategoryListResponse;
 use App\Entity\Book\BookCategory;
 use App\Repository\Book\BookCategoryRepository;
@@ -19,7 +19,7 @@ class BookCategoryService implements BookCategoryServiceInterface
         $categories = $this->bookCategoryRepository->findAllSortedByTitle();
 
         $items = array_map(
-            fn (BookCategory $bookCategory) => new BookCategoryListItem(
+            fn (BookCategory $bookCategory) => new BookCategoryModel(
                 $bookCategory->getId(), $bookCategory->getTitle(), $bookCategory->getSlug()
             ),
             $categories

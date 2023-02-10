@@ -4,6 +4,9 @@ namespace App\Repository\Reviews;
 
 use App\Entity\Reviews\Review;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,46 +24,35 @@ class ReviewRepository extends ServiceEntityRepository
         parent::__construct($registry, Review::class);
     }
 
-    public function save(Review $entity, bool $flush = false): void
+    public function countByBookId(int $id): int
     {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        return $this->count(['book' => $id]);
     }
 
-    public function remove(Review $entity, bool $flush = false): void
+    /**
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function getBookTotalRatingSum(int $id): int
     {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
+        return $this->_em->createQuery(
+            'SELECT SUM(r.rating) FORM APP\Entity\Reviews\Review r WHERE r.book = :id'
+        )->setParameter('id', $id)
+         ->getSingleScalarResult();
     }
 
-//    /**
-//     * @return Review[] Returns an array of Review objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
-//    public function findOneBySomeField($value): ?Review
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+
+    public function getPageByBookId(int $id, int $offset, int $limit): Paginator
+    {
+        $query = $this->_em
+                     ->createQuery('SELECT r FROM App\Entity\Reviews\Review r WHERE r.book = :id ORDER BY r.createdAt DESC')
+                     ->setParameter('id', $id)
+                     ->setFirstResult($offset)
+                     ->setMaxResults($limit);
+
+
+
+        return new Paginator($query, false);
+    }
 }

@@ -8,6 +8,7 @@ use App\Entity\Book\Book;
 use App\Exception\Book\Category\BookCategoryNotFoundException;
 use App\Repository\Book\BookCategoryRepository;
 use App\Repository\Book\BookRepository;
+use App\Repository\Reviews\ReviewRepository;
 use App\Service\Book\BookService;
 use App\Tests\AbstractTestCase;
 use DateTimeImmutable;
@@ -17,6 +18,7 @@ class BookServiceTest extends AbstractTestCase
 {
     public function testGetBooksByCategoryNotFound(): void
     {
+        $reviewRepository = $this->createMock(ReviewRepository::class);
         $bookRepository = $this->createMock(BookRepository::class);
         $bookCategoryRepository = $this->createMock(BookCategoryRepository::class);
         $bookCategoryRepository->expects($this->once())
@@ -27,11 +29,12 @@ class BookServiceTest extends AbstractTestCase
 
         $this->expectException(BookCategoryNotFoundException::class);
 
-        (new BookService($bookRepository, $bookCategoryRepository))->getBooksByCategory(130);
+        (new BookService($bookRepository, $bookCategoryRepository, $reviewRepository))->getBooksByCategory(130);
     }
 
     public function testGetBooksByCategory(): void
     {
+        $reviewRepository = $this->createMock(ReviewRepository::class);
         $bookRepository = $this->createMock(BookRepository::class);
         $bookRepository->expects($this->once())
                        ->method('findBooksByCategoryId')
@@ -45,7 +48,7 @@ class BookServiceTest extends AbstractTestCase
                                 ->willReturn(true)
         ;
 
-        $service = new BookService($bookRepository, $bookCategoryRepository);
+        $service = new BookService($bookRepository, $bookCategoryRepository, $reviewRepository);
         $expected = new BookListResponse([$this->createBookItemModel()]);
 
         $this->assertEquals($expected, $service->getBooksByCategory(130));
@@ -57,6 +60,8 @@ class BookServiceTest extends AbstractTestCase
                 ->setTitle('Test Book')
                 ->setSlug('test-book')
                 ->setMeap(false)
+                ->setIsbn('123321')
+                ->setDescription('test description')
                 ->setAuthors(['Tester'])
                 ->setImage('http://localhost/test.png')
                 ->setCategories(new ArrayCollection())

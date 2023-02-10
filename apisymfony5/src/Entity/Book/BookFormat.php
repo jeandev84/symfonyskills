@@ -3,8 +3,6 @@
 namespace App\Entity\Book;
 
 use App\Repository\Book\BookFormatRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +23,12 @@ class BookFormat
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $comment = null;
 
+    public function setId(?int $id): static
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     public function getId(): ?int
     {

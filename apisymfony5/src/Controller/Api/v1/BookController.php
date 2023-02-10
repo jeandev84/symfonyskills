@@ -10,6 +10,8 @@ use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use App\DTO\Model\Book\BookDetails;
+
 
 class BookController extends AbstractController
 {
@@ -33,5 +35,25 @@ class BookController extends AbstractController
     public function getBooksByCategory(int $id): JsonResponse
     {
         return $this->json($this->bookService->getBooksByCategory($id));
+    }
+
+
+
+    /**
+     * @OA\Response(
+     *     response=200,
+     *     description="Returns book detail information",
+     *     @Model(type=BookDetails::class)
+     * )
+     * @OA\Response(
+     *     response=404,
+     *     description="Book not found",
+     *     @Model(type=ErrorResponse::class)
+     * )
+     */
+    #[Route(path: '/api/v1/book/{id}', name: 'api.v1.book.show', methods: ['GET'])]
+    public function getBookById(int $id): JsonResponse
+    {
+        return $this->json($this->bookService->getBookById($id));
     }
 }
