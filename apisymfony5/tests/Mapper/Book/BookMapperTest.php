@@ -18,7 +18,6 @@ class BookMapperTest extends AbstractTestCase
                 ->setImage('123')
                 ->setAuthors(['tester'])
                 ->setMeap(true)
-                ->setMeap(true)
                 ->setPublicationDate(new \DateTimeImmutable('2020-10-10'));
 
 
