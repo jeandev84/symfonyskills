@@ -19,7 +19,6 @@ class ReviewService
     {
         $offset = max($page - 1, 0) * self::PAGE_LIMIT; // (3 - 1 = 2) * 5  + 1 = 11
         $paginator = $this->reviewRepository->getPageByBookId($id, $offset, self::PAGE_LIMIT);
-        $ratingSum = $this->reviewRepository->getBookTotalRatingSum($id);
         $total = count($paginator);  // Paginator implements \Countable interface we can write count($paginator);
 
         $rating = 0;
