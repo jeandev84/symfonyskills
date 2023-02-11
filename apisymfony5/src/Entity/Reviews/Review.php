@@ -21,18 +21,20 @@ class Review
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-
     #[ORM\Column(length: 255)]
     private ?string $author = null;
 
-
-    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\JoinColumn(nullable: false)]
     #[ORM\ManyToOne(targetEntity: Book::class, inversedBy: 'reviews')]
     private ?Book $book = null;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -63,8 +65,6 @@ class Review
         return $this;
     }
 
-
-
     public function getAuthor(): ?string
     {
         return $this->author;
@@ -76,8 +76,6 @@ class Review
 
         return $this;
     }
-
-
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
