@@ -3,11 +3,13 @@
 namespace App\Repository\Reviews;
 
 use App\Entity\Reviews\Review;
+use Countable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use Traversable;
 
 /**
  * @extends ServiceEntityRepository<Review>
@@ -41,6 +43,9 @@ class ReviewRepository extends ServiceEntityRepository
          ->getSingleScalarResult();
     }
 
+    /**
+     * @return Traversable&Countable
+     */
     public function getPageByBookId(int $id, int $offset, int $limit): Paginator
     {
         $query = $this->_em

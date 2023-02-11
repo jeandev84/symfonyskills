@@ -21,7 +21,14 @@ class ReviewService
     {
         $offset = max($page - 1, 0) * self::PAGE_LIMIT; // (3 - 1 = 2) * 5  + 1 = 11
         $paginator = $this->reviewRepository->getPageByBookId($id, $offset, self::PAGE_LIMIT);
-        $total = count($paginator);  // Paginator implements \Countable interface we can write count($paginator);
+        $total = count($paginator);
+
+        $items = [];
+
+        foreach ($paginator as $item) {
+            $items[] = $this->map($item);
+        }
+
 
         return (new ReviewPage())
                ->setRating($this->ratingService->calculateReviewRatingForBook($id, $total))
@@ -29,8 +36,7 @@ class ReviewService
                ->setPage($page)
                ->setPerPage(self::PAGE_LIMIT)
                ->setPages(ceil($total / self::PAGE_LIMIT))
-               ->setItems(array_map([$this, 'map'], $paginator->getIterator()->getArrayCopy()))
-        ;
+               ->setItems($items);
     }
 
     public function map(Review $review): ReviewModel
