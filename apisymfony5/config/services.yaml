@@ -10,6 +10,7 @@ parameters:
       App\Exception\Book\Category\BookCategoryNotFoundException: { code: 404, hidden: false }
       App\Exception\User\Subscriber\SubscriberAlreadyExistsException: { code: 409, hidden: false }
       App\Exception\Request\RequestBodyConvertException: { code: 400, hidden: false }
+      App\Exception\Book\BookNotFoundException: { code: 404, hidden: false }
 
 services:
     # default configuration for services in *this* file

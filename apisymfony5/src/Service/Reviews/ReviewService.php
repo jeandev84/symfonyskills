@@ -11,8 +11,10 @@ class ReviewService
 {
     private const PAGE_LIMIT = 5;
 
-    public function __construct(private ReviewRepository $reviewRepository)
-    {
+    public function __construct(
+        private ReviewRepository $reviewRepository,
+        private RatingService $ratingService
+    ) {
     }
 
     public function getReviewPageByBookId(int $id, int $page): ReviewPage
@@ -21,15 +23,8 @@ class ReviewService
         $paginator = $this->reviewRepository->getPageByBookId($id, $offset, self::PAGE_LIMIT);
         $total = count($paginator);  // Paginator implements \Countable interface we can write count($paginator);
 
-        $rating = 0;
-        if ($total > 0) {
-            $rating = $this->reviewRepository->getBookTotalRatingSum($id) / $total;
-        }
-
-
         return (new ReviewPage())
-               /* ->setRating($total > 0 ? $ratingSum / $total : 0) */
-               ->setRating($rating)
+               ->setRating($this->ratingService->calculateReviewRatingForBook($id, $total))
                ->setTotal($total)
                ->setPage($page)
                ->setPerPage(self::PAGE_LIMIT)
