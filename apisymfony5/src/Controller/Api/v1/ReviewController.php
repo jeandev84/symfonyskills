@@ -36,7 +36,7 @@ class ReviewController extends AbstractController
      * )
      */
     #[Route(path: '/api/v1/book/{id}/reviews', name: 'api.v1.book.reviews', methods: ['GET'])]
-    public function getReviews(int $id, Request $request): JsonResponse
+    public function getBookReviews(int $id, Request $request): JsonResponse
     {
         return $this->json($this->reviewService->getReviewPageByBookId($id, $request->query->get('page', 1)));
     }

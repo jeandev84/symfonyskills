@@ -36,7 +36,7 @@ class ReviewRepository extends ServiceEntityRepository
     public function getBookTotalRatingSum(int $id): int
     {
         return (int) $this->_em->createQuery(
-            'SELECT SUM(r.rating) FORM App\Entity\Reviews\Review r WHERE r.book = :id'
+            'SELECT SUM(r.rating) FROM App\Entity\Reviews\Review r WHERE r.book = :id'
         )->setParameter('id', $id)
          ->getSingleScalarResult();
     }
