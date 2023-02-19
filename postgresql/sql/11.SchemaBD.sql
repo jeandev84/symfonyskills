@@ -1,3 +1,9 @@
+--- product_types  (OneToMany)   products [ one product_types belongs many products ]
+--- products       (ManyToMany)  orders
+--- orders         (ManyToMany)  products
+--- customers      (OneToMany)   orders
+
+
 --- ТАБЛИЦЫ
 CREATE TABLE products(
  id SERIAL PRIMARY KEY,
@@ -17,6 +23,7 @@ CREATE TABLE product_types(
 
 
 --- Таблица продажи продуктов онлайн-школы
+--- Intermediate table
 CREATE TABLE sales(
   product_id INT,
   order_id INT,
