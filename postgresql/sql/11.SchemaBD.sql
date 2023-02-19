@@ -33,7 +33,7 @@ CREATE TABLE sales(
 
 
 
---- Таблица клиентов онлайн-школы
+--- Таблица заказчиков ( клиентов ) онлайн-школы
 CREATE TABLE customers(
   id SERIAL PRIMARY KEY,
   name VARCHAR(255),
@@ -47,3 +47,14 @@ CREATE TABLE orders(
   order_date DATE,
   customer_id INT
 );
+
+
+--- JOIN ( запрос для продукты в заказе )
+
+SELECT p.id, p.name, p.price, s.quantity, p.price * s.quantity AS total
+FROM products AS p
+JOIN sales AS s
+ON p.id = s.product_id
+WHERE s.order_id = 2;
+
+
