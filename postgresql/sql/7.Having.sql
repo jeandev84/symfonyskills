@@ -1,5 +1,5 @@
 --- Группировки и фильтрация в SQL: HAVING
-
+--- HAVING используется для фильтрации результатов группировки (GROUP BY)
 
 SELECT hair, COUNT(*) FROM superheroes
 WHERE gender='Female Characters'
