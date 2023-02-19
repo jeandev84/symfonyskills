@@ -51,10 +51,30 @@ CREATE TABLE orders(
 
 --- JOIN ( запрос для продукты в заказе )
 
-SELECT p.id, p.name, p.price, s.quantity, p.price * s.quantity AS total
+SELECT p.id,
+       p.name,
+       p.price,
+       s.quantity,
+       p.price * s.quantity AS total
 FROM products AS p
 JOIN sales AS s
 ON p.id = s.product_id
 WHERE s.order_id = 2;
+
+
+
+--- Найти всех покупок конкретного заказчика
+
+SELECT p.id,
+       p.name,
+       p.price,
+       s.quantity,
+       p.price * s.quantity AS total
+FROM products AS p
+JOIN sales AS s
+ON p.id = s.product_id
+JOIN orders AS o
+ON o.id = s.order_id
+WHERE o.customer_id = 1;
 
 
